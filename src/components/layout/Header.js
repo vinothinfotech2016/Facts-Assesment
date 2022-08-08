@@ -13,7 +13,11 @@ const Title = styled("span")({
 export const Header = () => {
   return (
     <AppBar
-      style={{ background: "white", border: "1px solid #707070", height: 64 }}
+      style={{
+        background: "white",
+        border: "1px solid #707070",
+        height: "45px",
+      }}
       elevation={0}
       position="fixed"
     >
