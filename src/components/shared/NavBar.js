@@ -47,7 +47,7 @@ export const NavBar = (props) => {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             color="inherit"
             component="div"
           >
