@@ -34,22 +34,32 @@ export const NavBar = (props) => {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" sx={{display:'flex', flexDirection:'row',}}>
+      <Typography
+            variant="h4"
+            color="inherit"
+            component="div"
+            sx={{ border: "1px solid #9e9e9e", maxHeight:'56px', width:'15.5%', backgroundColor:'#fff'}}
+          >
+          </Typography>
         <Toolbar
           variant="dense"
-          sx={{ display: "flex", justifyContent: "space-between" }}
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            backgroundColor: "#fff",
+            border: "1px solid #9e9e9e",
+            width:'85%',
+          }}
         >
-          <Typography variant="h4" color="inherit" component="div">
-            DESIGN TOOL
-          </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <UserCont onClick={handleOpenUserMenu}>
                 <UserTextCont>
-                  <Typography sx={{ color: "#fff", fontSize: "bold" }}>
+                  <Typography sx={{ color: "#000", fontSize: "bold" }}>
                     {props.user}
                   </Typography>
-                  <Typography sx={{ color: "#fff", fontSize: "12px" }}>
+                  <Typography sx={{ color: "#9e9e9e", fontSize: "12px" }}>
                     Admin
                   </Typography>
                 </UserTextCont>
