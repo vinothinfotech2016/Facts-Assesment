@@ -12,7 +12,7 @@ function Login(props) {
     },
     validationSchema: loginSchema,
     onSubmit: () => {
-      props.navigate("/home");
+      props.navigate("/menu");
     },
   });
 
