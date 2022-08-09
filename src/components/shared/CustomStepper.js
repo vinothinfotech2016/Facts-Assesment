@@ -4,8 +4,8 @@ import { Box, Tab } from "@mui/material";
 
 const StepperCont = styled(Box)`
   height: 94vh;
-  width: 15%;
-  border: 1px solid blue;
+  width: 100%;
+  border: 1px solid #9e9e9e;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@ const CustomStepper = (props) => {
               sx={{
                 width: "200px",
                 marginTop: "15px",
-                border: "2px  solid blue",
+                border: "2px  solid #9e9e9e",
                 borderRadius: "5px",
               }}
               onClick={(event) => {
