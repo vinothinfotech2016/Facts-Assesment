@@ -13,7 +13,6 @@ function Login(props) {
     validationSchema: loginSchema,
     onSubmit: () => {
       props.navigate("/menu");
-      // console.log("Submitted");
     },
   });
 

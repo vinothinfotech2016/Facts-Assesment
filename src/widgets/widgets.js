@@ -5,6 +5,7 @@ import {
   WidgetSelectField,
   WidgetTextField,
   WidgetTimeField,
+  WidgetPassword,
   WidgetUploadFile,
   CustomButton,
   DividerLine,
@@ -24,4 +25,5 @@ export const widgets = {
   customButton: CustomButton,
   customDivider: DividerLine,
   chipType: WidgetChipAutocomplete,
+  PasswordWidget: WidgetPassword,
 };

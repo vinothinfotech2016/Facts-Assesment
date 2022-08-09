@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -54,7 +53,6 @@
   height:auto;
   margin:0; 
   color: #00000089;
-  align-items: left;
 }
 
 .portal-box{
@@ -91,4 +89,30 @@
   align-items: center;
 }
 
+.container{
+  width: 55%;
+  margin: 30px auto;
+  border: 1px solid black;
+  padding: 30px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
+.btnContainer{
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 0;
+}
+
+.btn{
+  margin-left: 16px !important;
+}
+
+.backicon{
+  padding-top: 18px;
+  margin-right: 10px;
+}
+
+.newuser{
+  display: flex;
+}
