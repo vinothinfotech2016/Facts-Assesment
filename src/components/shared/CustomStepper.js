@@ -17,40 +17,29 @@ const CustomStepper = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const handleindividual = (event) => {
-    event.preventDefault();
-    props.navigate("home/indiTable");
-  };
-  const handlecompany = (event) => {
-    event.preventDefault();
-    props.navigate("home/compTable");
-  };
   return (
-    <div>
+    <Box>
       <StepperCont value={value} onChange={handleChange}>
-        <Tab
-          sx={{
-            width: "200px",
-            marginTop: "40px",
-            border: "2px  solid blue",
-            borderRadius: "5px",
-          }}
-          onClick={handleindividual}
-          label="INDIVIDUAL USER"
-        />
-        <Tab
-          sx={{
-            width: "200px",
-            marginTop: "10px",
-            border: "2px  solid blue",
-            borderRadius: "5px",
-          }}
-          onClick={handlecompany}
-          label="COMPANY USER"
-        />
+        {props.stepperVal.map((item, index) => {
+          return (
+            <Tab
+              key={index}
+              sx={{
+                width: "200px",
+                marginTop: "15px",
+                border: "2px  solid blue",
+                borderRadius: "5px",
+              }}
+              onClick={(event) => {
+                event.preventDefault();
+                props.navigate(`${item.route}`);
+              }}
+              label={item.name}
+            />
+          );
+        })}
       </StepperCont>
-    </div>
+    </Box>
   );
 };
 

@@ -12,8 +12,7 @@ function Login(props) {
     },
     validationSchema: loginSchema,
     onSubmit: () => {
-      // props.navigate("/home");
-      console.log("Submitted");
+      props.navigate("/home");
     },
   });
 
