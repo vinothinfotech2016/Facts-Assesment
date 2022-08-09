@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -54,5 +53,66 @@
   height:auto;
   margin:0; 
   color: #00000089;
-  align-items: left;
+}
+
+.portal-box{
+  position: absolute;
+  top: 210px;
+  left: 37%;
+  width: 463px;
+  height: 150px;
+  background: #4F4A98 0% 0% no-repeat padding-box;
+  border: 1px solid #4F4A98;
+  border-radius: 4px;
+  opacity: 1;
+  color:white;
+  font: normal  bold 30px Lato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portal-box1{
+  position: absolute;
+  top:55%;
+  left: 37%;
+  width: 463px;
+  height: 150px;
+  background: #4F4A98 0% 0% no-repeat padding-box;
+  border: 1px solid #4F4A98;
+  border-radius: 4px;
+  opacity: 1;
+  color:white;
+  font: normal  bold 30px Lato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  width: 55%;
+  margin: 30px auto;
+  border: 1px solid black;
+  padding: 30px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.btnContainer{
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 0;
+}
+
+.btn{
+  margin-left: 16px !important;
+}
+
+.backicon{
+  padding-top: 18px;
+  margin-right: 10px;
+}
+
+.newuser{
+  display: flex;
 }

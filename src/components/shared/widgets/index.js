@@ -9,3 +9,4 @@ export * from "./WidgetButton";
 export * from "../DividerLine";
 export * from "./WidgetChipAutocomplete";
 export * from "./WidgetCheckbox";
+export * from "./WidgetPassword";

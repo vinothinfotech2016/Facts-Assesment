@@ -8,6 +8,8 @@ const Title = styled("span")({
   color: "rgba(112, 112, 112, 0.8)",
   opacity: 1,
   fontSize: 32,
+  display: "flex",
+  justifyContent: "center",
 });
 
 export const Header = () => {
