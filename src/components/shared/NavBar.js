@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
+import { initValue } from "../constent";
 
 const UserCont = styled(IconButton)`
   display: flex;
@@ -21,7 +22,7 @@ const UserTextCont = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right:7px;
+  margin-right: 7px;
 `;
 
 export const NavBar = (props) => {
@@ -29,14 +30,6 @@ export const NavBar = (props) => {
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const logout = () => {
-    props.navigate("/");
-    handleCloseUserMenu();
   };
 
   return (
@@ -46,12 +39,8 @@ export const NavBar = (props) => {
           variant="dense"
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
-          <Typography
-            variant="h4"
-            color="inherit"
-            component="div"
-          >
-            Address Book
+          <Typography variant="h4" color="inherit" component="div">
+            DESIGN TOOL
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -81,20 +70,23 @@ export const NavBar = (props) => {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={() => {
+                setAnchorElUser(null);
+              }}
             >
-              <MenuItem key="Profile(C)" onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Profile(C)</Typography>
-              </MenuItem>
-              <MenuItem key="My Team" onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">My Team</Typography>
-              </MenuItem>
-              <MenuItem key="Parameters" onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Parameters</Typography>
-              </MenuItem>
-              <MenuItem key="Logout" onClick={logout}>
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
+              {initValue.userDropdown.map((item, index) => {
+                return (
+                  <MenuItem
+                    key={index}
+                    onClick={() => {
+                      setAnchorElUser(null);
+                      props.navigate(`${item.route}`);
+                    }}
+                  >
+                    <Typography textAlign="center">{item.name}</Typography>
+                  </MenuItem>
+                );
+              })}
             </Menu>
           </Box>
         </Toolbar>

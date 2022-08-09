@@ -6,3 +6,4 @@ export * from "./CustomTimeField";
 export * from "./CustomUploadImage";
 export * from "./DividerLine";
 export * from "./CustomDatePicker";
+export * from "./CustomStepper";
