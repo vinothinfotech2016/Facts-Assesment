@@ -34,14 +34,18 @@ export const NavBar = (props) => {
 
   return (
     <Box>
-      <AppBar position="static" sx={{display:'flex', flexDirection:'row',}}>
-      <Typography
-            variant="h4"
-            color="inherit"
-            component="div"
-            sx={{ border: "1px solid #9e9e9e", maxHeight:'56px', width:'15.5%', backgroundColor:'#fff'}}
-          >
-          </Typography>
+      <AppBar position="static" sx={{ display: "flex", flexDirection: "row" }}>
+        <Typography
+          variant="h4"
+          color="inherit"
+          component="div"
+          sx={{
+            border: "1px solid #9e9e9e",
+            maxHeight: "56px",
+            width: "15.5%",
+            backgroundColor: "#fff",
+          }}
+        ></Typography>
         <Toolbar
           variant="dense"
           sx={{
@@ -49,7 +53,7 @@ export const NavBar = (props) => {
             justifyContent: "flex-end",
             backgroundColor: "#fff",
             border: "1px solid #9e9e9e",
-            width:'85%',
+            width: "85%",
           }}
         >
           <Box sx={{ flexGrow: 0 }}>

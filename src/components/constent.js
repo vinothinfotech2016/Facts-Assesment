@@ -1,4 +1,20 @@
 export const initValue = {
+  userDropdown: [
+    { name: "My Profile", route: "/profile" },
+    { name: "Customer", route: "/customer" },
+    { name: "Roles & Access", route: "/roles" },
+    { name: "My User", route: "/myuser/userTable" },
+    { name: "Parameters", route: "/parameters" },
+    { name: "Logout", route: "/" },
+  ],
+  stepper: [
+    { name: "PRODUCT MASTER", route: "home/productMaster" },
+    { name: "FORM MASTER", route: "home/formMaster" },
+    { name: "MENU MASTER", route: "home/menuMaster" },
+  ],
+};
+
+export const tableContent = {
   indiUser: {
     header: "INDIVIDUAL USER",
     tHead: ["User Name", "Mobile No", "Email ID", "Status"],
@@ -13,17 +29,4 @@ export const initValue = {
       "Status",
     ],
   },
-  userDropdown: [
-    { name: "My Profile", route: "/profile" },
-    { name: "Customer", route: "/customer" },
-    { name: "Roles & Access", route: "/roles" },
-    { name: "My User", route: "/myuser" },
-    { name: "Parameters", route: "/parameters" },
-    { name: "Logout", route: "/" },
-  ],
-  stepper: [
-    { name: "PRODUCT MASTER", route: "home/productTable" },
-    { name: "FORM MASTER", route: "home/formTable" },
-    { name: "MENU MASTER", route: "home/menuTable" },
-  ],
 };
