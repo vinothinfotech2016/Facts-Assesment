@@ -26,12 +26,15 @@ export const BasicForm = (props) => {
             />
           </Box>
           <Stack style={{ paddingTop: 10 }}>
-            <Box className="newuser">
+            <Button
+              className="newuser"
+              onClick={() => props.navigate("/myuser/userTable")}
+            >
               <Box className="backicon">
                 <ArrowBackIcon />
               </Box>
               <h3>NEW USER</h3>
-            </Box>
+            </Button>
             <Box className="container">
               <Form
                 schema={formNewUserSchema}

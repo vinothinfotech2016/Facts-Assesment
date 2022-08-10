@@ -111,5 +111,7 @@
 }
 
 .newuser{
-  display: flex;
+ display: flex;
+ width: 200px;
+
 }

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { BasicForm } from "../pages/Newuser";
 import { Usertable } from "./Usertable";
 
