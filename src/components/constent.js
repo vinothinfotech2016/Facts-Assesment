@@ -22,8 +22,8 @@ export const initValue = {
     { name: "Logout", route: "/" },
   ],
   stepper: [
-    { name: "PRODUCT MASTER", route: "home/productTable" },
-    { name: "FORM MASTER", route: "home/formTable" },
-    { name: "MENU MASTER", route: "home/menuTable" },
+    { name: "PRODUCT MASTER", route: "home/productMaster" },
+    { name: "FORM MASTER", route: "home/formMaster" },
+    { name: "MENU MASTER", route: "home/menuMaster" },
   ],
 };

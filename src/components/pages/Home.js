@@ -6,7 +6,7 @@ import { initValue } from "../constent";
 import { CustomStepper } from "../shared";
 import { ProductMaster } from "./ProductMaster";
 import { FormMaster } from "./FormMaster";
-import { MenuTable } from "./MenuTable";
+import { MenuMaster} from "./MenuMaster";
 
 const Home = (props) => {
   return (
@@ -22,9 +22,9 @@ const Home = (props) => {
         <Box sx={{ display: "flex", justifyContent:'center', alignItems:'center',  width: "85%" }}>
           <Typography>Home</Typography>
           <Routes>
-            <Route path="/productTable" element={<ProductMaster/>} />
-            <Route path="/formTable" element={<FormMaster/>}  />
-            <Route path="/menuTable" element={<MenuTable/>}  />
+            <Route path="/productMaster" element={<ProductMaster/>} />
+            <Route path="/formMaster" element={<FormMaster/>}  />
+            <Route path="/menuMaster" element={<MenuMaster/>}  />
           </Routes>
         </Box>
       </Box>
