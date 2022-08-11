@@ -5,14 +5,16 @@ import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
 import React from "react";
-import { initValue } from "../constants/constant";
+import { initValue } from "../constent";
 import { CustomStepper } from "../shared";
 import { NavBar } from "../shared/NavBar";
-import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
+import {
+  customerFormSchema,
+  customerFormUiSchema,
+} from "../schema/CustomerForm";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { paths } from "../navigation/routePaths";
 
-export const UserForm = (props) => {
+export const CustomerForm = (props) => {
   const [formData, setFormData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   return (
@@ -29,17 +31,17 @@ export const UserForm = (props) => {
           <Stack style={{ paddingTop: 10 }}>
             <Button
               className="newuser"
-              onClick={() => props.navigate(`${paths.MYUSER}`)}
+              onClick={() => props.navigate("/myuser/userTable")}
             >
               <Box className="backicon">
                 <ArrowBackIcon />
               </Box>
-              <h3>NEW USER</h3>
+              <h3>NEW CUSTOMER</h3>
             </Button>
             <Box className="container">
               <Form
-                schema={formNewUserSchema}
-                uiSchema={formNewUserUiSchema()}
+                schema={customerFormSchema}
+                uiSchema={customerFormUiSchema()}
                 widgets={widgets}
                 formData={formData}
                 showErrorList={false}
@@ -48,7 +50,7 @@ export const UserForm = (props) => {
                 ObjectFieldTemplate={objectFieldTemplate}
                 FieldTemplate={CustomFieldTemplate}
                 transformErrors={(errors) =>
-                  customErrorMsg(errors, formNewUserSchema)
+                  customErrorMsg(errors, customerFormSchema)
                 }
                 onChange={(e) => {
                   console.log(e.formData);

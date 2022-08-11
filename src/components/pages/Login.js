@@ -1,13 +1,23 @@
-import React from "react";
-import { Grid, TextField, Button, Box } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Grid,
+  TextField,
+  Button,
+  Box,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import { Header } from "../layout/Header";
 import { useFormik } from "formik";
 import { loginSchema } from "../validation";
-import { useNavigate } from 'react-router-dom'
-import {paths} from '../navigation/routePaths'
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { paths } from "../navigation/routePaths";
 
 function Login(props) {
-  const navigate=useNavigate();
+  const [visible, setVisible] = useState(false);
+
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,8 +28,6 @@ function Login(props) {
       navigate(`${paths.MENU}`);
     },
   });
-
-
 
   return (
     <>
@@ -50,6 +58,7 @@ function Login(props) {
                   formik.errors.email ? formik.errors.email : null
                 )}
                 helperText={formik.errors.email ? formik.errors.email : null}
+                style={{ width: "275px" }}
               ></TextField>
             </Grid>
             <Grid item>
@@ -58,7 +67,7 @@ function Login(props) {
                 label="Password"
                 name="password"
                 InputLabelProps={{ shrink: true }}
-                type={"password"}
+                type={visible ? "text" : "password"}
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={Boolean(
@@ -67,6 +76,18 @@ function Login(props) {
                 helperText={
                   formik.errors.password ? formik.errors.password : null
                 }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        onClick={() => setVisible(!visible)}
+                      >
+                        {visible ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               ></TextField>
             </Grid>
 

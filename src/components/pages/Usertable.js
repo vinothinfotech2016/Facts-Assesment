@@ -1,15 +1,13 @@
 import React from "react";
-import { NavBar } from "../shared/NavBar";
-import { Box, Button, TextField } from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import SearchAppBar from "../shared/CustomSearchbar";
 import { paths } from "../navigation/routePaths";
 
 export const Usertable = (props) => {
   const navigate = useNavigate();
   return (
     <Box>
-      <NavBar user={props.user} navigate={props.navigate} />
       <Box
         sx={{
           display: "flex",
@@ -43,31 +41,30 @@ export const Usertable = (props) => {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "flex-end",
-                height: "6%",
-                backgroundColor: "#F4F4F4",
               }}
             >
-              <SearchOutlinedIcon
-                sx={{ color: "action.active", mr: 1, my: 0.5 }}
-              />
-              <TextField label="SEARCH" variant="standard" />
+              <Box
+                style={{
+                  display: "flex",
+                  marginRight: "30px",
+                }}
+              >
+                <SearchAppBar />
+              </Box>
+              <Button
+                variant="contained"
+                color="success"
+                style={{
+                  background: "#59B961 0% 0% no-repeat padding-box",
+                  width: "85px",
+                  height: "42px",
+                  borderRadius: "4px",
+                }}
+                onClick={() => navigate(paths.MYUSERFORM)}
+              >
+                NEW
+              </Button>
             </Box>
-          </Box>
-          <Box>
-            <Button
-              variant="contained"
-              color="success"
-              style={{
-                background: "#59B961 0% 0% no-repeat padding-box",
-                width: "85px",
-                height: "42px",
-                borderRadius: "4px",
-              }}
-              onClick={() => navigate(`${paths.MYUSERFORM}`)}
-            >
-              NEW
-            </Button>
           </Box>
         </Box>
       </Box>

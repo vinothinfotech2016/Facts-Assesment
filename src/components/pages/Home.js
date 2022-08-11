@@ -1,6 +1,6 @@
 import React from "react";
 import { NavBar } from "../shared/NavBar";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { initValue } from "../constants/constant";
 import { CustomStepper } from "../shared";
 // import { Navigation } from "../navigation/Navigation";
@@ -18,15 +18,7 @@ const Home = (props) => {
             stepperVal={initValue.stepper}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "85%",
-          }}
-        >
-          <Typography>Home</Typography>
+        <Box>
           <Routes>
             {/* {props.children} */}
             {routes.map((item, index) => {

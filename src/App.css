@@ -106,7 +106,7 @@
 }
 
 .backicon{
-  padding-top: 18px;
+  padding-top: 9px;
   margin-right: 10px;
 }
 
@@ -115,3 +115,18 @@
  width: 200px;
 
 }
+
+.tabletitlebox{
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  height: 30%;
+  padding-top: 25px;
+  padding-left: 30px;
+}
+.tablehead{
+  font: normal normal 600 18px Lato;
+  color:#333333;
+  height: 30px;
+}
+
