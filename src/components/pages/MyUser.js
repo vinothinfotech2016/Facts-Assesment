@@ -1,15 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import { UserForm } from "../pages/Newuser";
 import { Usertable } from "./Usertable";
+import { paths } from "../navigation/routePaths";
 
 export const MyUser = (props) => {
   return (
     <Routes>
       <Route
-        path="/userTable"
+        path={paths.MYUSER}
         element={<Usertable navigate={props.navigate} />}
       />
-      <Route path="/newUser" element={<UserForm navigate={props.navigate} />} />
+      <Route
+        path={paths.MYUSERFORM}
+        element={<UserForm navigate={props.navigate} />}
+      />
     </Routes>
   );
 };

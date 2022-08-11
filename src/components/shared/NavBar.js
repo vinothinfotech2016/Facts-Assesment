@@ -9,7 +9,8 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
-import { initValue } from "../constent";
+import { initValue } from "../constants/constant";
+import { useNavigate } from "react-router-dom";
 
 const UserCont = styled(IconButton)`
   display: flex;
@@ -27,6 +28,7 @@ const UserTextCont = styled(Box)`
 
 export const NavBar = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -94,7 +96,7 @@ export const NavBar = (props) => {
                     key={index}
                     onClick={() => {
                       setAnchorElUser(null);
-                      props.navigate(`${item.route}`);
+                      navigate(`${item.route}`);
                     }}
                   >
                     <Typography textAlign="center">{item.name}</Typography>

@@ -1,26 +1,45 @@
 import React from "react";
-import { NavBar } from "../shared/NavBar";
 import { Box, Button } from "@mui/material";
-import { initValue } from "../constent";
-import { CustomStepper } from "../shared";
+import { useNavigate } from "react-router-dom";
 import SearchAppBar from "../shared/CustomSearchbar";
-export const Usertable = (props) => {
-  return (
-    <>
-      <Box>
-        <NavBar user={props.user} navigate={props.navigate} />
-        <Box sx={{ display: "flex" }}>
-          <Box sx={{ width: "15%" }}>
-            <CustomStepper
-              navigate={props.navigate}
-              stepperVal={initValue.stepper}
-            />
-          </Box>
+import { paths } from "../navigation/routePaths";
 
-          <Box className="tabletitlebox">
-            <span className="tablehead">MY USERS</span>
+export const Usertable = (props) => {
+  const navigate = useNavigate();
+  return (
+    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "84%",
+          paddingTop: 3,
+          paddingLeft: 3,
+        }}
+      >
+        <span
+          style={{
+            font: "normal normal 600 18px Lato",
+            color: "#333333",
+          }}
+        >
+          MY USERS
+        </span>
+        <Box
+          style={{
+            display: "flex",
+            width: "50%",
+          }}
+        >
+          <Box
+            style={{
+              width: "35%",
+              marginRight: 30,
+              display: "flex",
+            }}
+          >
             <Box
-              style={{
+              sx={{
                 display: "flex",
               }}
             >
@@ -41,7 +60,7 @@ export const Usertable = (props) => {
                   height: "42px",
                   borderRadius: "4px",
                 }}
-                onClick={() => props.navigate("myuser/newUser")}
+                onClick={() => navigate(paths.MYUSERFORM)}
               >
                 NEW
               </Button>
@@ -49,6 +68,6 @@ export const Usertable = (props) => {
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };

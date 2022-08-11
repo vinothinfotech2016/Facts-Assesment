@@ -11,10 +11,13 @@ import { Header } from "../layout/Header";
 import { useFormik } from "formik";
 import { loginSchema } from "../validation";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { paths } from "../navigation/routePaths";
 
 function Login(props) {
   const [visible, setVisible] = useState(false);
 
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,7 +25,7 @@ function Login(props) {
     },
     validationSchema: loginSchema,
     onSubmit: () => {
-      props.navigate("/menu");
+      navigate(`${paths.MENU}`);
     },
   });
 
