@@ -5,11 +5,12 @@ import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
 import React from "react";
-import { initValue } from "../constent";
+import { initValue } from "../constants/constant";
 import { CustomStepper } from "../shared";
 import { NavBar } from "../shared/NavBar";
 import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { paths } from "../navigation/routePaths";
 
 export const BasicForm = (props) => {
   const [formData, setFormData] = React.useState({});
@@ -28,7 +29,7 @@ export const BasicForm = (props) => {
           <Stack style={{ paddingTop: 10 }}>
             <Button
               className="newuser"
-              onClick={() => props.navigate("/myuser/userTable")}
+              onClick={() => props.navigate(`${paths.MYUSER}`)}
             >
               <Box className="backicon">
                 <ArrowBackIcon />

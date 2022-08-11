@@ -1,10 +1,11 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Tab } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const StepperCont = styled(Box)`
   height: 94vh;
-  width: 100%;
+  width: 100%;  
   border: 1px solid #9e9e9e;
   display: flex;
   flex-direction: column;
@@ -13,6 +14,7 @@ const StepperCont = styled(Box)`
 
 const CustomStepper = (props) => {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -32,7 +34,7 @@ const CustomStepper = (props) => {
               }}
               onClick={(event) => {
                 event.preventDefault();
-                props.navigate(`${item.route}`);
+                navigate(`${item.route}`);
               }}
               label={item.name}
             />
