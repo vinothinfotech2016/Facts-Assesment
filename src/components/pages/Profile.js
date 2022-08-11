@@ -1,9 +1,6 @@
 import React from "react";
-import { NavBar } from "../shared/NavBar";
 import { Box, Typography } from "@mui/material";
 // import { Routes, Route } from "react-router-dom";
-import { initValue } from "../constent";
-import { CustomStepper } from "../shared";
 import { MainCont } from "../styled";
 import { Header } from "../styled";
 import { UserCont } from "../styled";
@@ -18,15 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 export const Profile = (props) => {
   return (
-    <Box>
-      <NavBar user={props.user} navigate={props.navigate} />
-      <Box sx={{ display: "flex" }}>
-        <Box sx={{ width: "15%" }}>
-          <CustomStepper
-            navigate={props.navigate}
-            stepperVal={initValue.stepper}
-          />
-        </Box>
+      <Box>
         <MainCont>
           <Header>
             <Typography
@@ -55,6 +44,5 @@ export const Profile = (props) => {
           </UserCont>
         </MainCont>
       </Box>
-    </Box>
   );
 };

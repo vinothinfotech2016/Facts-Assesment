@@ -1,12 +1,11 @@
 import React from "react";
 import { NavBar } from "../shared/NavBar";
 import { Box, Typography } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
-import { initValue } from "../constent";
+import { initValue } from "../constants/constant";
 import { CustomStepper } from "../shared";
-import { ProductMaster } from "./ProductMaster";
-import { FormMaster } from "./FormMaster";
-import { MenuMaster } from "./MenuMaster";
+// import { Navigation } from "../navigation/Navigation";
+import { Routes, Route } from "react-router-dom";
+import { routes } from "../navigation/Routes";
 
 const Home = (props) => {
   return (
@@ -29,9 +28,17 @@ const Home = (props) => {
         >
           <Typography>Home</Typography>
           <Routes>
-            <Route path="/productMaster" element={<ProductMaster />} />
-            <Route path="/formMaster" element={<FormMaster />} />
-            <Route path="/menuMaster" element={<MenuMaster />} />
+            {/* {props.children} */}
+            {routes.map((item, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={item.path}
+                  exact={item}
+                  element={<item.component />}
+                />
+              );
+            })}
           </Routes>
         </Box>
       </Box>
