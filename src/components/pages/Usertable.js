@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SearchAppBar from "../shared/CustomSearchbar";
 import { paths } from "../navigation/routePaths";
@@ -12,22 +12,23 @@ export const Usertable = (props) => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          width: "84%",
+          width: "100vh",
           paddingTop: 3,
           paddingLeft: 3,
         }}
       >
-        <span
+        <Typography
           style={{
             font: "normal normal 600 18px Lato",
             color: "#333333",
           }}
         >
           MY USERS
-        </span>
+        </Typography>
         <Box
           style={{
             display: "flex",
+            justifyContent: "flex-end",
             width: "50%",
           }}
         >
@@ -45,7 +46,6 @@ export const Usertable = (props) => {
             >
               <Box
                 style={{
-                  display: "flex",
                   marginRight: "30px",
                 }}
               >
@@ -57,7 +57,7 @@ export const Usertable = (props) => {
                 style={{
                   background: "#59B961 0% 0% no-repeat padding-box",
                   width: "85px",
-                  height: "42px",
+                  height: "38px",
                   borderRadius: "4px",
                 }}
                 onClick={() => navigate(paths.MYUSERFORM)}
