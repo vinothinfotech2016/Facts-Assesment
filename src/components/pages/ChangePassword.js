@@ -9,8 +9,8 @@ import {
   changePasswordSchema,
   changePasswordUiSchema,
 } from "../schema/ChangePassword";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { paths } from "../navigation/routePaths";
+import { FormTopbar } from "../shared/FormTopbar";
 
 export const ChangePassword = (props) => {
   const [password, setPassword] = React.useState({});
@@ -18,15 +18,7 @@ export const ChangePassword = (props) => {
   return (
     <>
       <Box>
-        <Button
-          className="newuser"
-          onClick={() => props.navigate(`${paths.PROFILE}`)}
-        >
-          <Box className="backicon">
-            <ArrowBackIcon />
-          </Box>
-          <h3>Change Password</h3>
-        </Button>
+        <FormTopbar label="Change Password" listPath={paths.PROFILE} />
         <Box className="container">
           <Form
             schema={changePasswordSchema}
@@ -62,7 +54,7 @@ export const ChangePassword = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                SUBMIT
+                UPDATE
               </Button>
             </div>
           </Form>
