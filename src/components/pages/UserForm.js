@@ -15,7 +15,7 @@ export const UserForm = (props) => {
   return (
     <>
       <Box>
-        <FormTopbar lable="New User" listpath={paths.MYUSER} />
+        <FormTopbar label="New User" listPath={paths.MYUSER} />
         <Box className="container">
           <Form
             schema={formNewUserSchema}
