@@ -1,7 +1,7 @@
 import React from "react";
 import { NavBar } from "../shared/NavBar";
 import { Box, Button } from "@mui/material";
-import { initValue } from "../constent";
+import { initValue } from "../constants/constant";
 import { CustomStepper } from "../shared";
 import SearchAppBar from "../shared/CustomSearchbar";
 export const Customertable = (props) => {
