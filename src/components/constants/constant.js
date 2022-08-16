@@ -1,18 +1,18 @@
-import { paths } from "../navigation/routePaths";
+import { mapPaths } from "../navigation/routePaths";
 
 export const initValue = {
   userDropdown: [
-    { name: "My Profile", route: `${paths.PROFILE}` },
-    { name: "Customer", route: `${paths.CUSTOMER}` },
-    { name: "Roles & Access", route: `${paths.ROLES}` },
-    { name: "My User", route: `${paths.MYUSER}` },
-    { name: "Parameters", route: `${paths.PARAM}` },
-    { name: "Logout", route: `${paths.LOGIN}` },
+    { name: "My Profile", route: `${mapPaths.PROFILE}` },
+    { name: "Customer", route: `${mapPaths.CUSTOMER}` },
+    { name: "Roles & Access", route: `${mapPaths.ROLES}` },
+    { name: "My User", route: `${mapPaths.MYUSER}` },
+    { name: "Parameters", route: `${mapPaths.PARAM}` },
+    { name: "Logout", route: `${mapPaths.LOGIN}` },
   ],
   stepper: [
-    { name: "PRODUCT MASTER", route: `${paths.PRODUCTMASTER}` },
-    { name: "FORM MASTER", route: `${paths.FORMMASTER}` },
-    { name: "MENU MASTER", route: `${paths.MENUMASTER}` },
+    { name: "PRODUCT MASTER", route: `${mapPaths.PRODUCTMASTER}` },
+    { name: "FORM MASTER", route: `${mapPaths.FORMMASTER}` },
+    { name: "MENU MASTER", route: `${mapPaths.MENUMASTER}` },
   ],
 };
 

@@ -18,21 +18,20 @@ const Home = (props) => {
             stepperVal={initValue.stepper}
           />
         </Box>
-        <Box>
-          <Routes>
-            {/* {props.children} */}
-            {routes.map((item, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={item.path}
-                  exact={item}
-                  element={<item.component />}
-                />
-              );
-            })}
-          </Routes>
-        </Box>
+
+        <Routes>
+          {/* {props.children} */}
+          {routes.map((item, index) => {
+            return (
+              <Route
+                key={index}
+                path={item.path}
+                exact={item}
+                element={<item.component />}
+              />
+            );
+          })}
+        </Routes>
       </Box>
     </Box>
   );
