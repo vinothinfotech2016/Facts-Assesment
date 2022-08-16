@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const StepperCont = styled(Box)`
   height: 94vh;
-  width: 100%;  
+  margin-top: 56px;
+  width: 15%;
   border: 1px solid #9e9e9e;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
 `;
 
 const CustomStepper = (props) => {

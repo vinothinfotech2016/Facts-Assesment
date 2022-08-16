@@ -60,7 +60,7 @@ export const Usertable = (props) => {
                   height: "38px",
                   borderRadius: "4px",
                 }}
-                onClick={() => navigate(clickPaths.USENAVIGATEMYUSER)}
+                onClick={() => navigate(clickPaths.USENAVIGATEMYUSERFORM)}
               >
                 NEW
               </Button>
