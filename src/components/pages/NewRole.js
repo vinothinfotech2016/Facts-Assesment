@@ -1,6 +1,6 @@
-import { CheckBox } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -71,6 +71,14 @@ const NewRole = (props) => {
               </FormGroup>
             </FormControl>
           </Box>
+          <div className="btnContainer">
+            <Button variant="outlined" className="btn">
+              CANCEL
+            </Button>
+            <Button variant="outlined" className="btn">
+              Save
+            </Button>
+          </div>
         </Box>
       </Box>
     </>
