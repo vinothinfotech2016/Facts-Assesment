@@ -9,10 +9,10 @@ const HeaderContainer = styled(Box)({
   boxSizing: "border-box",
   display: "flex",
   alignItems: "center",
-  position: "sticky",
-  top: 0,
-  backgroundColor: "white",
-  zIndex: 10,
+  // position: "sticky",
+  // top: 0,
+  // backgroundColor: "white",
+  // zIndex: 10,
 });
 const IconBtn = styled(ArrowBackIcon)({
   color: "black",
