@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 // import { Routes, Route } from "react-router-dom";
 import { MainCont } from "../styled";
 import { Header } from "../styled";
@@ -15,7 +15,6 @@ import EditIcon from "@mui/icons-material/Edit";
 
 export const Profile = (props) => {
   return (
-      <Box>
         <MainCont>
           <Header>
             <Typography
@@ -43,6 +42,5 @@ export const Profile = (props) => {
             </IconCont>
           </UserCont>
         </MainCont>
-      </Box>
   );
 };

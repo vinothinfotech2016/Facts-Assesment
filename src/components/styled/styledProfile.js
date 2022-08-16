@@ -14,7 +14,7 @@ export const MainCont = styled(Box)`
 
 export const UserCont = styled(Box)`
   padding: 20px;
-  width: 55%;
+  width: 50%;
   height: 170px;
   border: 2px solid #9e9e9e;
   border-radius: 10px;

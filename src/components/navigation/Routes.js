@@ -5,50 +5,57 @@ import { Customer } from "../pages/Customer";
 import { Roles } from "../pages/Roles";
 import { Usertable } from "../pages/Usertable";
 import { Parameters } from "../pages/Parameters";
-import { paths } from "./routePaths";
+import { mapPaths } from "./routePaths";
 import { ProductMaster } from "../pages/ProductMaster";
 import { FormMaster } from "../pages/FormMaster";
 import { MenuMaster } from "../pages/MenuMaster";
 import Home from "../pages/Home";
+import { UserForm } from "../pages/UserForm";
+
 
 export const routes = [
   {
-    path: paths.PROFILE,
+    path: mapPaths.PROFILE,
     component: Profile,
     exact: true,
   },
   {
-    path: paths.CUSTOMER,
+    path: mapPaths.CUSTOMER,
     component: Customer,
     exact: true,
   },
   {
-    path: paths.ROLES,
+    path: mapPaths.ROLES,
     component: Roles,
     exact: true,
   },
   {
-    path: paths.MYUSER,
+    path: mapPaths.MYUSER,
     component: Usertable,
     exact: true,
   },
   {
-    path: paths.PARAM,
+    path: mapPaths.MYUSERFORM,
+    component: UserForm,
+    exact: true,
+  },
+  {
+    path: mapPaths.PARAM,
     component: Parameters,
     exact: true,
   },
   {
-    path: paths.FORMMASTER,
+    path: mapPaths.FORMMASTER,
     component: FormMaster,
     exact: true,
   },
   {
-    path: paths.MENUMASTER,
+    path: mapPaths.MENUMASTER,
     component: MenuMaster,
     exact: true,
   },
   {
-    path: paths.PRODUCTMASTER,
+    path: mapPaths.PRODUCTMASTER,
     component: ProductMaster,
     exact: true,
   },
@@ -56,15 +63,15 @@ export const routes = [
 
 export const AppRoutes = [
   {
-    path: paths.LOGIN,
+    path: mapPaths.LOGIN,
     component: Login,
   },
   {
-    path: paths.MENU,
+    path: mapPaths.MENU,
     component: Menu,
   },
   {
-    path: paths.HOME,
+    path: mapPaths.HOME,
     component: Home,
     exact: true,
   },

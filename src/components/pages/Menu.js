@@ -2,16 +2,16 @@ import { Box } from "@mui/material";
 import React from "react";
 import { Header } from "../layout/Header";
 import { useNavigate } from "react-router-dom";
-import { paths } from "../navigation/routePaths";
+import { clickPaths } from "../navigation/routePaths";
 
 export const Menu = () => {
   const navigate = useNavigate();
   const handlePortal = () => {
-    navigate(`${paths.HOME}`);
+    navigate(`${clickPaths.USENAVIGATEHOME}`);
   };
 
   const handlePrototype = () => {
-    navigate(`${paths.HOME}`);
+    navigate(`${clickPaths.USENAVIGATEHOME}`);
   };
   return (
     <>
