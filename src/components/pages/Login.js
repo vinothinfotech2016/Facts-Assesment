@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 import { loginSchema } from "../validation";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { paths } from "../navigation/routePaths";
+import { mapPaths } from "../navigation/routePaths";
 
 function Login(props) {
   const [visible, setVisible] = useState(false);
@@ -25,7 +25,7 @@ function Login(props) {
     },
     validationSchema: loginSchema,
     onSubmit: () => {
-      navigate(`${paths.MENU}`);
+      navigate(`${mapPaths.MENU}`);
     },
   });
 

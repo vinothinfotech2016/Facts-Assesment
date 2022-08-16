@@ -6,7 +6,7 @@ import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
 import React from "react";
 import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
-import { paths } from "../navigation/routePaths";
+import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 
 export const UserForm = (props) => {
@@ -15,7 +15,7 @@ export const UserForm = (props) => {
   return (
     <>
       <Box>
-        <FormTopbar label="New User" listPath={paths.MYUSER} />
+        <FormTopbar label="New User" listPath={clickPaths.USENAVIGATEMYUSERFORM} />
         <Box className="container">
           <Form
             schema={formNewUserSchema}

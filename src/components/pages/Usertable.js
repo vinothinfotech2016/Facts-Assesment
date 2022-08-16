@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SearchAppBar from "../shared/CustomSearchbar";
-import { paths } from "../navigation/routePaths";
+import { clickPaths } from "../navigation/routePaths";
 
 export const Usertable = (props) => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ export const Usertable = (props) => {
                   height: "38px",
                   borderRadius: "4px",
                 }}
-                onClick={() => navigate(paths.MYUSERFORM)}
+                onClick={() => navigate(clickPaths.USENAVIGATEMYUSER)}
               >
                 NEW
               </Button>
