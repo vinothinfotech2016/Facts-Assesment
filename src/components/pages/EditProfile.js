@@ -1,6 +1,7 @@
 import { Box, Grid, TextField } from "@mui/material";
 import React from "react";
 import { paths } from "../navigation/routePaths";
+import { CustomUploadImage } from "../shared";
 import { FormTopbar } from "../shared/FormTopbar";
 
 const EditProfile = (props) => {
@@ -14,11 +15,7 @@ const EditProfile = (props) => {
               <TextField label="Name*" />
             </Grid>
             <Grid item xs={6}>
-              <input
-                type={"file"}
-                label="Profile Image"
-                style={{ border: "1px dashed #0000008A" }}
-              />
+              <CustomUploadImage label={"Profile Image"} />
             </Grid>
             <Grid item xs={6}>
               <TextField label="Mobile No*" />
