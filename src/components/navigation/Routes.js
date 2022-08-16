@@ -10,6 +10,8 @@ import { ProductMaster } from "../pages/ProductMaster";
 import { FormMaster } from "../pages/FormMaster";
 import { MenuMaster } from "../pages/MenuMaster";
 import Home from "../pages/Home";
+import { UserForm } from "../pages/UserForm";
+
 
 export const routes = [
   {
@@ -30,6 +32,11 @@ export const routes = [
   {
     path: mapPaths.MYUSER,
     component: Usertable,
+    exact: true,
+  },
+  {
+    path: mapPaths.MYUSERFORM,
+    component: UserForm,
     exact: true,
   },
   {

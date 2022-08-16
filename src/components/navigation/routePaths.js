@@ -21,8 +21,8 @@ export const mapPaths = {
 
   export const clickPaths = {
     USENAVIGATEHOME:'/home/productMaster/list',
-    USENAVIGATEMYUSER:'/home/myUser/form',
-    USENAVIGATEMYUSERFORM:'/home/myUser/list',
+    USENAVIGATEMYUSER:'/home/myUser/list',
+    USENAVIGATEMYUSERFORM:'/home/myUser/form',
     USENAVIGATEPRODUCTMASTERFORM: "/home/productMaster/form",
     USENAVIGATEMENUMASTER: "/home/menuMaster/list",
     USENAVIGATEMENUMASTERFORM: "/home/menuMaster/form",

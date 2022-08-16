@@ -36,7 +36,7 @@ export const NavBar = (props) => {
 
   return (
     <Box>
-      <AppBar position="static" sx={{ display: "flex", flexDirection: "row" }}>
+      <AppBar position="static" sx={{ display: "flex", flexDirection: "row", position: "fixed", }}>
         <Typography
           variant="h4"
           color="inherit"
