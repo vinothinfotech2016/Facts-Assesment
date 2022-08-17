@@ -11,8 +11,10 @@ import {
 } from "../schema/newProductMaster";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
+import { useNavigate } from "react-router";
 
 const ProductMasterForm = (props) => {
+  const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   return (
@@ -44,7 +46,11 @@ const ProductMasterForm = (props) => {
           }}
         >
           <div className="btnContainer">
-            <Button variant="outlined" className="btn">
+            <Button
+              variant="outlined"
+              className="btn"
+              onClick={() => navigate(clickPaths.USENAVIGATEHOME)}
+            >
               CANCEL
             </Button>
             <Button
