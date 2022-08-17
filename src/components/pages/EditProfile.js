@@ -1,14 +1,19 @@
-import { Box, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import React from "react";
-import { paths } from "../navigation/routePaths";
+import { useNavigate } from "react-router";
+import { clickPaths } from "../navigation/routePaths";
 import { CustomUploadImage } from "../shared";
 import { FormTopbar } from "../shared/FormTopbar";
 
 const EditProfile = (props) => {
+  const navigate = useNavigate();
   return (
     <>
       <Box>
-        <FormTopbar label="Edit Profile" listPath={paths.PROFILE} />
+        <FormTopbar
+          label="Edit Profile"
+          listPath={clickPaths.USENAVIGATEPROFILE}
+        />
         <Box className="container">
           <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -24,6 +29,18 @@ const EditProfile = (props) => {
               <TextField label="Email*" />
             </Grid>
           </Grid>
+          <Box className="btnContainer">
+            <Button
+              variant="outlined"
+              className="btn"
+              onClick={() => navigate(clickPaths.USENAVIGATEPROFILE)}
+            >
+              CANCEL
+            </Button>
+            <Button variant="outlined" className="btn">
+              UPDATE
+            </Button>
+          </Box>
         </Box>
       </Box>
     </>

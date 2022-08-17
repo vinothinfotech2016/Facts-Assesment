@@ -1,5 +1,3 @@
-import { CustomLabel } from "../shared/widgets/CustomLabel";
-
 export const formNewProductMasterSchema = {
   type: "object",
   required: [

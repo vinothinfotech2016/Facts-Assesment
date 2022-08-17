@@ -1,7 +1,7 @@
 import Login from "../pages/Login";
 import { Menu } from "../pages/Menu";
 import { Profile } from "../pages/Profile";
-import { Customer } from "../pages/Customer";
+import { ChangePassword } from "../pages/ChangePassword";
 import { Roles } from "../pages/Roles";
 import { Usertable } from "../pages/Usertable";
 import { Parameters } from "../pages/Parameters";
@@ -14,6 +14,10 @@ import { UserForm } from "../pages/UserForm";
 import ProductMasterForm from "../pages/ProductMasterForm";
 import { NewFormMaster } from "../pages/NewFormMaster";
 import { NewMenu } from "../pages/NewMenu";
+import EditProfile from "../pages/EditProfile";
+import { Customertable } from "../pages/Customertable";
+import { CustomerForm } from "../pages/CustomerForm";
+import NewRole from "../pages/NewRole";
 
 export const routes = [
   {
@@ -22,13 +26,33 @@ export const routes = [
     exact: true,
   },
   {
+    path: mapPaths.PROFILEFORM,
+    component: EditProfile,
+    exact: true,
+  },
+  {
+    path: mapPaths.CHANGEPASSWORD,
+    component: ChangePassword,
+    exact: true,
+  },
+  {
     path: mapPaths.CUSTOMER,
-    component: Customer,
+    component: Customertable,
+    exact: true,
+  },
+  {
+    path: mapPaths.CUSTOMERFORM,
+    component: CustomerForm,
     exact: true,
   },
   {
     path: mapPaths.ROLES,
     component: Roles,
+    exact: true,
+  },
+  {
+    path: mapPaths.ROLESFORM,
+    component: NewRole,
     exact: true,
   },
   {
