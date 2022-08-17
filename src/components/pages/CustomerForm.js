@@ -10,7 +10,7 @@ import {
   customerFormUiSchema,
 } from "../schema/CustomerForm";
 import { FormTopbar } from "../shared/FormTopbar";
-import { paths } from "../navigation/routePaths";
+import { clickPaths } from "../navigation/routePaths";
 
 export const CustomerForm = (props) => {
   const [formData, setFormData] = React.useState({});
@@ -18,7 +18,10 @@ export const CustomerForm = (props) => {
   return (
     <>
       <Box>
-        <FormTopbar label="New Customer" listPath={paths.CUSTOMER} />
+        <FormTopbar
+          label="New Customer"
+          listPath={clickPaths.USENAVIGATECUSTOMER}
+        />
         <Box className="container">
           <Form
             schema={customerFormSchema}

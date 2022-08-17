@@ -9,16 +9,21 @@ import {
   changePasswordSchema,
   changePasswordUiSchema,
 } from "../schema/ChangePassword";
-import { paths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
+import { clickPaths } from "../navigation/routePaths";
+import { useNavigate } from "react-router";
 
 export const ChangePassword = (props) => {
+  const navigate = useNavigate();
   const [password, setPassword] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   return (
     <>
       <Box>
-        <FormTopbar label="Change Password" listPath={paths.PROFILE} />
+        <FormTopbar
+          label="Change Password"
+          listPath={clickPaths.USENAVIGATEPROFILE}
+        />
         <Box className="container">
           <Form
             schema={changePasswordSchema}
@@ -43,9 +48,14 @@ export const ChangePassword = (props) => {
               console.log(props.formData);
               console.log(customErrorMsg);
             }}
+            onClick={() => navigate(clickPaths.USENAVIGATEPROFILE)}
           >
             <div className="btnContainer">
-              <Button variant="outlined" className="btn">
+              <Button
+                variant="outlined"
+                className="btn"
+                onClick={() => navigate(clickPaths.USENAVIGATEPROFILE)}
+              >
                 CANCEL
               </Button>
               <Button
