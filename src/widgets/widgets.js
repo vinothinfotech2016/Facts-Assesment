@@ -11,6 +11,7 @@ import {
   DividerLine,
   WidgetChipAutocomplete,
   WidgetCheckbox,
+  CustomLabel,
 } from "../components/shared/widgets";
 
 export const widgets = {
@@ -26,4 +27,5 @@ export const widgets = {
   customDivider: DividerLine,
   chipType: WidgetChipAutocomplete,
   PasswordWidget: WidgetPassword,
+  customLable: CustomLabel,
 };

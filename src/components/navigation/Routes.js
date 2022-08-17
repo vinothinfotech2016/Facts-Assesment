@@ -11,7 +11,9 @@ import { FormMaster } from "../pages/FormMaster";
 import { MenuMaster } from "../pages/MenuMaster";
 import Home from "../pages/Home";
 import { UserForm } from "../pages/UserForm";
-
+import ProductMasterForm from "../pages/ProductMasterForm";
+import { NewFormMaster } from "../pages/NewFormMaster";
+import { NewMenu } from "../pages/NewMenu";
 
 export const routes = [
   {
@@ -50,13 +52,28 @@ export const routes = [
     exact: true,
   },
   {
+    path: mapPaths.FORMMASTERFORM,
+    component: NewFormMaster,
+    exact: true,
+  },
+  {
     path: mapPaths.MENUMASTER,
     component: MenuMaster,
     exact: true,
   },
   {
+    path: mapPaths.MENUMASTERFORM,
+    component: NewMenu,
+    exact: true,
+  },
+  {
     path: mapPaths.PRODUCTMASTER,
     component: ProductMaster,
+    exact: true,
+  },
+  {
+    path: mapPaths.PRODUCTMASTERFORM,
+    component: ProductMasterForm,
     exact: true,
   },
 ];

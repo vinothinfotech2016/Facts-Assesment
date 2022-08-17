@@ -5,7 +5,7 @@ import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
 import React from "react";
-import { paths } from "../navigation/routePaths";
+import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import {
   newFormMasterSchema,
@@ -18,7 +18,7 @@ export const NewFormMaster = (props) => {
   return (
     <>
       <Box>
-        <FormTopbar label="New Form Master" listPath={paths.FORMMASTER} />
+        <FormTopbar label="New Form Master" listPath={clickPaths.USENAVIGATEFORMMASTER} />
         <Box className="container">
           <Form
             schema={newFormMasterSchema}
