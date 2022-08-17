@@ -29,7 +29,6 @@ function Login(props) {
       navigate(`${mapPaths.MENU}`);
     },
   });
-  console.log(formik.values);
   return (
     <>
       <form onSubmit={formik.handleSubmit} noValidate>

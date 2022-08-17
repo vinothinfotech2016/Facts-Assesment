@@ -22,7 +22,7 @@ export const ProductList = () => [
           rowId={props.row.original.id}
           toShow={{ edit: true, viewDetails: true }}
           paths={{
-            edit: `${clickPaths.USENAVIGATECUSTOMERFORM}`,
+            edit: `${clickPaths.USENAVIGATEPRODUCTMASTERFORM}`,
           }}
         />
       </div>

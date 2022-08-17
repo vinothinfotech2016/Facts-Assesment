@@ -1,7 +1,6 @@
 import * as yup from "yup";
 
 export const loginSchema = (values) => {
-  console.log(values, "values");
   const temp = values
     ? {
         email: yup

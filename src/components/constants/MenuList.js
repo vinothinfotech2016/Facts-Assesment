@@ -22,7 +22,7 @@ export const MenuList = () => [
           rowId={props.row.original.id}
           toShow={{ edit: true, viewDetails: true }}
           paths={{
-            edit: `${clickPaths.USENAVIGATECUSTOMERFORM}`,
+            edit: `${clickPaths.USENAVIGATEMENUMASTER}`,
           }}
         />
       </div>
