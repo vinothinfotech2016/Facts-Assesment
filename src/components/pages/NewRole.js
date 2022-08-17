@@ -9,10 +9,12 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import { paths } from "../navigation/routePaths";
+import { useNavigate } from "react-router";
+import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 
 const NewRole = (props) => {
+  const navigate = useNavigate();
   const [acessState, setAcessState] = useState({
     productMaster: false,
     menuMaster: false,
@@ -28,7 +30,7 @@ const NewRole = (props) => {
   return (
     <>
       <Box>
-        <FormTopbar label="New Role" listPath={paths.ROLES} />
+        <FormTopbar label="New Role" listPath={clickPaths.USENAVIGATEROLES} />
         <Box className="container">
           <TextField label="Role Name*" style={{ marginBottom: "20px" }} />
           <Box>
@@ -72,7 +74,11 @@ const NewRole = (props) => {
             </FormControl>
           </Box>
           <div className="btnContainer">
-            <Button variant="outlined" className="btn">
+            <Button
+              variant="outlined"
+              className="btn"
+              onClick={() => navigate(clickPaths.USENAVIGATEROLES)}
+            >
               CANCEL
             </Button>
             <Button variant="outlined" className="btn">

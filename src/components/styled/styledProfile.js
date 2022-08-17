@@ -1,7 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
-
 export const Header = styled(Box)`
   padding: 25px;
 `;
@@ -35,42 +34,47 @@ export const TextCont = styled(Box)`
   height: 140px;
   width: 60%;
   margin-left: 30px;
-  display:flex;
-  justify-content:space-between;
-  flex-direction:column;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 `;
 
 export const Title = styled(Box)`
-  background-color:#f0eded;
-  width:80px;
-  height:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-`
+  background-color: #f0eded;
+  width: 80px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const IconCont = styled(Box)`
-  display:flex;
-  justify-content:space-between;
-  height:140px;
-  width:120px;
-`
+  display: flex;
+  justify-content: space-between;
+  height: 140px;
+  width: 120px;
+`;
 export const ChangePass = styled(Box)`
-  background-color:#f0eded;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:40px;
-  width:40px;
-  cursor:pointer;
-`
+  background-color: #f0eded;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+`;
 
 export const EditUserIcon = styled(Box)`
-  background-color:#f0eded;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:40px;
-  width:40px;
-  cursor:pointer;
-`
+  background-color: #f0eded;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+`;
+export const ListContainer = styled(Box)`
+  box-sizing: border-box;
+  width: 96%;
+  padding-left: 30px;
+`;

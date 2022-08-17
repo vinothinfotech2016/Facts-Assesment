@@ -8,8 +8,10 @@ import React from "react";
 import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
+import { useNavigate } from "react-router";
 
 export const UserForm = (props) => {
+  const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   return (
@@ -42,7 +44,11 @@ export const UserForm = (props) => {
             }}
           >
             <div className="btnContainer">
-              <Button variant="outlined" className="btn">
+              <Button
+                variant="outlined"
+                className="btn"
+                onClick={() => navigate(clickPaths.USENAVIGATEMYUSER)}
+              >
                 CANCEL
               </Button>
               <Button

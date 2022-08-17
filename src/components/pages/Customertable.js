@@ -1,54 +1,46 @@
 import React from "react";
-import { NavBar } from "../shared/NavBar";
-import { Box, Button } from "@mui/material";
-import { initValue } from "../constants/constant";
-import { CustomStepper } from "../shared";
-import SearchAppBar from "../shared/CustomSearchbar";
+import { ListTopbar } from "../shared/ListTopbar";
+import { clickPaths } from "../navigation/routePaths";
+import { ListContainer } from "../styled";
+import { CustomReactTable } from "../shared/CustomReactTable";
+import { customerdata, CustomersList } from "../constants/Customers";
+
 export const Customertable = (props) => {
   return (
     <>
-      <Box>
-        <NavBar user={props.user} navigate={props.navigate} />
-        <Box sx={{ display: "flex" }}>
-          <Box sx={{ width: "15%" }}>
-            <CustomStepper
-              navigate={props.navigate}
-              stepperVal={initValue.stepper}
-            />
-          </Box>
-
-          <Box className="tabletitlebox">
-            <span className="tablehead">Customers</span>
-            <Box
-              style={{
-                display: "flex",
-              }}
-            >
-              <Box
-                style={{
-                  display: "flex",
-                  marginRight: "30px",
-                }}
-              >
-                <SearchAppBar />
-              </Box>
-              <Button
-                variant="contained"
-                color="success"
-                style={{
-                  background: "#59B961 0% 0% no-repeat padding-box",
-                  width: "85px",
-                  height: "42px",
-                  borderRadius: "4px",
-                }}
-                onClick={() => props.navigate("myuser/newUser")}
-              >
-                NEW
-              </Button>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+      <ListContainer>
+        <ListTopbar
+          searchField={true}
+          newForm={true}
+          download={false}
+          filter={false}
+          label={"CUSTOMERS"}
+          newFormPath={clickPaths.USENAVIGATECUSTOMERFORM}
+        />
+        <CustomReactTable
+          columnData={CustomersList()}
+          rawData={customerdata}
+          disableRowSelection={true}
+          // onChangePageSize={onChangePageSize}
+          // count={count}
+          // pageSize={pageSize}
+          // currentPage={currentPage}
+          // onPageNumberChange={onPageNumberChange}
+          columnSize={false}
+          style={{
+            th: {
+              color: "#0000008A",
+              font: "normal normal bold 17px Roboto !important",
+              height: "64px !important",
+              backgroundColor: "#D2E1FC",
+            },
+            body: {
+              color: "#000000DE",
+              font: "normal normal normal 14px Roboto !important",
+            },
+          }}
+        />
+      </ListContainer>
     </>
   );
 };
