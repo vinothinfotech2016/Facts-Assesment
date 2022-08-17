@@ -16,10 +16,18 @@ export const Menu = () => {
   return (
     <>
       <Header />
-      <Box className="portal-box" onClick={handlePortal}>
+      <Box
+        className="portal-box"
+        onClick={handlePortal}
+        sx={{ cursor: "pointer" }}
+      >
         <span>CONTENT PORTAL</span>
       </Box>
-      <Box className="portal-box1" onClick={handlePrototype}>
+      <Box
+        className="portal-box1"
+        onClick={handlePrototype}
+        sx={{ cursor: "pointer" }}
+      >
         <span>PROTOTYPE</span>
       </Box>
     </>

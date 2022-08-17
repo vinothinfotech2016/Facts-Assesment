@@ -18,7 +18,7 @@ export const formNewProductMasterSchema = {
     },
     productDiscription: {
       type: "string",
-      label: "Product Discription",
+      label: "Product Description",
     },
     divider1: {
       type: "string",
@@ -44,7 +44,7 @@ export const formNewProductMasterSchema = {
     },
     centerText: {
       type: "string",
-      label: "Upload Logo",
+      label: "Text",
     },
     divider3: {
       type: "string",
@@ -94,7 +94,7 @@ export const formNewProductMasterUiSchema = () => ({
     "ui:widget": "customDivider",
   },
   header3: { "ui:widget": "customLable" },
-  rightImage: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
+  rightImage: { xs: 6.01, "ui:widget": "FileWidget", uploadFile: true },
   rightName: { xs: 6 },
   rightRole: { xs: 6 },
   divider4: {
