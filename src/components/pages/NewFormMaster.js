@@ -11,14 +11,19 @@ import {
   newFormMasterSchema,
   newFormMasterUiSchema,
 } from "../schema/newFormMaster";
+import { useNavigate } from "react-router";
 
 export const NewFormMaster = (props) => {
+  const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   return (
     <>
       <Box>
-        <FormTopbar label="New Form Master" listPath={clickPaths.USENAVIGATEFORMMASTER} />
+        <FormTopbar
+          label="New Form Master"
+          listPath={clickPaths.USENAVIGATEFORMMASTER}
+        />
         <Box className="container">
           <Form
             schema={newFormMasterSchema}
@@ -45,7 +50,11 @@ export const NewFormMaster = (props) => {
             }}
           >
             <div className="btnContainer">
-              <Button variant="outlined" className="btn">
+              <Button
+                variant="outlined"
+                className="btn"
+                onClick={() => navigate(clickPaths.USENAVIGATEFORMMASTER)}
+              >
                 CANCEL
               </Button>
               <Button

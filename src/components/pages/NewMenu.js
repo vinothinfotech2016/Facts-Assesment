@@ -16,8 +16,10 @@ import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { newMenuSchema, newMenuUiSchema } from "../schema/newmenu";
 import { DividerLine } from "../shared";
+import { useNavigate } from "react-router";
 
 export const NewMenu = (props) => {
+  const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
 
@@ -26,10 +28,14 @@ export const NewMenu = (props) => {
       [e.target.name]: e.target.value,
     });
   };
+
   return (
     <>
       <Box>
-        <FormTopbar label="New Menu" listPath={clickPaths.USENAVIGATEMENUMASTER} />
+        <FormTopbar
+          label="New Menu"
+          listPath={clickPaths.USENAVIGATEMENUMASTER}
+        />
         <Box className="container">
           <FormControl fullWidth style={{ marginBottom: "15px" }}>
             <InputLabel>Select Product</InputLabel>
@@ -69,7 +75,11 @@ export const NewMenu = (props) => {
             }}
           >
             <div className="btnContainer">
-              <Button variant="outlined" className="btn">
+              <Button
+                variant="outlined"
+                className="btn"
+                onClick={() => navigate(clickPaths.USENAVIGATEMENUMASTER)}
+              >
                 CANCEL
               </Button>
               <Button

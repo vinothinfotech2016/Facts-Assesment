@@ -70,6 +70,17 @@ export const routes = [
     component: Parameters,
     exact: true,
   },
+
+  {
+    path: mapPaths.PRODUCTMASTER,
+    component: ProductMaster,
+    exact: true,
+  },
+  {
+    path: mapPaths.PRODUCTMASTERFORM,
+    component: ProductMasterForm,
+    exact: true,
+  },
   {
     path: mapPaths.FORMMASTER,
     component: FormMaster,
@@ -88,16 +99,6 @@ export const routes = [
   {
     path: mapPaths.MENUMASTERFORM,
     component: NewMenu,
-    exact: true,
-  },
-  {
-    path: mapPaths.PRODUCTMASTER,
-    component: ProductMaster,
-    exact: true,
-  },
-  {
-    path: mapPaths.PRODUCTMASTERFORM,
-    component: ProductMasterForm,
     exact: true,
   },
 ];
