@@ -12,7 +12,7 @@ import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
 import React from "react";
-import { paths } from "../navigation/routePaths";
+import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { newMenuSchema, newMenuUiSchema } from "../schema/newmenu";
 import { DividerLine } from "../shared";
@@ -29,7 +29,7 @@ export const NewMenu = (props) => {
   return (
     <>
       <Box>
-        <FormTopbar label="New Menu" listPath={paths.MENUMASTER} />
+        <FormTopbar label="New Menu" listPath={clickPaths.USENAVIGATEMENUMASTER} />
         <Box className="container">
           <FormControl fullWidth style={{ marginBottom: "15px" }}>
             <InputLabel>Select Product</InputLabel>

@@ -6,13 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled(Box)({
   padding: 20,
+  margin:'2px',
   boxSizing: "border-box",
   display: "flex",
   alignItems: "center",
-  // position: "sticky",
-  // top: 0,
-  // backgroundColor: "white",
-  // zIndex: 10,
+  position: "fixed",
+  top:'56px',
+  backgroundColor: "white",
+  zIndex: 2,
+  width:'100%'
 });
 const IconBtn = styled(ArrowBackIcon)({
   color: "black",
