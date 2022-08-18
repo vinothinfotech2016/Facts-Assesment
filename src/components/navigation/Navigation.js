@@ -4,6 +4,7 @@ import { routes, AppRoutes } from "./Routes";
 import React from "react";
 
 export const Navigation = () => {
+  // name change
   return (
     <Routes>
       {routes.map((item, index) => {

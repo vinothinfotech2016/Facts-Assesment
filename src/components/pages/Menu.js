@@ -6,9 +6,9 @@ import { clickPaths } from "../navigation/routePaths";
 
 export const Menu = () => {
   const navigate = useNavigate();
-  const handlePortal = () => {
-    navigate(`${clickPaths.USENAVIGATEHOME}`);
-  };
+  // const handlePortal = () => {
+  //   navigate(`${clickPaths.USENAVIGATEHOME}`);
+  // };
 
   const handlePrototype = () => {
     navigate(`${clickPaths.USENAVIGATEHOME}`);
@@ -18,7 +18,7 @@ export const Menu = () => {
       <Header />
       <Box
         className="portal-box"
-        onClick={handlePortal}
+        // onClick={handlePortal}
         sx={{ cursor: "pointer" }}
       >
         <span>CONTENT PORTAL</span>

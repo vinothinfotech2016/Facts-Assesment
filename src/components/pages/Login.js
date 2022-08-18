@@ -16,6 +16,7 @@ import { mapPaths } from "../navigation/routePaths";
 
 function Login(props) {
   const [visible, setVisible] = useState(false);
+  const [isTypedEmail, setIsTypedEmail] = useState(true);
 
   const navigate = useNavigate();
   const formik = useFormik({
@@ -23,12 +24,11 @@ function Login(props) {
       email: "",
       password: "",
     },
-    validationSchema: loginSchema,
+    validationSchema: () => loginSchema(isTypedEmail),
     onSubmit: () => {
       navigate(`${mapPaths.MENU}`);
     },
   });
-
   return (
     <>
       <form onSubmit={formik.handleSubmit} noValidate>
@@ -53,7 +53,11 @@ function Login(props) {
                 name="email"
                 InputLabelProps={{ shrink: true }}
                 value={formik.values.email}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  const t = e.target.value;
+                  setIsTypedEmail(isNaN(e.target.value));
+                  formik.handleChange({ ...e, [t]: isNaN(e.target.value) });
+                }}
                 error={Boolean(
                   formik.errors.email ? formik.errors.email : null
                 )}
@@ -71,7 +75,9 @@ function Login(props) {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={Boolean(
-                  formik.errors.password ? formik.errors.password : null
+                  formik.errors.password && formik.touched.password
+                    ? formik.errors.password
+                    : null
                 )}
                 helperText={
                   formik.errors.password ? formik.errors.password : null
