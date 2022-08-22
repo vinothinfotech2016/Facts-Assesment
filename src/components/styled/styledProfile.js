@@ -80,8 +80,8 @@ export const ListContainer = styled(Box)`
 `;
 
 export const TableHeadingCell = styled(TableCell)`
-  background: #d2e1fc 0% 0% no-repeat padding-box;
-  font: normal normal bold 16px Roboto;
+  background: #d2e1fc;
+  font: normal bold 16px Roboto;
   color: #0000008a;
 `;
 

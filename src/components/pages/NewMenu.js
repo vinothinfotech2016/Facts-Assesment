@@ -51,7 +51,7 @@ export const NewMenu = (props) => {
             </Select>
           </FormControl>
           <DividerLine />
-          <h3 style={{ color: "#4F4A98" }}>Menu Settings</h3>
+          <h3 className="subheading">Menu Settings</h3>
           <Form
             schema={newMenuSchema}
             uiSchema={newMenuUiSchema()}
