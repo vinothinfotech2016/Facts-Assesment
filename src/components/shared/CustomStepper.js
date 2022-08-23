@@ -1,16 +1,13 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Tab } from "@mui/material";
+import { Box, Tabs, Tab } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const StepperCont = styled(Box)`
+const StepperCont = styled(Tabs)`
   height: 94vh;
   margin-top: 56px;
   width: 15%;
   border: 1px solid #9e9e9e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: fixed;
 `;
 
@@ -23,7 +20,14 @@ const CustomStepper = (props) => {
   };
   return (
     <Box>
-      <StepperCont value={value} onChange={handleChange}>
+      <StepperCont
+        value={value}
+        onChange={handleChange}
+        orientation="vertical"
+        sx={{
+          "& button:focus": { backgroundColor: "#d6d6d6", color: "black" },
+        }}
+      >
         {props.stepperVal.map((item, index) => {
           return (
             <Tab
@@ -31,6 +35,7 @@ const CustomStepper = (props) => {
               sx={{
                 width: "200px",
                 marginTop: "15px",
+                marginLeft: "13%",
                 border: "2px  solid #9e9e9e",
                 borderRadius: "5px",
               }}
