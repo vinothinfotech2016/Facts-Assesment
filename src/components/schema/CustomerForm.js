@@ -20,7 +20,7 @@ export const customerFormSchema = {
     },
     customerEmail: {
       type: "string",
-      label: "Customer Name",
+      label: "Customer Email",
     },
     customerNumber: {
       type: "number",

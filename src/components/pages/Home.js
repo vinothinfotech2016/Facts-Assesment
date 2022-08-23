@@ -3,8 +3,7 @@ import { NavBar } from "../shared/NavBar";
 import { Box } from "@mui/material";
 import { initValue } from "../constants/constant";
 import { CustomStepper } from "../shared";
-import { Routes, Route } from "react-router-dom";
-import { routes } from "../navigation/Routes";
+import { PrototypeNavigation } from "../navigation/Navigation";
 
 const Home = (props) => {
   return (
@@ -18,18 +17,7 @@ const Home = (props) => {
           />
         </Box>
         <Box sx={{ marginTop: "56px", width: "85%" }}>
-          <Routes>
-            {routes.map((item, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={item.path}
-                  exact={item}
-                  element={<item.component />}
-                />
-              );
-            })}
-          </Routes>
+          <PrototypeNavigation />
         </Box>
       </Box>
     </Box>
