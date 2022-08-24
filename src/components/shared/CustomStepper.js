@@ -33,9 +33,10 @@ const CustomStepper = (props) => {
             <Tab
               key={index}
               sx={{
-                width: "200px",
-                marginTop: "15px",
-                marginLeft: "13%",
+                width: "75%",
+                // marginTop: "15px",
+                // marginLeft: "10%",
+                margin: "7% 10%",
                 border: "2px  solid #9e9e9e",
                 borderRadius: "5px",
               }}
