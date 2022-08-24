@@ -1,28 +1,40 @@
 export const formNewUserSchema = {
   type: "object",
   required: [
-    "userName",
-    "userEmail",
-    "userNumber",
-    "selectRole",
+    // "userName",
+    // "userEmail",
+    // "userNumber",
+    // "selectRole",
+    // "password",
+    // "confirmPassword",
+    // "selectProducts",
+    "name",
+    "email",
+    "mobileNumber",
+    "roleId",
     "password",
     "confirmPassword",
-    "selectProducts",
+    "userType",
   ],
   properties: {
-    userName: {
+    // userName: {
+    name: {
       type: "string",
       label: "User Name",
+      name: "name",
     },
-    userEmail: {
+    // userEmail: {
+    email: {
       type: "string",
       label: "User Email",
     },
-    userNumber: {
+    // userNumber: {
+    mobileNumber: {
       type: "number",
       label: "User Number",
     },
-    selectRole: {
+    // selectRole: {
+    roleId: {
       type: "string",
       label: "Select Role",
       options: [
@@ -40,7 +52,8 @@ export const formNewUserSchema = {
       type: "string",
       label: "Confirm Password",
     },
-    selectProducts: {
+    // selectProducts: {
+    userType: {
       type: "string",
       label: "Select Product(s)",
       options: [
@@ -54,15 +67,15 @@ export const formNewUserSchema = {
 };
 
 export const formNewUserUiSchema = () => ({
-  userName: {},
-  userEmail: { xs: 6 },
-  userNumber: { xs: 6 },
-  selectRole: {
+  name: {},
+  email: { xs: 6 },
+  mobileNumber: { xs: 6 },
+  roleId: {
     "ui:widget": "SelectWidget",
   },
   password: { xs: 6, showEyeIcon: true, "ui:widget": "PasswordWidget" },
   confirmPassword: { xs: 6, showEyeIcon: true, "ui:widget": "PasswordWidget" },
-  selectProducts: {
+  userType: {
     "ui:widget": "SelectWidget",
   },
 });
