@@ -1,17 +1,30 @@
 import React, { useState } from "react";
-import { Box, Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  Table,
+  TableContainer,
+  Paper,
+  TableHead,
+  TableRow,
+  TableBody,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Form from "@rjsf/core";
 import { widgets } from "../../widgets/widgets";
 import { parameterSchema, parameterUiSchema } from "../schema/Parameters";
 import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
+import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
 
 // import { Routes, Route } from "react-router-dom";
 
 export const Parameters = (props) => {
   const [parameter, setParameter] = useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
+  const [formType, setFormtype] = useState([]);
 
   return (
     <>
@@ -37,25 +50,62 @@ export const Parameters = (props) => {
                 ...e.formData,
               });
             }}
-            onSubmit={(props) => {
-              console.log(props.formData);
-              console.log(customErrorMsg);
+            onSubmit={() => {
+              setLiveValidator(true);
+              setFormtype([...formType, parameter]);
+
+              // console.log(customErrorMsg);
             }}
           >
-            <div className="btnContainer">
-              <Button variant="outlined" className="btn">
-                CANCEL
+            <Box className="btnContainer ">
+              <Button type="submit" variant="contained" className="btn">
+                ADD
               </Button>
-              <Button
-                type="submit"
-                variant="outlined"
-                className="btn"
-                onClick={() => setLiveValidator(true)}
-              >
-                SUBMIT
-              </Button>
-            </div>
+            </Box>
           </Form>
+
+          <Box>
+            <TableContainer component={Paper}>
+              <Table style={{ padding: "50px" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableHeadingCell>Form Type</TableHeadingCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {formType &&
+                    formType.map((data, index) => {
+                      return (
+                        <TableRow key={index + 1}>
+                          <TableBodyCell>
+                            <Box>{data.formType}</Box>
+                            <Box style={{ marginRight: "50px" }}>
+                              <EditIcon
+                                color="action"
+                                onClick={() => console.log("cliked")}
+                              />
+                              <DeleteIcon
+                                color="action"
+                                style={{ paddingLeft: "10px" }}
+                                onClick={() => console.log("cliked")}
+                              />
+                            </Box>
+                          </TableBodyCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+          <Box className="btnContainer">
+            <Button variant="outlined" className="btn">
+              CANCEL
+            </Button>
+            <Button variant="outlined" className="btn">
+              SUBMIT
+            </Button>
+          </Box>
         </Box>
       </Box>
     </>

@@ -6,10 +6,11 @@ export const parameterSchema = {
       type: "string",
       label: "Form type",
       options: [
-        { id: "1", name: "Form type 1" },
-        { id: "1", name: "Form type 2" },
-        { id: "1", name: "Form type 3" },
+        { id: "Form type 1", name: "Form type 1" },
+        { id: "Form type 2", name: "Form type 2" },
+        { id: "Form type 3", name: "Form type 3" },
       ],
+      // default: "1",
     },
   },
 };

@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Box, TableCell } from "@mui/material";
 
 export const Header = styled(Box)`
   padding: 25px;
@@ -77,4 +77,15 @@ export const ListContainer = styled(Box)`
   box-sizing: border-box;
   width: 96%;
   padding-left: 30px;
+`;
+
+export const TableHeadingCell = styled(TableCell)`
+  background: #d2e1fc;
+  font: normal bold 16px Roboto;
+  color: #0000008a;
+`;
+
+export const TableBodyCell = styled(TableCell)`
+  display: flex;
+  justify-content: space-between;
 `;
