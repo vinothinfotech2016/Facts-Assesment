@@ -17,16 +17,16 @@ const EditProfile = (props) => {
         <Box className="container">
           <Grid container spacing={3}>
             <Grid item xs={6}>
-              <TextField label="Name*" />
+              <TextField label="Name*" sx={{width:'100%',}}/>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <CustomUploadImage label={"Profile Image"} />
             </Grid>
             <Grid item xs={6}>
-              <TextField label="Mobile No*" />
+              <TextField label="Mobile No*" sx={{width:'100%',}}/>
             </Grid>
             <Grid item xs={6}>
-              <TextField label="Email*" />
+              <TextField label="Email*" sx={{width:'100%',}}/>
             </Grid>
           </Grid>
           <Box className="btnContainer">
