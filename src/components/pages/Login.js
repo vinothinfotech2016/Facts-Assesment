@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import  axios  from "axios";
 import {
   Grid,
   TextField,
@@ -26,7 +27,18 @@ function Login(props) {
     },
     validationSchema: () => loginSchema(isTypedEmail),
     onSubmit: () => {
-      navigate(`${mapPaths.MENU}`);
+      axios
+        .post("http://localhost:4000/userLogin", {
+          email: formik.values.email,
+          password: formik.values.password,
+        })
+        .then(function (response) {
+          console.log(response);
+          navigate(`${mapPaths.MENU}`)
+        })
+        .catch(function (error) {
+          console.log(error.response.data);
+        });
     },
   });
   return (
