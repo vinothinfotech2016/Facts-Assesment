@@ -21,6 +21,7 @@ export const Roles = (props) => {
           columnData={RolesList()}
           rawData={roledata}
           disableRowSelection={true}
+          disablePagination={true}
           // onChangePageSize={onChangePageSize}
           // count={count}
           // pageSize={pageSize}

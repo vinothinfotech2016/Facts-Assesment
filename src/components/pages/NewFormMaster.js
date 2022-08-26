@@ -21,21 +21,21 @@ import {
   newFormMasterUiSchema,
 } from "../schema/newFormMaster";
 import { useNavigate } from "react-router";
-import { DividerLine } from "../shared/DividerLine";
-import { actionItemSchema, actionItemUischema } from "../schema/formActionItem";
 import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import { CustomReactTable } from "../shared/CustomReactTable";
-// import { ActionItem } from "../constants/ActionItem";
 
 export const NewFormMaster = (props) => {
   const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
-  const [actionItem, setActionItem] = React.useState({});
-  const [liveValidator1, setLiveValidator1] = React.useState(false);
   const [liveValidator, setLiveValidator] = React.useState(false);
   const [actionItemList, setActionItemList] = React.useState([]);
+
+  const addToTable = () => {
+    // console.log(actionItem, "actionItem");
+    setActionItemList([...actionItemList, userData]);
+    console.log(actionItemList, "actionItemList");
+  };
 
   return (
     <>
@@ -51,7 +51,7 @@ export const NewFormMaster = (props) => {
             widgets={widgets}
             formData={userData}
             showErrorList={false}
-            liveValidate={liveValidator1}
+            liveValidate={liveValidator}
             noHtml5Validate
             ObjectFieldTemplate={objectFieldTemplate}
             FieldTemplate={CustomFieldTemplate}
@@ -71,57 +71,14 @@ export const NewFormMaster = (props) => {
           >
             <Box className="btnContainer">
               <Button
-                variant="outlined"
+                variant="contained"
                 className="btn"
-                onClick={() => navigate(clickPaths.USENAVIGATEFORMMASTER)}
+                onClick={() => addToTable()}
               >
-                CANCEL
-              </Button>
-              <Button
-                type="submit"
-                variant="outlined"
-                className="btn"
-                onClick={() => setLiveValidator1(true)}
-              >
-                SUBMIT
-              </Button>
-            </Box>
-          </Form>
-          <DividerLine />
-          <h3 className="subheading">On Click</h3>
-          <Form
-            schema={actionItemSchema}
-            uiSchema={actionItemUischema()}
-            widgets={widgets}
-            formData={actionItem}
-            showErrorList={false}
-            liveValidate={liveValidator}
-            noHtml5Validate
-            ObjectFieldTemplate={objectFieldTemplate}
-            FieldTemplate={CustomFieldTemplate}
-            transformErrors={(errors) =>
-              customErrorMsg(errors, actionItemSchema)
-            }
-            onChange={(e) => {
-              console.log(e.formData, "actionItem");
-              setActionItem({
-                ...e.formData,
-              });
-            }}
-            onSubmit={(props) => {
-              setLiveValidator(true);
-              setActionItemList([...actionItemList, actionItem]);
-
-              console.log(actionItemList, "actionItemList");
-            }}
-          >
-            <Box className="btnContainer">
-              <Button type="submit" variant="contained" className="btn">
                 ADD
               </Button>
             </Box>
-          </Form>
-          <Box>
+
             <TableContainer component={Paper}>
               <Table style={{ padding: "50px" }}>
                 <TableHead>
@@ -158,14 +115,32 @@ export const NewFormMaster = (props) => {
               </Table>
             </TableContainer>
 
-            {/* <CustomReactTable
+            <Box className="btnContainer">
+              <Button
+                variant="outlined"
+                className="btn"
+                onClick={() => navigate(clickPaths.USENAVIGATEFORMMASTER)}
+              >
+                CANCEL
+              </Button>
+              <Button
+                type="submit"
+                variant="outlined"
+                className="btn"
+                onClick={() => setLiveValidator(true)}
+              >
+                SUBMIT
+              </Button>
+            </Box>
+          </Form>
+
+          {/* <CustomReactTable
               columnData={ActionItem()}
               rawData={actionItemList}
               disableRowSelection={true}
               columnSize={false}
               disablePagination={true}
             /> */}
-          </Box>
         </Box>
       </Box>
     </>

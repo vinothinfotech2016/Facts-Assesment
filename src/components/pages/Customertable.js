@@ -21,6 +21,7 @@ export const Customertable = (props) => {
           columnData={CustomersList()}
           rawData={customerdata}
           disableRowSelection={true}
+          disablePagination={true}
           // onChangePageSize={onChangePageSize}
           // count={count}
           // pageSize={pageSize}
