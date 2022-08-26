@@ -9,6 +9,8 @@ export const newFormMasterSchema = {
     "actionItems",
     "formURL",
     "notesForDeveloper",
+    "selectActionItem",
+    "SelectForm",
   ],
   properties: {
     selectProduct: {
@@ -69,6 +71,26 @@ export const newFormMasterSchema = {
       type: "string",
       label: "Notes for developer",
     },
+    divider1: {
+      type: "string",
+    },
+    header1: { type: "string", label: "On Click" },
+    selectActionItem: {
+      type: "string",
+      label: "Select Action Item",
+      options: [
+        { id: "1", name: "Action 1" },
+        { id: "2", name: "ACtion 2" },
+      ],
+    },
+    selectForm: {
+      type: "string",
+      label: "Select Form",
+      options: [
+        { id: "1", name: "Form 1" },
+        { id: "2", name: "Form 2" },
+      ],
+    },
   },
 };
 
@@ -95,4 +117,14 @@ export const newFormMasterUiSchema = () => ({
   },
   formURL: {},
   notesForDeveloper: {},
+  divider1: {
+    "ui:widget": "customDivider",
+  },
+  header1: { "ui:widget": "customLable" },
+  selectActionItem: {
+    "ui:widget": "SelectWidget",
+  },
+  selectForm: {
+    "ui:widget": "SelectWidget",
+  },
 });

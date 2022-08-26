@@ -21,6 +21,7 @@ export const Usertable = (props) => {
           columnData={UserList()}
           rawData={userdata}
           disableRowSelection={true}
+          disablePagination={true}
           // onChangePageSize={onChangePageSize}
           // count={count}
           // pageSize={pageSize}

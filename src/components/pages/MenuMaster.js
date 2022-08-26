@@ -21,6 +21,7 @@ export const MenuMaster = (props) => {
           columnData={MenuList()}
           rawData={menudata}
           disableRowSelection={true}
+          disablePagination={true}
           // onChangePageSize={onChangePageSize}
           // count={count}
           // pageSize={pageSize}

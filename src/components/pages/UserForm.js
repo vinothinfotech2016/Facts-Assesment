@@ -1,16 +1,16 @@
 import Form from "@rjsf/core";
 import { widgets } from "../../widgets/widgets";
-import { Box, Button, Snackbar } from "@mui/material";
+import { Box, Button, responsiveFontSizes, Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { useNavigate } from "react-router";
-import { createUser } from "../api/api";
+import { createUser, getRole } from "../api/api";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -21,6 +21,16 @@ export const UserForm = (props) => {
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [role, setRole] = useState([]);
+
+  useEffect(() => {
+    getRole()
+      .then((res) => {
+        console.log(res, "RESPONSE");
+        setRole(res.data);
+      })
+      .catch((res) => console.log(responsiveFontSizes));
+  }, []);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -33,13 +43,7 @@ export const UserForm = (props) => {
     createUser(userdetail)
       .then(() => {
         setOpen(true);
-        <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
-          <Alert severity="success" sx={{ width: "100%" }}>
-            User created Successfully
-          </Alert>
-        </Snackbar>;
-        // navigate(clickPaths.USENAVIGATEMYUSER);
-        // alert("User Created Successfully");
+        navigate(clickPaths.USENAVIGATEMYUSER);
       })
       .catch((res) => console.log(res));
   };
@@ -50,7 +54,7 @@ export const UserForm = (props) => {
         <FormTopbar label="New User" listPath={clickPaths.USENAVIGATEMYUSER} />
         <Box className="container">
           <Form
-            schema={formNewUserSchema}
+            schema={formNewUserSchema(role)}
             uiSchema={formNewUserUiSchema()}
             widgets={widgets}
             formData={userData}
@@ -96,6 +100,15 @@ export const UserForm = (props) => {
               >
                 SUBMIT
               </Button>
+              <Snackbar
+                open={open}
+                autoHideDuration={1000}
+                onClose={handleClose}
+              >
+                <Alert severity="success" sx={{ width: "100%" }}>
+                  User created Successfully
+                </Alert>
+              </Snackbar>
             </div>
           </Form>
         </Box>
