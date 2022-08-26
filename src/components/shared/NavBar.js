@@ -73,7 +73,7 @@ export const NavBar = (props) => {
               <UserCont onClick={handleOpenUserMenu}>
                 <UserTextCont>
                   <Typography sx={{ color: "#000", fontSize: "bold" }}>
-                    {props.user}
+                    {userInfo.data.name}
                   </Typography>
                   <Typography sx={{ color: "#9e9e9e", fontSize: "12px" }}>
                     {userInfo.data.roleId}

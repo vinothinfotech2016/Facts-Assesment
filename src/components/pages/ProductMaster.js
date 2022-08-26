@@ -21,6 +21,7 @@ export const ProductMaster = (props) => {
           columnData={ProductList()}
           rawData={productmasterdata}
           disableRowSelection={true}
+          disablePagination={true}
           // onChangePageSize={onChangePageSize}
           // count={count}
           // pageSize={pageSize}

@@ -21,6 +21,7 @@ export const FormMaster = (props) => {
           columnData={FormList()}
           rawData={formdata}
           disableRowSelection={true}
+          disablePagination={true}
           // onChangePageSize={onChangePageSize}
           // count={count}
           // pageSize={pageSize}

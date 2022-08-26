@@ -1,28 +1,42 @@
 export const customerFormSchema = {
   type: "object",
   required: [
-    "customerName",
-    "customerEmail",
-    "customerNumber",
+    // "customerName",
+    // "customerEmail",
+    // "customerNumber",
+    // "address",
+    // "state",
+    // "district",
+    // "pinCode",
+    // "selectProducts",
+    // "userId",
+    // "password",
+    // "confirmPassword",
+    "name",
+    "email",
+    "mobileNumber",
     "address",
     "state",
     "district",
-    "pinCode",
-    "selectProducts",
+    "pincode",
+    "products",
     "userId",
     "password",
     "confirmPassword",
   ],
   properties: {
-    customerName: {
+    // customerName: {
+    name: {
       type: "string",
       label: "Customer Name",
     },
-    customerEmail: {
+    // customerEmail: {
+    email: {
       type: "string",
       label: "Customer Email",
     },
-    customerNumber: {
+    // customerNumber: {
+    mobileNumber: {
       type: "number",
       label: "Customer Number",
     },
@@ -38,14 +52,15 @@ export const customerFormSchema = {
       type: "string",
       label: "District",
     },
-    pinCode: {
+    pincode: {
       type: "number",
       label: "Pincode",
     },
     divider1: {
       type: "string",
     },
-    selectProducts: {
+    // selectProducts: {
+    products: {
       type: "string",
       label: "Select Product(s)",
       options: [
@@ -74,17 +89,17 @@ export const customerFormSchema = {
 };
 
 export const customerFormUiSchema = () => ({
-  customerName: {},
-  customerEmail: { xs: 6 },
-  customerNumber: { xs: 6 },
+  name: {},
+  email: { xs: 6 },
+  mobileNumber: { xs: 6 },
   address: {},
   state: { xs: 6 },
   district: { xs: 6 },
-  pinCode: { xs: 6 },
+  pincode: { xs: 6 },
   divider1: {
     "ui:widget": "customDivider",
   },
-  selectProducts: {
+  products: {
     "ui:widget": "SelectWidget",
   },
   divider2: {

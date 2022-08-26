@@ -1,6 +1,7 @@
 import Form from "@rjsf/core";
 import { widgets } from "../../widgets/widgets";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
@@ -11,10 +12,36 @@ import {
 } from "../schema/CustomerForm";
 import { FormTopbar } from "../shared/FormTopbar";
 import { clickPaths } from "../navigation/routePaths";
+import { createUser } from "../api/api";
+import { useNavigate } from "react-router";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export const CustomerForm = (props) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const customerCreation = (customerdetail) => {
+    createUser(customerdetail)
+      .then(() => {
+        navigate(clickPaths.USENAVIGATECUSTOMER);
+      })
+      .catch((res) => {
+        setOpen(true);
+        console.log(res);
+      });
+  };
   return (
     <>
       <Box>
@@ -43,8 +70,16 @@ export const CustomerForm = (props) => {
               });
             }}
             onSubmit={(props) => {
-              console.log(props.formData);
-              console.log(customErrorMsg);
+              let customerdetail = {
+                ...formData,
+                mobileNumber: JSON.stringify(formData.mobileNumber),
+                pincode: JSON.stringify(formData.pincode),
+              };
+
+              console.log(customerdetail, "customerdetail");
+              customerCreation(customerdetail);
+              // console.log(props.formData);
+              // console.log(customErrorMsg);
             }}
           >
             <div className="btnContainer">
@@ -59,6 +94,15 @@ export const CustomerForm = (props) => {
               >
                 SUBMIT
               </Button>
+              <Snackbar
+                open={open}
+                autoHideDuration={1000}
+                onClose={handleClose}
+              >
+                <Alert severity="error" sx={{ width: "100%" }}>
+                  Customer created Successfully
+                </Alert>
+              </Snackbar>
             </div>
           </Form>
         </Box>

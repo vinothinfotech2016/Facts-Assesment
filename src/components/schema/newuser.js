@@ -1,4 +1,4 @@
-export const formNewUserSchema = {
+export const formNewUserSchema = (role) => ({
   type: "object",
   required: [
     // "userName",
@@ -37,12 +37,7 @@ export const formNewUserSchema = {
     roleId: {
       type: "string",
       label: "Select Role",
-      options: [
-        { id: "1", name: "Role 1" },
-        { id: "2", name: "Role 2" },
-        { id: "3", name: "Role 3" },
-        { id: "4", name: "Role 4" },
-      ],
+      options: role,
     },
     password: {
       type: "string",
@@ -64,7 +59,7 @@ export const formNewUserSchema = {
       ],
     },
   },
-};
+});
 
 export const formNewUserUiSchema = () => ({
   name: {},
