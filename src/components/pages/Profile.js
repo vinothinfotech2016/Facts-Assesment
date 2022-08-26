@@ -17,6 +17,7 @@ import { useNavigate } from "react-router";
 
 export const Profile = () => {
   const navigate = useNavigate();
+  let userInfo = JSON.parse(localStorage.getItem("user"));
   return (
     <MainCont>
       <Header>
@@ -30,11 +31,10 @@ export const Profile = () => {
       <UserCont>
         <ImgCont></ImgCont>
         <TextCont>
-          list
-          <Typography variant="h5">Dan Schneider</Typography>
-          <Typography>Email</Typography>
-          <Typography>Phone Number</Typography>
-          <Title>Admin</Title>
+          <Typography variant="h5">{userInfo.data.name}</Typography>
+          <Typography>{userInfo.data.email}</Typography>
+          <Typography>{userInfo.data.mobileNumber}</Typography>
+          <Title>{userInfo.data.roleId}</Title>
         </TextCont>
         <IconCont>
           <ChangePass
