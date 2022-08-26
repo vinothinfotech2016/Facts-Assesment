@@ -33,6 +33,7 @@ export const NavBar = (props) => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+  let userInfo=JSON.parse(localStorage.getItem('user'));
 
   return (
     <Box>
@@ -75,7 +76,7 @@ export const NavBar = (props) => {
                     {props.user}
                   </Typography>
                   <Typography sx={{ color: "#9e9e9e", fontSize: "12px" }}>
-                    Admin
+                    {userInfo.data.roleId}
                   </Typography>
                 </UserTextCont>
                 <Avatar src="" sx={{ marginLeft: "10px" }} />
