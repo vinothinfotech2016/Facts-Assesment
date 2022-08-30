@@ -6,6 +6,7 @@ import {
   Box,
   InputAdornment,
   IconButton,
+  Alert,
 } from "@mui/material";
 import { Header } from "../layout/Header";
 import { useFormik } from "formik";
@@ -13,10 +14,12 @@ import { loginSchema } from "../validation";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { mapPaths } from "../navigation/routePaths";
+import { loginUser } from "../api/api";
 
 function Login(props) {
   const [visible, setVisible] = useState(false);
   const [isTypedEmail, setIsTypedEmail] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
   const formik = useFormik({
@@ -26,7 +29,19 @@ function Login(props) {
     },
     validationSchema: () => loginSchema(isTypedEmail),
     onSubmit: () => {
-      navigate(`${mapPaths.MENU}`);
+      let data = {
+        email: formik.values.email,
+        password: formik.values.password,
+      };
+      loginUser(data)
+        .then(function (response) {
+          console.log(response);
+          navigate(`${mapPaths.MENU}`);
+          localStorage.setItem('user', JSON.stringify(response))
+        })
+        .catch(function (error) {
+          setErrorMsg(error.response.data);
+        });
     },
   });
   return (
@@ -46,6 +61,11 @@ function Login(props) {
             width="380px"
           >
             <h3 className="heading">LOGIN</h3>
+            {errorMsg !== "" ? (
+              <Alert severity="error">{errorMsg.error}</Alert>
+            ) : (
+              ""
+            )}
             <Grid item>
               <TextField
                 required
