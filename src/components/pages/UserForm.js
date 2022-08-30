@@ -27,7 +27,20 @@ export const UserForm = (props) => {
     getRole()
       .then((res) => {
         console.log(res, "RESPONSE");
-        setRole(res.data);
+        setRole(
+          res.data.map((item) => ({
+            id: item.id,
+            name: item.role,
+          }))
+        );
+        // setRole(() => ({
+        //   res.data.map((item) => ({
+        //     id: item.id,
+        //     name: item.role,
+        //   })),
+        // }));
+
+        // setRole(res.data);
       })
       .catch((res) => console.log(responsiveFontSizes));
   }, []);
@@ -42,10 +55,12 @@ export const UserForm = (props) => {
   const userCreation = (userdetail) => {
     createUser(userdetail)
       .then(() => {
-        setOpen(true);
-        navigate(clickPaths.USENAVIGATEMYUSER);
+        // navigate(clickPaths.USENAVIGATEMYUSER);
       })
-      .catch((res) => console.log(res));
+      .catch((res) => {
+        setOpen(true);
+        console.log(res);
+      });
   };
 
   return (
