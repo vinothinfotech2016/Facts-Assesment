@@ -48,4 +48,14 @@ export const formdata = [
     formName: "EMP Master Listing",
     customerUpdate: "Approved",
   },
+  {
+    productName: "EMS",
+    formName: "EMS Product Data",
+    customerUpdate: "Approved",
+  },
+  {
+    productName: "Design Tool",
+    formName: "Form Master",
+    customerUpdate: "Approved",
+  },
 ];

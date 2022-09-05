@@ -12,7 +12,7 @@ import {
 } from "../schema/CustomerForm";
 import { FormTopbar } from "../shared/FormTopbar";
 import { clickPaths } from "../navigation/routePaths";
-import { createUser } from "../api/api";
+import { createCustomer } from "../api/api";
 import { useNavigate } from "react-router";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -33,7 +33,7 @@ export const CustomerForm = (props) => {
   };
 
   const customerCreation = (customerdetail) => {
-    createUser(customerdetail)
+    createCustomer(customerdetail)
       .then(() => {
         navigate(clickPaths.USENAVIGATECUSTOMER);
       })
