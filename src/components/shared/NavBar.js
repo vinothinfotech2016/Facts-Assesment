@@ -43,7 +43,7 @@ export const NavBar = (props) => {
           display: "flex",
           flexDirection: "row",
           position: "fixed",
-          zIndex: "2",
+          zIndex: "3",
           boxShadow: "none",
         }}
       >

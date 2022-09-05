@@ -42,7 +42,6 @@ const ProductMasterForm = (props) => {
           }}
           onSubmit={(props) => {
             console.log(props.formData);
-            console.log(customErrorMsg);
           }}
         >
           <div className="btnContainer">

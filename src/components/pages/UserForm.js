@@ -10,7 +10,7 @@ import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { useNavigate } from "react-router";
-import { createUser, getRole } from "../api/api";
+import { createCustomer, getRole } from "../api/api";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -53,7 +53,7 @@ export const UserForm = (props) => {
   };
 
   const userCreation = (userdetail) => {
-    createUser(userdetail)
+    createCustomer(userdetail)
       .then(() => {
         // navigate(clickPaths.USENAVIGATEMYUSER);
       })
@@ -111,7 +111,7 @@ export const UserForm = (props) => {
                 type="submit"
                 variant="outlined"
                 className="btn"
-                onClick={() => setLiveValidator(true)}
+                onClick={() => setLiveValidator(true) }
               >
                 SUBMIT
               </Button>

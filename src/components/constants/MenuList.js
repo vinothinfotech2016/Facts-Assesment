@@ -62,4 +62,18 @@ export const menudata = [
     orderNo: "2",
     subMenu: "6",
   },
+  {
+    productName: "School ERP",
+    menuName: "Stepper",
+    menuDesignType: "Side stepper",
+    orderNo: "1",
+    subMenu: "2",
+  },
+  {
+    productName: "Design Tool",
+    menuName: "Drop Down",
+    menuDesignType: "Top Nav",
+    orderNo: "4",
+    subMenu: "3 ",
+  },
 ];
