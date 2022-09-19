@@ -4,3 +4,8 @@ const appApi = axios.create({
 });
 
 export default appApi;
+
+let formData = new FormData();
+
+formData.append("sasas", "");
+formData.append("sasas", "");

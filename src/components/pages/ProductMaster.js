@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
 import { productmasterdata, ProductList } from "../constants/ProductList";
+import { getProductById } from "../api/api";
 
 export const ProductMaster = (props) => {
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("user"));
+    const id = data.data.id;
+
+    getProductById(id)
+      .then((res) => {
+        setTableData(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <ListContainer>
@@ -19,7 +35,7 @@ export const ProductMaster = (props) => {
         />
         <CustomReactTable
           columnData={ProductList()}
-          rawData={productmasterdata}
+          rawData={tableData}
           disableRowSelection={true}
           disablePagination={true}
           // onChangePageSize={onChangePageSize}

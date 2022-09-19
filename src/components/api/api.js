@@ -15,3 +15,11 @@ export const getRole = () => {
 export const userList = () => {
   return appApi.get(`${apiRoutes.GET_USER}`);
 };
+
+export const createProduct = (data) => {
+  return appApi.post(`${apiRoutes.PRODUCT_CREATION}`, data);
+};
+
+export const getProductById = (id) => {
+  return appApi.get(`${apiRoutes.GET_PRODUCT_BY_ID}/${id}`);
+};

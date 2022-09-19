@@ -4,7 +4,7 @@ import { EditPopover } from "../shared/EditPopover";
 export const ProductList = () => [
   {
     Header: "Product Name",
-    accessor: "productName",
+    accessor: "name",
     sticky: "left",
     id: 1,
     width: 300,
@@ -28,16 +28,10 @@ export const ProductList = () => [
       </div>
     ),
   },
-];
-
-export const productmasterdata = [
   {
-    productName: "School ERP",
-  },
-  {
-    productName: "EMS",
-  },
-  {
-    productName: "Design Tool",
+    Header: "Description",
+    accessor: "description",
+    id: 2,
+    width: 300,
   },
 ];

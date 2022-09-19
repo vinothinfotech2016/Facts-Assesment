@@ -1,22 +1,22 @@
 export const formNewProductMasterSchema = {
   type: "object",
   required: [
-    "productName",
-    "productDiscription",
-    "leftLogo",
-    "centerLogo",
+    "name",
+    "description",
+    "leftLogoUrl",
+    "centerLogoUrl",
     "centerText",
     "rightImage",
-    "rightName",
-    "rightRole",
-    "designURL",
+    "profileName",
+    "rightLogoUrl",
+    "menuDesignUrl",
   ],
   properties: {
-    productName: {
+    name: {
       type: "string",
       label: "Product Name",
     },
-    productDiscription: {
+    description: {
       type: "string",
       label: "Product Description",
     },
@@ -24,7 +24,7 @@ export const formNewProductMasterSchema = {
       type: "string",
     },
     header1: { type: "string", label: "Layout-Left" },
-    leftLogo: {
+    leftLogoUrl: {
       type: "array",
       label: "Upload Logo",
       items: {
@@ -35,7 +35,7 @@ export const formNewProductMasterSchema = {
       type: "string",
     },
     header2: { type: "string", label: "Layout-Center" },
-    centerLogo: {
+    centerLogoUrl: {
       type: "array",
       label: "Upload Logo",
       items: {
@@ -51,55 +51,59 @@ export const formNewProductMasterSchema = {
     },
     header3: { type: "string", label: "Layout-Right" },
     rightImage: {
+      type: "string",
+      label: "Role",
+    },
+    profileName: {
+      type: "string",
+      label: "Name",
+    },
+    rightLogoUrl: {
       type: "array",
       label: "Upload image",
       items: {
         type: "object",
       },
     },
-    rightName: {
-      type: "string",
-      label: "Name",
-    },
-    rightRole: {
-      type: "string",
-      label: "Role",
-    },
+
     divider4: {
       type: "string",
     },
     header4: { type: "string", label: "Product menu design url" },
-    designURL: {
-      type: "string",
-      label: "Product menu design url",
+    menuDesignUrl: {
+      type: "array",
+      label: "Upload Logo",
+      items: {
+        type: "object",
+      },
     },
   },
 };
 
 export const formNewProductMasterUiSchema = () => ({
-  productName: {},
-  productDiscription: {},
+  name: {},
+  description: {},
   divider1: {
     "ui:widget": "customDivider",
   },
   header1: { "ui:widget": "customLable" },
-  leftLogo: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
+  leftLogoUrl: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
   divider2: {
     "ui:widget": "customDivider",
   },
   header2: { "ui:widget": "customLable" },
-  centerLogo: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
+  centerLogoUrl: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
   centerText: { xs: 6 },
   divider3: {
     "ui:widget": "customDivider",
   },
   header3: { "ui:widget": "customLable" },
-  rightImage: { xs: 6.01, "ui:widget": "FileWidget", uploadFile: true },
-  rightName: { xs: 6 },
-  rightRole: { xs: 6 },
+  rightImage: { xs: 6 },
+  profileName: { xs: 6 },
+  rightLogoUrl: { xs: 6.01, "ui:widget": "FileWidget", uploadFile: true },
   divider4: {
     "ui:widget": "customDivider",
   },
   header4: { "ui:widget": "customLable" },
-  designURL: {},
+  menuDesignUrl: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
 });

@@ -37,7 +37,7 @@ function Login(props) {
         .then(function (response) {
           console.log(response);
           navigate(`${mapPaths.MENU}`);
-          localStorage.setItem('user', JSON.stringify(response))
+          localStorage.setItem("user", JSON.stringify(response));
         })
         .catch(function (error) {
           setErrorMsg(error.response.data);
@@ -62,7 +62,7 @@ function Login(props) {
           >
             <h3 className="heading">LOGIN</h3>
             {errorMsg !== "" ? (
-              <Alert severity="error">{errorMsg.error}</Alert>
+              <Alert severity="error">{errorMsg?.error}</Alert>
             ) : (
               ""
             )}
@@ -119,8 +119,7 @@ function Login(props) {
 
             <Grid item>
               <Button variant="outlined" type="submit">
-                {" "}
-                Login{" "}
+                Login
               </Button>
             </Grid>
           </Grid>

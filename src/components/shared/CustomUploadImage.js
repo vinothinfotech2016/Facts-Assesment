@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { FormControl, FormHelperText } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { makeStyles } from "@mui/styles";
+import CustomSnackbar from "./CustomSnackbar";
 
 // Basic user image
 const User =
@@ -45,12 +46,25 @@ export function CustomUploadImage({
   // const [fileName, setFileName] = React.useState("");
   const [fileName, setFileName] = React.useState(value && value[0]?.name);
   const myRefname = useRef(null);
+  const formats = [
+    "image/jpg",
+    "image/jpeg",
+    "image/png",
+    "image/img",
+    "image/svg",
+  ];
 
   const handleClick = (e) => {
     myRefname.current.click();
   };
 
+  const [open, setOpen] = React.useState(false);
+
   const onImageChange = (event) => {
+    if (!formats.includes(event.target.files[0].type)) {
+      setOpen(true);
+      return;
+    }
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
       reader.onload = (e) => {
@@ -73,30 +87,41 @@ export function CustomUploadImage({
   }, [url]);
 
   return (
-    <FormControl fullWidth>
-      <input
-        ref={myRefname}
-        className={classes.inputField}
-        name={name}
-        type={"file"}
-        error={touched && error}
-        onChange={(event) => onImageChange(event)}
-        label={label}
-        disabled={isViewMode}
+    <>
+      <FormControl fullWidth>
+        <input
+          ref={myRefname}
+          className={classes.inputField}
+          name={name}
+          type={"file"}
+          error={touched && error}
+          onChange={(event) => onImageChange(event)}
+          label={label}
+          disabled={isViewMode}
+          accept={"image/*"}
+        />
+        <div
+          onClick={(e) => handleClick(e)}
+          className={classes.fileInputHolder}
+        >
+          {uploadFile ? (
+            <FileUploadIcon style={{ marginRight: 10 }} />
+          ) : (
+            <img
+              src={imgUrl || profileUrl || User}
+              className={classes.imgContainer}
+              alt=""
+            ></img>
+          )}
+          <span style={{ color: "grey" }}>{fileName || label}</span>
+        </div>
+        <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>
+      </FormControl>
+      <CustomSnackbar
+        open={open}
+        setOpen={setOpen}
+        message={"please select a valid file"}
       />
-      <div onClick={(e) => handleClick(e)} className={classes.fileInputHolder}>
-        {uploadFile ? (
-          <FileUploadIcon style={{ marginRight: 10 }} />
-        ) : (
-          <img
-            src={imgUrl || profileUrl || User}
-            className={classes.imgContainer}
-            alt=""
-          ></img>
-        )}
-        <span style={{ color: "grey" }}>{fileName || label}</span>
-      </div>
-      <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>
-    </FormControl>
+    </>
   );
 }

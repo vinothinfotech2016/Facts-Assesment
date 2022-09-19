@@ -12,11 +12,13 @@ import {
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { useNavigate } from "react-router";
+import { createProduct } from "../api/api";
 
 const ProductMasterForm = (props) => {
   const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
+
   return (
     <Box>
       <FormTopbar label="New Product" listPath={clickPaths.USENAVIGATEHOME} />
@@ -35,13 +37,41 @@ const ProductMasterForm = (props) => {
             customErrorMsg(errors, formNewProductMasterSchema)
           }
           onChange={(e) => {
-            console.log(e.formData);
             setUserData({
               ...e.formData,
             });
           }}
-          onSubmit={(props) => {
-            console.log(props.formData);
+          onSubmit={(values) => {
+            const {
+              name,
+              description,
+              leftLogoUrl,
+              rightLogoUrl,
+              centerLogoUrl,
+              profileName,
+              menuDesignUrl,
+            } = values.formData;
+            const formData = new FormData();
+            const data = JSON.parse(localStorage.getItem("user"));
+            const id = data.data.id;
+
+            formData.append("name", name);
+            formData.append("description", description);
+            formData.append("profileName", profileName);
+            formData.append("leftLofoUrl", leftLogoUrl[0]);
+            formData.append("rightLogoUrl", rightLogoUrl[0]);
+            formData.append("centerLogoUrl", centerLogoUrl[0]);
+            formData.append("menuDesignUrl", menuDesignUrl[0]);
+            formData.append("createdBy", id);
+
+            createProduct(formData)
+              .then((res) => {
+                console.log(res);
+                navigate(clickPaths.USENAVIGATEHOME);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }}
         >
           <div className="btnContainer">

@@ -4,9 +4,8 @@ export const customErrorMsg = (errors, initialSchema) => {
       error.message = `${
         initialSchema?.properties[error.params.missingProperty]?.label
       } is mandatory`;
-      console.log(error)
+      // console.log(error)
     }
     return error;
-    
   });
 };
