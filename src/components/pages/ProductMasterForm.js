@@ -99,7 +99,6 @@ const ProductMasterForm = (props) => {
             customErrorMsg(errors, formNewProductMasterSchema)
           }
           onChange={(e) => {
-            console.log(e.formData);
             setUserData({
               ...e.formData,
             });

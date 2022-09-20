@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
@@ -6,6 +6,10 @@ import { CustomReactTable } from "../shared/CustomReactTable";
 import { menudata, MenuList } from "../constants/MenuList";
 
 export const MenuMaster = (props) => {
+  const [tableData, setTableData] = React.useState([]);
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <ListContainer>

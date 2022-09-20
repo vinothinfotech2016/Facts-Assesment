@@ -82,14 +82,16 @@ export function CustomUploadImage({
 
   useEffect(() => {
     if (value !== undefined) {
-      if (typeof value === "string") {
+      if (typeof value === "string" && value.length < 50) {
         setFileName(value);
       }
       if (Array.isArray(value)) {
         setImgUrl(value[0]);
-        const fullName = value[0]?.split("/");
-        if (fullName) {
-          setFileName(fullName[fullName?.length - 1]);
+        if (value[0]?.length < 50) {
+          const fullName = value[0]?.split("/");
+          if (fullName) {
+            setFileName(fullName[fullName?.length - 1]);
+          }
         }
       }
     }

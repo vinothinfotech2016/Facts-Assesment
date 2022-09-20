@@ -31,3 +31,7 @@ export const updateProduct = (value, id) => {
 export const createMenu = (value) => {
   return appApi.post(`${apiRoutes.CREATE_MENU}`, value);
 };
+
+export const getMenuByProductId = (id) => {
+  return appApi.get(`${apiRoutes.GET_MENU_BY_PRODUCT_ID}/${id}`);
+};

@@ -1,11 +1,19 @@
 import axios from "axios";
+import { store } from "../../redux";
+import { closeLoaderAction, openLoaderAction } from "../../redux/actions";
+
 const appApi = axios.create({
   baseURL: "http://localhost:4000",
 });
 
+appApi.interceptors.request.use((request) => {
+  store.dispatch(openLoaderAction());
+  return request;
+});
+
+appApi.interceptors.response.use((response) => {
+  store.dispatch(closeLoaderAction());
+  return response;
+});
+
 export default appApi;
-
-let formData = new FormData();
-
-formData.append("sasas", "");
-formData.append("sasas", "");

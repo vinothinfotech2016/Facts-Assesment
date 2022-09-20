@@ -26,6 +26,7 @@ export const NewMenu = (props) => {
   const [products, setProducts] = React.useState([]);
 
   const handleChange = (e) => {
+    console.log(userData);
     setUserData({
       [e.target.name]: e.target.value,
     });
@@ -89,25 +90,26 @@ export const NewMenu = (props) => {
               });
             }}
             onSubmit={(props) => {
-              const { productId, orderNo, displayType, name, hasSubMenu } =
-                props.formData;
-
-              console.log(
-                "productId",
+              const {
                 productId,
-                "orderNo",
                 orderNo,
-                "displayType",
                 displayType,
-                "name",
                 name,
-                "hasSubMenu",
-                hasSubMenu
-              );
+                hasSubMenu,
+                subMenus,
+              } = props.formData;
 
-              createMenu({ productId, orderNo, displayType, name, hasSubMenu })
+              createMenu({
+                productId,
+                orderNo,
+                displayType,
+                name,
+                hasSubMenu,
+                subMenus,
+              })
                 .then((res) => {
                   console.log(res);
+                  navigate(clickPaths.USENAVIGATEMENUMASTER);
                 })
                 .catch((error) => {
                   console.log(error);

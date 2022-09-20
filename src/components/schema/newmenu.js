@@ -13,7 +13,6 @@ export const newMenuSchema = {
     displayType: {
       type: "string",
       label: "Menu Display Type",
-
       options: [
         { id: "Top Navigation", name: "Top Navigation" },
         { id: "Side Navigation", name: "Side Navigation" },
@@ -22,23 +21,20 @@ export const newMenuSchema = {
       default: "Top Navigation",
     },
     hasSubMenu: {
-      type: "string",
+      type: "boolean",
       label: "Sub-menus",
       options: [
         { id: true, name: "Yes" },
         { id: false, name: "No" },
       ],
-      default: "1",
+      default: true,
     },
-    subMenuNames: {
+    subMenus: {
       type: "array",
       label: "Enter Sub Menu Names",
       items: {
-        type: "object",
-        options: [
-          { id: "1", name: "Menu 1" },
-          { id: "2", name: "Menu 2" },
-        ],
+        type: "string",
+        options: [],
       },
       uniqueItems: true,
     },
@@ -56,7 +52,7 @@ export const newMenuUiSchema = () => ({
     "ui:widget": "radio",
     labelStyle: { marginRight: "75px" },
   },
-  subMenuNames: {
-    "ui:widget": "multiSelect",
+  subMenus: {
+    "ui:widget": "autoComplete",
   },
 });
