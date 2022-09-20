@@ -33,7 +33,7 @@ export const NavBar = (props) => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  let userInfo=JSON.parse(localStorage.getItem('user'));
+  let userInfo = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Box>

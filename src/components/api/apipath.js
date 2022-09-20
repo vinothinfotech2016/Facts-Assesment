@@ -8,4 +8,8 @@ export const apiRoutes = {
   //PRODUCTMASTER
   PRODUCT_CREATION: "product/create",
   GET_PRODUCT_BY_ID: "product/getProductById",
+  UPDATE_PRODUCT: "product/update",
+
+  // MENU MASTER
+  CREATE_MENU: "product/menu/create",
 };

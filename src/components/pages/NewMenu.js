@@ -11,23 +11,38 @@ import {
 import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
-import React from "react";
+import React, { useEffect } from "react";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { newMenuSchema, newMenuUiSchema } from "../schema/newmenu";
 import { DividerLine } from "../shared";
 import { useNavigate } from "react-router";
+import { createMenu, getProductById } from "../api/api";
 
 export const NewMenu = (props) => {
   const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
+  const [products, setProducts] = React.useState([]);
 
   const handleChange = (e) => {
     setUserData({
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const userId = userData?.data?.id;
+
+    getProductById(userId)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -41,13 +56,17 @@ export const NewMenu = (props) => {
             <InputLabel>Select Product</InputLabel>
             <Select
               label="Select Product"
-              name="productName"
+              name="productId"
               onChange={handleChange}
-              value={userData.productName || ""}
+              value={userData.productId || ""}
             >
-              <MenuItem value={"1"}>Product 1</MenuItem>
-              <MenuItem value={"2"}>Product 2</MenuItem>
-              <MenuItem value={"3"}>Product 3</MenuItem>
+              {products.map((product) => {
+                return (
+                  <MenuItem key={product.id} value={product.id}>
+                    {product.name}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
           <DividerLine />
@@ -64,14 +83,35 @@ export const NewMenu = (props) => {
             FieldTemplate={CustomFieldTemplate}
             transformErrors={(errors) => customErrorMsg(errors, newMenuSchema)}
             onChange={(e) => {
-              console.log(e.formData);
+              // console.log(e.formData);
               setUserData({
                 ...e.formData,
               });
             }}
             onSubmit={(props) => {
-              console.log(props.formData);
-              console.log(customErrorMsg);
+              const { productId, orderNo, displayType, name, hasSubMenu } =
+                props.formData;
+
+              console.log(
+                "productId",
+                productId,
+                "orderNo",
+                orderNo,
+                "displayType",
+                displayType,
+                "name",
+                name,
+                "hasSubMenu",
+                hasSubMenu
+              );
+
+              createMenu({ productId, orderNo, displayType, name, hasSubMenu })
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             }}
           >
             <div className="btnContainer">

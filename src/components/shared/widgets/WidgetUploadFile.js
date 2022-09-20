@@ -9,7 +9,7 @@ export const WidgetUploadFile = (props) => {
       label={schema?.label}
       url={url}
       value={value}
-      onChange={(event) => onChange([event.target.files[0]])}
+      onChange={(val) => onChange(val)}
       profileUrl=""
       isViewMode={readonly}
       uploadFile={schema?.uploadFile}

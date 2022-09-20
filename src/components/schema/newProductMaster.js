@@ -5,8 +5,6 @@ export const formNewProductMasterSchema = {
     "description",
     "leftLogoUrl",
     "centerLogoUrl",
-    "centerText",
-    "rightImage",
     "profileName",
     "rightLogoUrl",
     "menuDesignUrl",
@@ -20,6 +18,10 @@ export const formNewProductMasterSchema = {
       type: "string",
       label: "Product Description",
     },
+    profileName: {
+      type: "string",
+      label: "Name",
+    },
     divider1: {
       type: "string",
     },
@@ -28,7 +30,7 @@ export const formNewProductMasterSchema = {
       type: "array",
       label: "Upload Logo",
       items: {
-        type: "object",
+        type: "string",
       },
     },
     divider2: {
@@ -39,30 +41,19 @@ export const formNewProductMasterSchema = {
       type: "array",
       label: "Upload Logo",
       items: {
-        type: "object",
+        type: "string",
       },
-    },
-    centerText: {
-      type: "string",
-      label: "Text",
     },
     divider3: {
       type: "string",
     },
     header3: { type: "string", label: "Layout-Right" },
-    rightImage: {
-      type: "string",
-      label: "Role",
-    },
-    profileName: {
-      type: "string",
-      label: "Name",
-    },
+
     rightLogoUrl: {
       type: "array",
       label: "Upload image",
       items: {
-        type: "object",
+        type: "string",
       },
     },
 
@@ -74,36 +65,56 @@ export const formNewProductMasterSchema = {
       type: "array",
       label: "Upload Logo",
       items: {
-        type: "object",
+        type: "string",
       },
     },
   },
 };
 
-export const formNewProductMasterUiSchema = () => ({
-  name: {},
+export const formNewProductMasterUiSchema = (editId) => ({
+  name: {
+    "ui:readonly": Boolean(editId),
+  },
   description: {},
   divider1: {
     "ui:widget": "customDivider",
   },
   header1: { "ui:widget": "customLable" },
-  leftLogoUrl: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
+  leftLogoUrl: {
+    xs: 6,
+    "ui:widget": "FileWidget",
+    uploadFile: true,
+    editId: editId,
+  },
   divider2: {
     "ui:widget": "customDivider",
   },
   header2: { "ui:widget": "customLable" },
-  centerLogoUrl: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
-  centerText: { xs: 6 },
+  centerLogoUrl: {
+    xs: 6,
+    "ui:widget": "FileWidget",
+    uploadFile: true,
+    editId: editId,
+  },
   divider3: {
     "ui:widget": "customDivider",
   },
   header3: { "ui:widget": "customLable" },
-  rightImage: { xs: 6 },
-  profileName: { xs: 6 },
-  rightLogoUrl: { xs: 6.01, "ui:widget": "FileWidget", uploadFile: true },
+  profileName: { xs: 12 },
+  rightLogoUrl: {
+    xs: 6.01,
+    "ui:widget": "FileWidget",
+    uploadFile: true,
+    editId: editId,
+  },
   divider4: {
     "ui:widget": "customDivider",
   },
   header4: { "ui:widget": "customLable" },
-  menuDesignUrl: { xs: 6, "ui:widget": "FileWidget", uploadFile: true },
+  menuDesignUrl: {
+    xs: 6,
+    "ui:widget": "FileWidget",
+    uploadFile: true,
+    editId: editId,
+  },
 });

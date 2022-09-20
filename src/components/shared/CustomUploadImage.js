@@ -40,6 +40,7 @@ export function CustomUploadImage({
   profileUrl,
   isViewMode,
   uploadFile,
+  editId,
 }) {
   const classes = useStyles();
   const [imgUrl, setImgUrl] = React.useState(url);
@@ -68,10 +69,11 @@ export function CustomUploadImage({
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
       reader.onload = (e) => {
+        value = [reader.result];
         setImgUrl(reader.result);
         // onChange(name, event.target.files[0]);
         // onChange([event.target.files[0]]);
-        onChange(event);
+        onChange(value);
         setFileName(event.target.files[0].name);
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -79,7 +81,18 @@ export function CustomUploadImage({
   };
 
   useEffect(() => {
-    if (typeof value === "string") setFileName(value);
+    if (value !== undefined) {
+      if (typeof value === "string") {
+        setFileName(value);
+      }
+      if (Array.isArray(value)) {
+        setImgUrl(value[0]);
+        const fullName = value[0]?.split("/");
+        if (fullName) {
+          setFileName(fullName[fullName?.length - 1]);
+        }
+      }
+    }
   }, [value]);
 
   useEffect(() => {

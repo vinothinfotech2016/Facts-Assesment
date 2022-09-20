@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { productmasterdata, ProductList } from "../constants/ProductList";
+import { ProductList } from "../constants/ProductList";
 import { getProductById } from "../api/api";
 
 export const ProductMaster = (props) => {

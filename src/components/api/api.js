@@ -23,3 +23,11 @@ export const createProduct = (data) => {
 export const getProductById = (id) => {
   return appApi.get(`${apiRoutes.GET_PRODUCT_BY_ID}/${id}`);
 };
+
+export const updateProduct = (value, id) => {
+  return appApi.post(`${apiRoutes.UPDATE_PRODUCT}/${id}`, value);
+};
+
+export const createMenu = (value) => {
+  return appApi.post(`${apiRoutes.CREATE_MENU}`, value);
+};

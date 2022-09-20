@@ -1,32 +1,32 @@
 export const newMenuSchema = {
   type: "object",
-  required: ["orderNo", "menuName", "menuType", "subMenus", "subMenuNames"],
+  required: ["orderNo", "name", "displayType", "hasSubMenu"],
   properties: {
     orderNo: {
-      type: "string",
+      type: "number",
       label: "Order No",
     },
-    menuName: {
+    name: {
       type: "string",
       label: "Menu Name",
     },
-    menuType: {
+    displayType: {
       type: "string",
       label: "Menu Display Type",
 
       options: [
-        { id: "1", name: "Top Navigation" },
-        { id: "2", name: "Side Navigation" },
-        { id: "3", name: "Profile Menu" },
+        { id: "Top Navigation", name: "Top Navigation" },
+        { id: "Side Navigation", name: "Side Navigation" },
+        { id: "Profile Menu", name: "Profile Menu" },
       ],
-      default: "1",
+      default: "Top Navigation",
     },
-    subMenus: {
+    hasSubMenu: {
       type: "string",
       label: "Sub-menus",
       options: [
-        { id: "1", name: "Yes" },
-        { id: "2", name: "No" },
+        { id: true, name: "Yes" },
+        { id: false, name: "No" },
       ],
       default: "1",
     },
@@ -47,12 +47,12 @@ export const newMenuSchema = {
 
 export const newMenuUiSchema = () => ({
   orderNo: { xs: 6 },
-  menuName: {},
-  menuType: {
+  name: {},
+  displayType: {
     "ui:widget": "radio",
     labelStyle: { marginRight: "20px" },
   },
-  subMenus: {
+  hasSubMenu: {
     "ui:widget": "radio",
     labelStyle: { marginRight: "75px" },
   },
