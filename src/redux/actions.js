@@ -1,4 +1,4 @@
-import { CLOSE_LOADER, OPEN_LOADER } from "./constants";
+import { CLOSE_LOADER, OPEN_LOADER, SNACK_BAR_MESSAGE } from "./constants";
 
 export const openLoaderAction = () => {
   return {
@@ -9,5 +9,12 @@ export const openLoaderAction = () => {
 export const closeLoaderAction = () => {
   return {
     type: CLOSE_LOADER,
+  };
+};
+
+export const snackBarAction = (data) => {
+  return {
+    type: SNACK_BAR_MESSAGE,
+    payload: data,
   };
 };

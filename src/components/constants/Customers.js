@@ -4,7 +4,7 @@ import { EditPopover } from "../shared/EditPopover";
 export const CustomersList = () => [
   {
     Header: "Product Name",
-    accessor: "productName",
+    accessor: "name",
     sticky: "left",
     id: 1,
     width: 300,
@@ -30,29 +30,20 @@ export const CustomersList = () => [
   },
   {
     Header: "Customer Name",
-    accessor: "customerName",
+    accessor: "name",
     id: 2,
     width: 200,
   },
   {
     Header: "Customer Email",
-    accessor: "customerEmail",
+    accessor: "email",
     id: 3,
     width: 200,
   },
   {
     Header: "Customer Number",
-    accessor: "customerNumber",
+    accessor: "mobileNumber",
     id: 4,
     width: 200,
-  },
-];
-
-export const customerdata = [
-  {
-    productName: "EMS",
-    customerName: "Ahil",
-    customerEmail: "ahil@gmail.com",
-    customerNumber: "9688518844",
   },
 ];

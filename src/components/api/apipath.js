@@ -1,9 +1,9 @@
 export const apiRoutes = {
   //myUser
-  CREATE_CUSTOMER: "createUser",
+  CREATE_CUSTOMER: "createCustomer",
   USER_LOGIN: "userLogin",
   GET_ROLES: "roles/list",
-  GET_USER: "getAllUsers",
+  GET_USER: "getCustomers",
 
   //PRODUCTMASTER
   PRODUCT_CREATION: "product/create",
@@ -12,5 +12,10 @@ export const apiRoutes = {
 
   // MENU MASTER
   CREATE_MENU: "product/menu/create",
-  GET_MENU_BY_PRODUCT_ID: "product/menu/getMenuByProductId",
+  GET_MENU_BY_USER_ID: "/product/menu/getMenusByUser",
+  UPDATE_MENU: "product/menu/update",
+
+  // users
+  USER_LISTING: "getAppUsers",
+  CREATE_USER: "createAppUser",
 };

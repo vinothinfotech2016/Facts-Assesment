@@ -3,6 +3,9 @@ import { FormControl, FormHelperText } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { makeStyles } from "@mui/styles";
 import CustomSnackbar from "./CustomSnackbar";
+import { store } from "../../redux";
+import { snackBarAction } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 // Basic user image
 const User =
@@ -54,16 +57,24 @@ export function CustomUploadImage({
     "image/img",
     "image/svg",
   ];
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     myRefname.current.click();
   };
 
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
   const onImageChange = (event) => {
     if (!formats.includes(event.target.files[0].type)) {
-      setOpen(true);
+      dispatch(
+        snackBarAction({
+          open: true,
+          color: "error",
+          message: "please select a valid file",
+        })
+      );
+
       return;
     }
     if (event.target.files && event.target.files[0]) {
@@ -132,11 +143,6 @@ export function CustomUploadImage({
         </div>
         <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>
       </FormControl>
-      <CustomSnackbar
-        open={open}
-        setOpen={setOpen}
-        message={"please select a valid file"}
-      />
     </>
   );
 }

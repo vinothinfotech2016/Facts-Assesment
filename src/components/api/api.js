@@ -32,6 +32,18 @@ export const createMenu = (value) => {
   return appApi.post(`${apiRoutes.CREATE_MENU}`, value);
 };
 
-export const getMenuByProductId = (id) => {
-  return appApi.get(`${apiRoutes.GET_MENU_BY_PRODUCT_ID}/${id}`);
+export const getMenusByUserId = (id) => {
+  return appApi.get(`${apiRoutes.GET_MENU_BY_USER_ID}/${id}`);
+};
+
+export const updateMenu = (value, id) => {
+  return appApi.put(`${apiRoutes.UPDATE_MENU}/${id}`, value);
+};
+
+export const getUsers = () => {
+  return appApi.get(`${apiRoutes.USER_LISTING}`);
+};
+
+export const createUsers = (value) => {
+  return appApi.post(`${apiRoutes.CREATE_USER}`, value);
 };

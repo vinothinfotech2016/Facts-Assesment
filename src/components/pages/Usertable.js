@@ -4,18 +4,21 @@ import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
 import { UserList } from "../constants/User";
-import { userList } from "../api/api";
+import { getUsers, userList } from "../api/api";
 
 export const Usertable = (props) => {
   const [data, setData] = React.useState([]);
 
   useEffect(() => {
-    userList()
+    getUsers()
       .then((res) => {
-        // console.log(res, "hello");
+        console.log(res);
         setData(res.data);
+        console.log(res.data);
       })
-      .catch((res) => console.log("responsiveFontSizes"));
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

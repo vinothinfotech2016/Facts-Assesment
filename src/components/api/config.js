@@ -11,9 +11,15 @@ appApi.interceptors.request.use((request) => {
   return request;
 });
 
-appApi.interceptors.response.use((response) => {
-  store.dispatch(closeLoaderAction());
-  return response;
-});
+appApi.interceptors.response.use(
+  (response) => {
+    store.dispatch(closeLoaderAction());
+    return response;
+  },
+  (error) => {
+    store.dispatch(closeLoaderAction());
+    return Promise.reject(error);
+  }
+);
 
 export default appApi;

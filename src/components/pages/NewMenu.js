@@ -16,26 +16,37 @@ import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { newMenuSchema, newMenuUiSchema } from "../schema/newmenu";
 import { DividerLine } from "../shared";
-import { useNavigate } from "react-router";
-import { createMenu, getProductById } from "../api/api";
+import { useLocation, useNavigate } from "react-router";
+import {
+  createMenu,
+  getMenusByUserId,
+  getProductById,
+  updateMenu,
+} from "../api/api";
+import { snackBarAction } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import { snackBarMessages } from "../constants/SnackBarConstants";
 
 export const NewMenu = (props) => {
   const navigate = useNavigate();
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   const [products, setProducts] = React.useState([]);
+  const dispatch = useDispatch();
+  const search = useLocation().search;
+  const searchParam = new URLSearchParams(search);
+  const editId = searchParam?.get("editId");
+  const LocalData = JSON.parse(localStorage.getItem("user"));
+  const userId = LocalData?.data?.id;
+  const [menus, setMenu] = React.useState([]);
 
   const handleChange = (e) => {
-    console.log(userData);
     setUserData({
       [e.target.name]: e.target.value,
     });
   };
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user"));
-    const userId = userData?.data?.id;
-
     getProductById(userId)
       .then((res) => {
         setProducts(res.data);
@@ -44,6 +55,78 @@ export const NewMenu = (props) => {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {
+    getMenusByUserId(userId)
+      .then((res) => {
+        setMenu(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [editId]);
+
+  useEffect(() => {
+    menus.forEach((menu) => {
+      if (menu.id === editId) {
+        setUserData({
+          ...menu,
+          hasSubMenu: menu.hasSubMenu === 1 ? "1" : "2",
+          subMenus: JSON.parse(menu?.subMenus),
+        });
+      }
+    });
+  }, [menus]);
+
+  const update = (value) => {
+    updateMenu(value, editId)
+      .then((res) => {
+        console.log(res);
+        navigate(clickPaths.USENAVIGATEMENUMASTER);
+        dispatch(
+          snackBarAction({
+            color: "success",
+            message: snackBarMessages.MENU_UPDATE_SUCCESS,
+            open: true,
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(
+          snackBarAction({
+            color: "error",
+            message: snackBarMessages.MENU_UPDATE_FAILED,
+            open: true,
+          })
+        );
+      });
+  };
+
+  const add = (value) => {
+    createMenu(value)
+      .then((res) => {
+        console.log(res);
+        navigate(clickPaths.USENAVIGATEMENUMASTER);
+        dispatch(
+          snackBarAction({
+            color: "success",
+            message: snackBarMessages.MENU_CREATION_SUCCESS,
+            open: true,
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(
+          snackBarAction({
+            color: "error",
+            message: snackBarMessages.MENU_CREATION_FAILED,
+            open: true,
+          })
+        );
+      });
+  };
 
   return (
     <>
@@ -60,6 +143,7 @@ export const NewMenu = (props) => {
               name="productId"
               onChange={handleChange}
               value={userData.productId || ""}
+              disabled={Boolean(editId)}
             >
               {products.map((product) => {
                 return (
@@ -74,7 +158,7 @@ export const NewMenu = (props) => {
           <h3 className="subheading">Menu Settings</h3>
           <Form
             schema={newMenuSchema}
-            uiSchema={newMenuUiSchema()}
+            uiSchema={newMenuUiSchema(editId)}
             widgets={widgets}
             formData={userData}
             showErrorList={false}
@@ -84,7 +168,7 @@ export const NewMenu = (props) => {
             FieldTemplate={CustomFieldTemplate}
             transformErrors={(errors) => customErrorMsg(errors, newMenuSchema)}
             onChange={(e) => {
-              // console.log(e.formData);
+              console.log(e.formData);
               setUserData({
                 ...e.formData,
               });
@@ -99,21 +183,23 @@ export const NewMenu = (props) => {
                 subMenus,
               } = props.formData;
 
-              createMenu({
-                productId,
-                orderNo,
-                displayType,
-                name,
-                hasSubMenu,
-                subMenus,
-              })
-                .then((res) => {
-                  console.log(res);
-                  navigate(clickPaths.USENAVIGATEMENUMASTER);
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
+              editId
+                ? update({
+                    productId,
+                    orderNo,
+                    displayType,
+                    name,
+                    hasSubMenu: hasSubMenu === "1" ? true : false,
+                    subMenus,
+                  })
+                : add({
+                    productId,
+                    orderNo,
+                    displayType,
+                    name,
+                    hasSubMenu: hasSubMenu === "1" ? true : false,
+                    subMenus,
+                  });
             }}
           >
             <div className="btnContainer">
@@ -130,7 +216,7 @@ export const NewMenu = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                SUBMIT
+                {editId ? "UPDATE" : "SUBMIT"}
               </Button>
             </div>
           </Form>

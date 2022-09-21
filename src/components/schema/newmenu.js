@@ -21,13 +21,13 @@ export const newMenuSchema = {
       default: "Top Navigation",
     },
     hasSubMenu: {
-      type: "boolean",
+      type: "string",
       label: "Sub-menus",
       options: [
-        { id: true, name: "Yes" },
-        { id: false, name: "No" },
+        { id: "1", name: "Yes" },
+        { id: "2", name: "No" },
       ],
-      default: true,
+      default: "1",
     },
     subMenus: {
       type: "array",
@@ -41,9 +41,12 @@ export const newMenuSchema = {
   },
 };
 
-export const newMenuUiSchema = () => ({
+export const newMenuUiSchema = (editId) => ({
   orderNo: { xs: 6 },
-  name: {},
+  name: {
+    "ui:readonly": Boolean(editId),
+  },
+
   displayType: {
     "ui:widget": "radio",
     labelStyle: { marginRight: "20px" },

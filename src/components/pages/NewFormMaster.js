@@ -3,38 +3,52 @@ import { widgets } from "../../widgets/widgets";
 import {
   Box,
   Button,
-  Paper,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
+  Grid,
+  Stack,
+  // Button,
+  // Paper,
+  // Table,
+  // TableBody,
+  // TableContainer,
+  // TableHead,
+  // TableRow,
 } from "@mui/material";
-import { customErrorMsg } from "../../template/customErrorMsg";
-import { CustomFieldTemplate } from "../../template/fieldTemplate";
-import { objectFieldTemplate } from "../../template/objectTemplate";
-import React from "react";
+// import { customErrorMsg } from "../../template/customErrorMsg";
+// import { CustomFieldTemplate } from "../../template/fieldTemplate";
+// import { objectFieldTemplate } from "../../template/objectTemplate";
+import React, { useEffect } from "react";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
-import {
-  newFormMasterSchema,
-  newFormMasterUiSchema,
-} from "../schema/newFormMaster";
-import { useNavigate } from "react-router";
-import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { CustomUploadImage } from "../shared/CustomUploadImage";
+import { height } from "@mui/system";
+// import {
+//   newFormMasterSchema,
+//   newFormMasterUiSchema,
+// } from "../schema/newFormMaster";
+// import { useNavigate } from "react-router";
+// import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
+// import EditIcon from "@mui/icons-material/Edit";
+// import DeleteIcon from "@mui/icons-material/Delete";
 
 export const NewFormMaster = (props) => {
-  const navigate = useNavigate();
-  const [userData, setUserData] = React.useState({});
-  const [liveValidator, setLiveValidator] = React.useState(false);
-  const [actionItemList, setActionItemList] = React.useState([]);
+  // const navigate = useNavigate();
+  // const [userData, setUserData] = React.useState({});
+  // const [liveValidator, setLiveValidator] = React.useState(false);
+  // const [actionItemList, setActionItemList] = React.useState([]);
 
-  const addToTable = () => {
-    // console.log(actionItem, "actionItem");
-    setActionItemList([...actionItemList, userData]);
-    console.log(actionItemList, "actionItemList");
+  // const addToTable = () => {
+  //   // console.log(actionItem, "actionItem");
+  //   setActionItemList([...actionItemList, userData]);
+  //   console.log(actionItemList, "actionItemList");
+  // };
+  const [source, setSource] = React.useState("");
+
+  const changeHandler = (value) => {
+    setSource(value);
+  };
+
+  const removeImage = () => {
+    setSource("");
   };
 
   return (
@@ -44,7 +58,7 @@ export const NewFormMaster = (props) => {
           label="New Form Master"
           listPath={clickPaths.USENAVIGATEFORMMASTER}
         />
-        <Box className="container">
+        {/* <Box className="container">
           <Form
             schema={newFormMasterSchema}
             uiSchema={newFormMasterUiSchema()}
@@ -141,7 +155,67 @@ export const NewFormMaster = (props) => {
               columnSize={false}
               disablePagination={true}
             /> */}
-        </Box>
+        {/* </Box> */}
+
+        {Boolean(source) ? (
+          <>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Grid item>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img src={source} alt={"image"} width={500} height={500} />
+                </Box>
+                <Button
+                  onClick={() => {
+                    removeImage();
+                  }}
+                  sx={{
+                    margin: "100px",
+                  }}
+                >
+                  remove image
+                </Button>
+              </Grid>
+            </Grid>
+          </>
+        ) : (
+          <Box
+            sx={{
+              marginTop: "300px",
+              zIndex: 9999,
+              // backgroundColor: "#000",
+            }}
+          >
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Grid item xs={3}>
+                <CustomUploadImage
+                  value={source}
+                  label={"upload image"}
+                  onChange={changeHandler}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        )}
       </Box>
     </>
   );

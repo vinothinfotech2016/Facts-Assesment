@@ -13,6 +13,9 @@ import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { useLocation, useNavigate } from "react-router";
 import { createProduct, getProductById, updateProduct } from "../api/api";
+import { useDispatch } from "react-redux";
+import { snackBarAction } from "../../redux/actions";
+import { snackBarMessages } from "../constants/SnackBarConstants";
 
 const ProductMasterForm = (props) => {
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ const ProductMasterForm = (props) => {
   const search = useLocation().search;
   const searchParam = new URLSearchParams(search);
   const editId = searchParam?.get("editId");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("user"));
@@ -64,9 +68,23 @@ const ProductMasterForm = (props) => {
       .then((res) => {
         console.log(res);
         navigate(clickPaths.USENAVIGATEHOME);
+        dispatch(
+          snackBarAction({
+            color: "success",
+            message: snackBarMessages.PRODUCT_CREATION_SUCCESS,
+            open: true,
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
+        dispatch(
+          snackBarAction({
+            color: "error",
+            message: snackBarMessages.PRODUCT_CREATION_FAILED,
+            open: true,
+          })
+        );
       });
   };
 
@@ -75,9 +93,23 @@ const ProductMasterForm = (props) => {
       .then((res) => {
         console.log(res);
         navigate(clickPaths.USENAVIGATEHOME);
+        dispatch(
+          snackBarAction({
+            color: "success",
+            message: snackBarMessages.PRODUCT_UPDATE_SUCCESS,
+            open: true,
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
+        dispatch(
+          snackBarAction({
+            color: "error",
+            message: snackBarMessages.PRODUCT_UPDATE_FAILED,
+            open: true,
+          })
+        );
       });
   };
 

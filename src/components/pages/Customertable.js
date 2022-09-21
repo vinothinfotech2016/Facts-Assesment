@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
 import { customerdata, CustomersList } from "../constants/Customers";
+import { userList } from "../api/api";
 
 export const Customertable = (props) => {
+  const [tableData, setTableData] = React.useState([]);
+
+  useEffect(() => {
+    userList()
+      .then((res) => {
+        // console.log(res, "hello");
+        console.log(res.data);
+        setTableData(res.data);
+      })
+      .catch((res) => console.log("responsiveFontSizes"));
+  }, []);
+
   return (
     <>
       <ListContainer>
@@ -19,7 +32,7 @@ export const Customertable = (props) => {
         />
         <CustomReactTable
           columnData={CustomersList()}
-          rawData={customerdata}
+          rawData={tableData}
           disableRowSelection={true}
           disablePagination={true}
           // onChangePageSize={onChangePageSize}

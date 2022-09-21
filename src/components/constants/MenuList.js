@@ -1,42 +1,44 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const MenuList = () => [
+export const MenuList = (inputValues) => [
   {
     Header: "Product Name",
-    accessor: "productName",
+    accessor: "productId",
     sticky: "left",
     id: 1,
     width: 300,
-    Cell: (props) => (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        {props.value}
-        <EditPopover
-          values={props}
-          rowId={props.row.original.id}
-          toShow={{ edit: true, viewDetails: true }}
-          paths={{
-            edit: `${clickPaths.USENAVIGATEMENUMASTER}`,
+    Cell: (props) => {
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
-        />
-      </div>
-    ),
+        >
+          {inputValues?.find((item) => item.id === props.value)?.name}
+          <EditPopover
+            values={props}
+            rowId={props.row.original.id}
+            toShow={{ edit: true, viewDetails: true }}
+            paths={{
+              edit: `${clickPaths.USENAVIGATEMENUMASTERFORM}`,
+            }}
+          />
+        </div>
+      );
+    },
   },
   {
     Header: "Menu Name",
-    accessor: "menuName",
+    accessor: "name",
     id: 2,
     width: 200,
   },
   {
     Header: "Menu Design Type",
-    accessor: "menuDesignType",
+    accessor: "displayType",
     id: 3,
     width: 200,
   },
@@ -48,32 +50,11 @@ export const MenuList = () => [
   },
   {
     Header: "Sub Menus",
-    accessor: "subMenu",
+    accessor: "subMenus",
     id: 5,
     width: 200,
-  },
-];
-
-export const menudata = [
-  {
-    productName: "EMS",
-    menuName: "Dashboard",
-    menuDesignType: "Top Nav",
-    orderNo: "2",
-    subMenu: "6",
-  },
-  {
-    productName: "School ERP",
-    menuName: "Stepper",
-    menuDesignType: "Side stepper",
-    orderNo: "1",
-    subMenu: "2",
-  },
-  {
-    productName: "Design Tool",
-    menuName: "Drop Down",
-    menuDesignType: "Top Nav",
-    orderNo: "4",
-    subMenu: "3 ",
+    Cell: (props) => {
+      return JSON.parse(props?.value)?.toString();
+    },
   },
 ];

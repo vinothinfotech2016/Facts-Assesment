@@ -5,7 +5,7 @@ import React from "react";
 function Loader() {
   return (
     <>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ position: "absolute", top: "50vh", left: "50%" }}>
         <CircularProgress />
         loading...
       </Box>
