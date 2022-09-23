@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { FormControl, FormHelperText } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { makeStyles } from "@mui/styles";
-import CustomSnackbar from "./CustomSnackbar";
-import { store } from "../../redux";
 import { snackBarAction } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 

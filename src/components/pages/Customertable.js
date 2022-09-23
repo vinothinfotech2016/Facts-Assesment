@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { customerdata, CustomersList } from "../constants/Customers";
+import { CustomersList } from "../constants/Customers";
 import { userList } from "../api/api";
 
 export const Customertable = (props) => {
@@ -12,7 +12,6 @@ export const Customertable = (props) => {
   useEffect(() => {
     userList()
       .then((res) => {
-        // console.log(res, "hello");
         console.log(res.data);
         setTableData(res.data);
       })

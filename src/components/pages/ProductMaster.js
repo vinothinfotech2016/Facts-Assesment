@@ -10,8 +10,10 @@ export const ProductMaster = (props) => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("user"));
-    const id = data.data.id;
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const {
+      data: { id },
+    } = userData;
 
     getProductById(id)
       .then((res) => {
