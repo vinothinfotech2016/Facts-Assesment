@@ -14,4 +14,12 @@ export const snackBarMessages = {
   // myUsers
   USER_CREATION_SUCCESS: "User created successfully",
   USER_CREATION_FAILED: "User creation failed",
+
+  //file
+  VALID_FILE: "Please upload a valid file",
+  TEXT_IS_REQUIRED: "Screen Name is required",
+
+  //screen
+  SCREEN_CREATION_SUCCESS: "Screen Created Successfully",
+  SCREEN_CREATION_FAILED: "Screen Creation Failed",
 };

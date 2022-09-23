@@ -1,6 +1,5 @@
-import { Box, FormControl, FormHelperText } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -27,21 +26,10 @@ const useStyles = makeStyles({
 });
 
 function CustomMultipleImageUpload(props) {
-  const { isViewMode, label, touched, error, name, value, onChange } = props;
+  const { isViewMode, label, touched, error, name, onChange } = props;
 
   const classes = useStyles();
-  const [imgUrl, setImgUrl] = React.useState("");
-  // const [fileName, setFileName] = React.useState("");
-  const [fileName, setFileName] = React.useState(value && value[0]?.name);
   const myRefname = useRef(null);
-  const formats = [
-    "image/jpg",
-    "image/jpeg",
-    "image/png",
-    "image/img",
-    "image/svg",
-  ];
-  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     myRefname.current.click();
@@ -60,7 +48,6 @@ function CustomMultipleImageUpload(props) {
           label={label}
           disabled={isViewMode}
           accept={"image/*"}
-          multiple={"multiple"}
         />
         <div
           onClick={(e) => handleClick(e)}

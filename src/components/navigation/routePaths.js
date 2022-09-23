@@ -28,6 +28,8 @@ export const mapPaths = {
 
   FORMMASTER: "formMaster/list",
   FORMMASTERFORM: "formMaster/form",
+
+  PREVIEWPAGE: "formMaster/preview",
 };
 
 export const clickPaths = {
@@ -54,4 +56,6 @@ export const clickPaths = {
 
   USENAVIGATEFORMMASTER: "/home/formMaster/list",
   USENAVIGATEFORMMASTERFORM: "/home/formMaster/form",
+
+  USENAVIGATEPREVIEWPAGE: "/home/formMaster/preview",
 };

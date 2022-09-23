@@ -47,3 +47,15 @@ export const getUsers = () => {
 export const createUsers = (value) => {
   return appApi.post(`${apiRoutes.CREATE_USER}`, value);
 };
+
+export const createScreen = (value) => {
+  return appApi.post(`${apiRoutes.CREATE_SCREEN}`, value);
+};
+
+export const getScreensByProductId = (id) => {
+  return appApi.get(`${apiRoutes.GET_SCREEN_BY_PRODUCT_ID}/${id}`);
+};
+
+export const getScreenById = (id) => {
+  return appApi.get(`${apiRoutes.GET_SCREEN_BY_ID}/${id}`);
+};

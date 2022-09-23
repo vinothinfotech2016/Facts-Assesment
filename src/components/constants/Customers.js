@@ -1,10 +1,10 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const CustomersList = () => [
+export const CustomersList = (products) => [
   {
     Header: "Product Name",
-    accessor: "name",
+    accessor: "products",
     sticky: "left",
     id: 1,
     width: 300,
@@ -16,7 +16,13 @@ export const CustomersList = () => [
           alignItems: "center",
         }}
       >
-        {props.value}
+        {props.value
+          ? products.map((product) => {
+              return (
+                JSON.parse(props.value).includes(product.id) && product.name
+              );
+            })
+          : "-"}
         <EditPopover
           values={props}
           rowId={props.row.original.id}
