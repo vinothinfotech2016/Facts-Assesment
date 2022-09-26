@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { menudata, MenuList } from "../constants/MenuList";
+import { MenuList } from "../constants/MenuList";
+import { getMenusByUserId, getProductById } from "../api/api";
 
 export const MenuMaster = (props) => {
+  const [tableData, setTableData] = React.useState([]);
+  const [inputValues, setInputValues] = React.useState([]);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const userId = userData.data.id;
+
+    getMenusByUserId(userId)
+      .then((res) => {
+        setTableData(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getProductById(userId)
+      .then((res) => {
+        setInputValues(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <ListContainer>
@@ -18,8 +43,8 @@ export const MenuMaster = (props) => {
           newFormPath={clickPaths.USENAVIGATEMENUMASTERFORM}
         />
         <CustomReactTable
-          columnData={MenuList()}
-          rawData={menudata}
+          columnData={MenuList(inputValues)}
+          rawData={tableData}
           disableRowSelection={true}
           disablePagination={true}
           // onChangePageSize={onChangePageSize}

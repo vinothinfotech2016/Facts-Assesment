@@ -33,7 +33,7 @@ export const NavBar = (props) => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  let userInfo=JSON.parse(localStorage.getItem('user'));
+  let userInfo = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Box>
@@ -43,7 +43,7 @@ export const NavBar = (props) => {
           display: "flex",
           flexDirection: "row",
           position: "fixed",
-          zIndex: "3",
+          zIndex: "100",
           boxShadow: "none",
         }}
       >

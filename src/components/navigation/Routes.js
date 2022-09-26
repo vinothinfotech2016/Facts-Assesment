@@ -17,6 +17,7 @@ import { NewMenu } from "../pages/NewMenu";
 import EditProfile from "../pages/EditProfile";
 import { Customertable } from "../pages/Customertable";
 import { CustomerForm } from "../pages/CustomerForm";
+import PreviewPage from "../pages/PreviewPage";
 import NewRole from "../pages/NewRole";
 
 export const routes = [
@@ -99,6 +100,11 @@ export const routes = [
   {
     path: mapPaths.MENUMASTERFORM,
     component: NewMenu,
+    exact: true,
+  },
+  {
+    path: mapPaths.PREVIEWPAGE,
+    component: PreviewPage,
     exact: true,
   },
 ];

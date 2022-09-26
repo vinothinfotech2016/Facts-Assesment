@@ -10,7 +10,10 @@ import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { useNavigate } from "react-router";
-import { createCustomer, getRole } from "../api/api";
+import { createUsers, getProductById, getRole } from "../api/api";
+import { useDispatch } from "react-redux";
+import { snackBarAction } from "../../redux/actions";
+import { snackBarMessages } from "../constants/SnackBarConstants";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,27 +25,31 @@ export const UserForm = (props) => {
   const [liveValidator, setLiveValidator] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [role, setRole] = useState([]);
+  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getRole()
       .then((res) => {
-        console.log(res, "RESPONSE");
         setRole(
           res.data.map((item) => ({
             id: item.id,
             name: item.role,
           }))
         );
-        // setRole(() => ({
-        //   res.data.map((item) => ({
-        //     id: item.id,
-        //     name: item.role,
-        //   })),
-        // }));
-
-        // setRole(res.data);
       })
       .catch((res) => console.log(responsiveFontSizes));
+
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const userId = userData.data.id;
+
+    getProductById(userId)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const handleClose = (event, reason) => {
@@ -52,24 +59,13 @@ export const UserForm = (props) => {
     setOpen(false);
   };
 
-  const userCreation = (userdetail) => {
-    createCustomer(userdetail)
-      .then(() => {
-        // navigate(clickPaths.USENAVIGATEMYUSER);
-      })
-      .catch((res) => {
-        setOpen(true);
-        console.log(res);
-      });
-  };
-
   return (
     <>
       <Box>
         <FormTopbar label="New User" listPath={clickPaths.USENAVIGATEMYUSER} />
         <Box className="container">
           <Form
-            schema={formNewUserSchema(role)}
+            schema={formNewUserSchema(role, products)}
             uiSchema={formNewUserUiSchema()}
             widgets={widgets}
             formData={userData}
@@ -82,21 +78,46 @@ export const UserForm = (props) => {
               customErrorMsg(errors, formNewUserSchema)
             }
             onChange={(e) => {
-              console.log(e.formData);
               setUserData({
                 ...e.formData,
               });
             }}
-            onSubmit={() => {
-              let userdetail = {
-                ...userData,
-                mobileNumber: JSON.stringify(userData.mobileNumber),
-              };
-              console.log(userdetail, "userdetail");
-              userCreation(userdetail);
+            onSubmit={(values) => {
+              const { name, email, mobileNumber, roleId, password, userType } =
+                values.formData;
 
-              // console.log(props.formData);
-              // console.log(customErrorMsg);
+              const temp = userType.map((data) => {
+                return data.id;
+              });
+              createUsers({
+                name,
+                email,
+                mobileNumber: mobileNumber.toString(),
+                roleId,
+                password,
+                productIds: temp,
+              })
+                .then((res) => {
+                  console.log(res);
+                  navigate(clickPaths.USENAVIGATEMYUSER);
+                  dispatch(
+                    snackBarAction({
+                      color: "success",
+                      open: true,
+                      message: snackBarMessages.USER_CREATION_SUCCESS,
+                    })
+                  );
+                })
+                .catch((error) => {
+                  console.log(error);
+                  dispatch(
+                    snackBarAction({
+                      color: "error",
+                      open: true,
+                      message: snackBarMessages.USER_CREATION_FAILED,
+                    })
+                  );
+                });
             }}
           >
             <div className="btnContainer">
@@ -111,7 +132,7 @@ export const UserForm = (props) => {
                 type="submit"
                 variant="outlined"
                 className="btn"
-                onClick={() => setLiveValidator(true) }
+                onClick={() => setLiveValidator(true)}
               >
                 SUBMIT
               </Button>

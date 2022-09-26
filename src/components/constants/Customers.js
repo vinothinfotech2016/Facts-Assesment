@@ -1,10 +1,10 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const CustomersList = () => [
+export const CustomersList = (products) => [
   {
     Header: "Product Name",
-    accessor: "productName",
+    accessor: "products",
     sticky: "left",
     id: 1,
     width: 300,
@@ -16,7 +16,11 @@ export const CustomersList = () => [
           alignItems: "center",
         }}
       >
-        {props.value}
+        {props?.value?.length !== 0
+          ? props?.value?.map((value) => {
+              return value.name;
+            })
+          : "-"}
         <EditPopover
           values={props}
           rowId={props.row.original.id}
@@ -30,29 +34,20 @@ export const CustomersList = () => [
   },
   {
     Header: "Customer Name",
-    accessor: "customerName",
+    accessor: "name",
     id: 2,
     width: 200,
   },
   {
     Header: "Customer Email",
-    accessor: "customerEmail",
+    accessor: "email",
     id: 3,
     width: 200,
   },
   {
     Header: "Customer Number",
-    accessor: "customerNumber",
+    accessor: "mobileNumber",
     id: 4,
     width: 200,
-  },
-];
-
-export const customerdata = [
-  {
-    productName: "EMS",
-    customerName: "Ahil",
-    customerEmail: "ahil@gmail.com",
-    customerNumber: "9688518844",
   },
 ];

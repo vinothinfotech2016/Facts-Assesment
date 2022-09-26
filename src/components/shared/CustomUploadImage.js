@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { FormControl, FormHelperText } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { makeStyles } from "@mui/styles";
-import CustomSnackbar from "./CustomSnackbar";
+import { snackBarAction } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 // Basic user image
 const User =
@@ -40,6 +41,7 @@ export function CustomUploadImage({
   profileUrl,
   isViewMode,
   uploadFile,
+  editId,
 }) {
   const classes = useStyles();
   const [imgUrl, setImgUrl] = React.useState(url);
@@ -53,25 +55,34 @@ export function CustomUploadImage({
     "image/img",
     "image/svg",
   ];
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     myRefname.current.click();
   };
 
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
   const onImageChange = (event) => {
     if (!formats.includes(event.target.files[0].type)) {
-      setOpen(true);
+      dispatch(
+        snackBarAction({
+          open: true,
+          color: "error",
+          message: "please select a valid file",
+        })
+      );
+
       return;
     }
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
       reader.onload = (e) => {
+        value = [reader.result];
         setImgUrl(reader.result);
         // onChange(name, event.target.files[0]);
         // onChange([event.target.files[0]]);
-        onChange(event);
+        onChange(value);
         setFileName(event.target.files[0].name);
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -79,7 +90,20 @@ export function CustomUploadImage({
   };
 
   useEffect(() => {
-    if (typeof value === "string") setFileName(value);
+    if (value !== undefined) {
+      if (typeof value === "string" && value.length < 50) {
+        setFileName(value);
+      }
+      if (Array.isArray(value)) {
+        setImgUrl(value[0]);
+        if (value[0]?.length < 50) {
+          const fullName = value[0]?.split("/");
+          if (fullName) {
+            setFileName(fullName[fullName?.length - 1]);
+          }
+        }
+      }
+    }
   }, [value]);
 
   useEffect(() => {
@@ -117,11 +141,6 @@ export function CustomUploadImage({
         </div>
         <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>
       </FormControl>
-      <CustomSnackbar
-        open={open}
-        setOpen={setOpen}
-        message={"please select a valid file"}
-      />
     </>
   );
 }

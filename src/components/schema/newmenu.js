@@ -1,27 +1,26 @@
 export const newMenuSchema = {
   type: "object",
-  required: ["orderNo", "menuName", "menuType", "subMenus", "subMenuNames"],
+  required: ["orderNo", "name", "displayType", "hasSubMenu"],
   properties: {
     orderNo: {
-      type: "string",
+      type: "number",
       label: "Order No",
     },
-    menuName: {
+    name: {
       type: "string",
       label: "Menu Name",
     },
-    menuType: {
+    displayType: {
       type: "string",
       label: "Menu Display Type",
-
       options: [
-        { id: "1", name: "Top Navigation" },
-        { id: "2", name: "Side Navigation" },
-        { id: "3", name: "Profile Menu" },
+        { id: "Top Navigation", name: "Top Navigation" },
+        { id: "Side Navigation", name: "Side Navigation" },
+        { id: "Profile Menu", name: "Profile Menu" },
       ],
-      default: "1",
+      default: "Top Navigation",
     },
-    subMenus: {
+    hasSubMenu: {
       type: "string",
       label: "Sub-menus",
       options: [
@@ -30,33 +29,33 @@ export const newMenuSchema = {
       ],
       default: "1",
     },
-    subMenuNames: {
+    subMenus: {
       type: "array",
       label: "Enter Sub Menu Names",
       items: {
-        type: "object",
-        options: [
-          { id: "1", name: "Menu 1" },
-          { id: "2", name: "Menu 2" },
-        ],
+        type: "string",
+        options: [],
       },
       uniqueItems: true,
     },
   },
 };
 
-export const newMenuUiSchema = () => ({
+export const newMenuUiSchema = (editId) => ({
   orderNo: { xs: 6 },
-  menuName: {},
-  menuType: {
+  name: {
+    "ui:readonly": Boolean(editId),
+  },
+
+  displayType: {
     "ui:widget": "radio",
     labelStyle: { marginRight: "20px" },
   },
-  subMenus: {
+  hasSubMenu: {
     "ui:widget": "radio",
     labelStyle: { marginRight: "75px" },
   },
-  subMenuNames: {
-    "ui:widget": "multiSelect",
+  subMenus: {
+    "ui:widget": "autoComplete",
   },
 });

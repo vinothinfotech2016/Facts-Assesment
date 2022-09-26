@@ -61,14 +61,16 @@ export const customerFormSchema = {
     },
     // selectProducts: {
     products: {
-      type: "string",
+      type: "array",
       label: "Select Product(s)",
-      options: [
-        { id: "1", name: "Product Name 1" },
-        { id: "2", name: "Product Name 2" },
-        { id: "3", name: "Product Name 3" },
-        { id: "4", name: "Product Name 4" },
-      ],
+      items: {
+        options: [
+          { id: "1", name: "Product Name 1" },
+          { id: "2", name: "Product Name 2" },
+          { id: "3", name: "Product Name 3" },
+          { id: "4", name: "Product Name 4" },
+        ],
+      },
     },
     divider2: {
       type: "string",
@@ -100,7 +102,7 @@ export const customerFormUiSchema = () => ({
     "ui:widget": "customDivider",
   },
   products: {
-    "ui:widget": "SelectWidget",
+    "ui:widget": "multiSelect",
   },
   divider2: {
     "ui:widget": "customDivider",

@@ -1,3 +1,4 @@
+import CustomAutoCompleteWithtext from "../components/shared/CustomAutoCompleteWithtext";
 import {
   WidgetAutocomplete,
   WidgetDateField,
@@ -28,4 +29,5 @@ export const widgets = {
   chipType: WidgetChipAutocomplete,
   PasswordWidget: WidgetPassword,
   customLable: CustomLabel,
+  autoComplete: CustomAutoCompleteWithtext,
 };

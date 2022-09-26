@@ -1,148 +1,169 @@
-import Form from "@rjsf/core";
-import { widgets } from "../../widgets/widgets";
-import {
-  Box,
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { customErrorMsg } from "../../template/customErrorMsg";
-import { CustomFieldTemplate } from "../../template/fieldTemplate";
-import { objectFieldTemplate } from "../../template/objectTemplate";
-import React from "react";
+import { Box, Button, Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
-import {
-  newFormMasterSchema,
-  newFormMasterUiSchema,
-} from "../schema/newFormMaster";
-import { useNavigate } from "react-router";
-import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { CustomUploadImage } from "../shared/CustomUploadImage";
+import RegionSelect from "react-region-select";
+import ImageMapper from "react-image-mapper";
+import CustomMultipleImageUpload from "../shared/CustomMultipleImageUpload";
 
 export const NewFormMaster = (props) => {
-  const navigate = useNavigate();
-  const [userData, setUserData] = React.useState({});
-  const [liveValidator, setLiveValidator] = React.useState(false);
-  const [actionItemList, setActionItemList] = React.useState([]);
+  const [source, setSource] = React.useState("");
 
-  const addToTable = () => {
-    // console.log(actionItem, "actionItem");
-    setActionItemList([...actionItemList, userData]);
-    console.log(actionItemList, "actionItemList");
+  const changeHandler = (value) => {
+    setSource(value);
   };
 
+  const removeImage = () => {
+    setSource("");
+  };
+
+  const areas = [
+    // {
+    //   data: { link: "https://www.youtube.com/" },
+    //   x: 10,
+    //   y: 10,
+    //   width: 10,
+    //   height: 10,
+    // },
+    // {
+    //   data: { link: "http://facebook.com" },
+    //   x: 20,
+    //   y: 20,
+    //   width: 10,
+    //   height: 10,
+    // },
+  ];
+
+  const imageUrl = source;
+
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      console.log("image size", { width: image.width, height: image.height });
+      setImageSize({ width: image.width, height: image.height });
+    };
+  }, []);
+
+  const [regions, setRegions] = useState(
+    areas.map((area, index) => ({
+      ...area,
+      data: { ...area.data, index },
+      new: false,
+      isChanging: false,
+    }))
+  );
+  const [imageMap, setImageMap] = useState([]);
+
+  useEffect(() => {
+    const tx = imageSize.width * (20 / 100);
+    const bx = imageSize.width * ((20 + 50) / 100);
+    const ty = imageSize.height * (20 / 100);
+    const by = imageSize.height * ((20 + 50) / 100);
+    const area = {
+      name: "flower",
+      shape: "rect",
+      coords: [tx, ty, bx, by],
+      preFillColor: "rgba(0, 0, 0, 0.7)",
+      fillColor: "yellow",
+    };
+    const maps = areas.map((area, index) => ({
+      _id: index,
+      shape: "rect",
+      coords: [
+        imageSize.width * (area.x / 100),
+        imageSize.height * (area.y / 100),
+        imageSize.width * ((area.x + area.width) / 100),
+        imageSize.height * ((area.y + area.height) / 100),
+      ],
+      href: area.data.link,
+      preFillColor: "rgba(0, 0, 0, 0.5)",
+    }));
+    console.log(`maps`, maps);
+    setImageMap(maps);
+  }, [imageSize]);
+
+  const regionStyle = {
+    background: "rgba(0, 0, 255, 0.5)",
+    zIndex: 99,
+  };
+
+  const onChangeRegion = (currentRegions) => {
+    setRegions(currentRegions);
+    console.log({ currentRegions });
+  };
+
+  const actionDeleteRegion = (regionIdx) => {
+    console.log("​regionIdx", regionIdx);
+    console.log(`regions`, regions);
+    const filteredRegion = regions.filter(
+      (reg) => reg.data.index !== regionIdx
+    );
+    setRegions(filteredRegion);
+  };
+
+  const markImageRegion = (markedIndex, markedKey) => {
+    regions[markedIndex].value = markedKey;
+    console.log(regions, "regions");
+    // let markeRegions = regions?.map((regIndex) => {
+    //   if (regIndex === markedIndex) {
+    //     regions[regIndex]["value"] = markedKey;
+    //   }
+    // });
+    // setRegions(markeRegions);
+  };
+
+  const regionRenderer = (regionProps) => {
+    if (!regionProps.isChanging) {
+      return (
+        <div style={{ position: "absolute", right: 0, bottom: "-1.5em" }}>
+          <input
+            type="text"
+            name="link"
+            onChange={(e) =>
+              markImageRegion(regionProps.data.index, e.target.value)
+            }
+          />
+          <button onClick={() => actionDeleteRegion(regionProps.data.index)}>
+            Delete
+          </button>
+        </div>
+      );
+    }
+  };
+  const fetchClickedScale = (a, b, c) => {
+    console.log(a, b, c, "clicked pointer");
+  };
   return (
     <>
-      <Box>
-        <FormTopbar
-          label="New Form Master"
-          listPath={clickPaths.USENAVIGATEFORMMASTER}
-        />
-        <Box className="container">
-          <Form
-            schema={newFormMasterSchema}
-            uiSchema={newFormMasterUiSchema()}
-            widgets={widgets}
-            formData={userData}
-            showErrorList={false}
-            liveValidate={liveValidator}
-            noHtml5Validate
-            ObjectFieldTemplate={objectFieldTemplate}
-            FieldTemplate={CustomFieldTemplate}
-            transformErrors={(errors) =>
-              customErrorMsg(errors, newFormMasterSchema)
-            }
-            onChange={(e) => {
-              console.log(e.formData);
-              setUserData({
-                ...e.formData,
-              });
-            }}
-            onSubmit={(props) => {
-              console.log(props.formData);
-              console.log(customErrorMsg);
-            }}
-          >
-            <Box className="btnContainer">
-              <Button
-                variant="contained"
-                className="btn"
-                onClick={() => addToTable()}
-              >
-                ADD
-              </Button>
-            </Box>
-
-            <TableContainer component={Paper}>
-              <Table style={{ padding: "50px" }}>
-                <TableHead>
-                  <TableRow>
-                    <TableHeadingCell>Action Item</TableHeadingCell>
-                    <TableHeadingCell>Form</TableHeadingCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {actionItemList &&
-                    actionItemList.map((data, index) => {
-                      return (
-                        <TableRow key={index + 1}>
-                          <TableBodyCell>
-                            <Box>{data.selectActionItem}</Box>
-                            <Box>{data.selectForm}</Box>
-
-                            <Box style={{ marginRight: "50px" }}>
-                              <EditIcon
-                                color="action"
-                                onClick={() => console.log("cliked")}
-                              />
-                              <DeleteIcon
-                                color="action"
-                                style={{ paddingLeft: "10px" }}
-                                onClick={() => console.log("cliked")}
-                              />
-                            </Box>
-                          </TableBodyCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-            <Box className="btnContainer">
-              <Button
-                variant="outlined"
-                className="btn"
-                onClick={() => navigate(clickPaths.USENAVIGATEFORMMASTER)}
-              >
-                CANCEL
-              </Button>
-              <Button
-                type="submit"
-                variant="outlined"
-                className="btn"
-                onClick={() => setLiveValidator(true)}
-              >
-                SUBMIT
-              </Button>
-            </Box>
-          </Form>
-
-          {/* <CustomReactTable
-              columnData={ActionItem()}
-              rawData={actionItemList}
-              disableRowSelection={true}
-              columnSize={false}
-              disablePagination={true}
-            /> */}
-        </Box>
-      </Box>
+      <RegionSelect
+        regions={regions}
+        regionStyle={regionStyle}
+        onChange={onChangeRegion}
+        regionRenderer={regionRenderer}
+        style={{ border: "1px solid black" }}
+      >
+        <img src={imageUrl} alt={"sample"} />
+      </RegionSelect>
     </>
+  );
+
+  return (
+    <div style={{ display: "flex" }}>
+      <div style={{ flexGrow: 1, flexShrink: 1, width: "50%" }}>
+        <div className="container" style={{ position: "relative" }}>
+          {imageSize.width > 0 && (
+            <ImageMapper
+              src={imageUrl}
+              onClick={fetchClickedScale}
+              map={{ name: "my-map", areas: imageMap }}
+            />
+          )}
+        </div>
+      </div>
+    </div>
   );
 };

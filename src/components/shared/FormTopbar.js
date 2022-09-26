@@ -13,7 +13,7 @@ const HeaderContainer = styled(Box)({
   position: "fixed",
   top: "56px",
   backgroundColor: "white",
-  zIndex: 2,
+  zIndex: 100,
   width: "100%",
 });
 const IconBtn = styled(ArrowBackIcon)({
