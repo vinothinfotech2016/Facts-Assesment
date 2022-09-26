@@ -16,11 +16,9 @@ export const CustomersList = (products) => [
           alignItems: "center",
         }}
       >
-        {props.value
-          ? products.map((product) => {
-              return (
-                JSON.parse(props.value).includes(product.id) && product.name
-              );
+        {props?.value?.length !== 0
+          ? props?.value?.map((value) => {
+              return value.name;
             })
           : "-"}
         <EditPopover
