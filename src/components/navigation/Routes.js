@@ -19,6 +19,8 @@ import { Customertable } from "../pages/Customertable";
 import { CustomerForm } from "../pages/CustomerForm";
 import PreviewPage from "../pages/PreviewPage";
 import NewRole from "../pages/NewRole";
+import CheckFlowPage from "../pages/CheckFlowPage";
+import ImageMapperPage from "../pages/ImageMapperPage";
 
 export const routes = [
   {
@@ -107,6 +109,16 @@ export const routes = [
     component: PreviewPage,
     exact: true,
   },
+  {
+    path: mapPaths.CHECKPAGE,
+    component: CheckFlowPage,
+    exact: true,
+  },
+  // {
+  //   path: mapPaths.IMAGEMAPPERPAGE,
+  //   component: ImageMapperPage,
+  //   exact: true,
+  // },
 ];
 
 export const AppRoutes = [
