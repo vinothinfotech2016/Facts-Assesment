@@ -30,6 +30,8 @@ export const mapPaths = {
   FORMMASTERFORM: "formMaster/form",
 
   PREVIEWPAGE: "formMaster/preview",
+  CHECKPAGE: "formMaster/check",
+  IMAGEMAPPERPAGE: "formMaster/imageMapper",
 };
 
 export const clickPaths = {
@@ -58,4 +60,6 @@ export const clickPaths = {
   USENAVIGATEFORMMASTERFORM: "/home/formMaster/form",
 
   USENAVIGATEPREVIEWPAGE: "/home/formMaster/preview",
+  USENAVIGATECHECKPAGE: "/home/formMaster/check",
+  USENAVIGATEIMAGEMAPPERPAGE: "/home/formMaster/imageMapper",
 };

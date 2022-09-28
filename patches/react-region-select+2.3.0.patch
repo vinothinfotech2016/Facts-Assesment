@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-region-select/lib/RegionSelect.js b/node_modules/react-region-select/lib/RegionSelect.js
+index c5ceb6b..b71f1cb 100644
+--- a/node_modules/react-region-select/lib/RegionSelect.js
++++ b/node_modules/react-region-select/lib/RegionSelect.js
+@@ -35,14 +35,13 @@ var RegionSelect = function (_Component) {
+ 
+ 	function RegionSelect(props) {
+ 		_classCallCheck(this, RegionSelect);
+-
+ 		var _this = _possibleConstructorReturn(this, (RegionSelect.__proto__ || Object.getPrototypeOf(RegionSelect)).call(this, props));
+ 
+ 		_this.onComponentMouseTouchDown = _this.onComponentMouseTouchDown.bind(_this);
+ 		_this.onDocMouseTouchMove = _this.onDocMouseTouchMove.bind(_this);
+ 		_this.onDocMouseTouchEnd = _this.onDocMouseTouchEnd.bind(_this);
+ 		_this.onRegionMoveStart = _this.onRegionMoveStart.bind(_this);
+-		_this.regionCounter = 0;
++		_this.regionCounter = props.regions.length;
+ 		return _this;
+ 	}
+ 

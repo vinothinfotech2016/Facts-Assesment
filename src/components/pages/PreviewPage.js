@@ -2,7 +2,7 @@ import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import RegionSelect from "react-region-select";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import {
   getScreenById,
   getScreensByProductId,
@@ -12,17 +12,20 @@ import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 
 function PreviewPage() {
+  const navigate = useNavigate();
   const search = useLocation().search;
   const searchParam = new URLSearchParams(search);
   const editId = searchParam?.get("editId");
   const [screen, setScreen] = useState("");
   const areas = [];
   const [screens, setScreens] = useState([]);
-  const [selectedRegions, setSelectedRegions] = useState([]);
   const [regions, setRegions] = useState(
     areas?.map((area, index) => ({
       ...area,
-      data: { ...area.data, index },
+      data: {
+        id: screens[0]?.id,
+        index: index,
+      },
       new: false,
       isChanging: false,
     }))
@@ -32,6 +35,7 @@ function PreviewPage() {
     getScreenById(editId)
       .then((res) => {
         setScreen(res.data);
+        res.data.actionItems && setRegions(JSON.parse(res?.data?.actionItems));
       })
       .catch((error) => {
         console.log(error);
@@ -49,13 +53,23 @@ function PreviewPage() {
         });
   }, [screen]);
 
+  const [dropDownValue, setDropDownValue] = useState(screens[0]?.id);
+
   const regionStyle = {
-    background: "rgba(0, 0, 255, 0.5)",
+    background: "rgba(0, 0, 0, 0.2)",
     zIndex: 99,
   };
 
   const onChangeRegion = (currentRegions) => {
-    setRegions(currentRegions);
+    const temp = [...currentRegions];
+    temp[currentRegions.length - 1] = {
+      ...currentRegions[currentRegions.length - 1],
+      data: {
+        ...currentRegions[currentRegions.length - 1].data,
+        id: screens[0]?.id,
+      },
+    };
+    setRegions(temp);
   };
 
   const markImageRegion = (markedIndex, markedKey) => {
@@ -64,25 +78,12 @@ function PreviewPage() {
     });
 
     regions[markedIndex].data = {
-      targetImageUrl: selectedRegion?.screenImageUrl,
-      targetScreenName: selectedRegion?.screenName,
+      ...regions[markedIndex].data,
+      id: selectedRegion?.id,
     };
-    const finalValue = regions.map((region) => {
-      return {
-        data: region.data,
-        x: region.x,
-        y: region.y,
-        width: region.width,
-        heigth: region.height,
-      };
-    });
-    setSelectedRegions(finalValue);
-    console.log(selectedRegions);
   };
 
   const actionDeleteRegion = (regionIdx) => {
-    console.log("​regionIdx", regionIdx);
-    console.log(`regions`, regions);
     const filteredRegion = regions.filter(
       (reg) => reg.data.index !== regionIdx
     );
@@ -100,10 +101,10 @@ function PreviewPage() {
           </div>
           <div style={{ position: "absolute", right: 0, bottom: "-30px" }}>
             <select
-              onChange={(e) =>
-                markImageRegion(regionProps.data.index, e.target.value)
-              }
-              value={regionProps.data.dataType}
+              onChange={(e) => {
+                markImageRegion(regionProps.data.index, e.target.value);
+              }}
+              value={dropDownValue}
             >
               {screens.map((data, index) => {
                 return (
@@ -113,7 +114,6 @@ function PreviewPage() {
                 );
               })}
             </select>
-            {/* <button onClick={() => add()}>Save</button> */}
           </div>
         </div>
       );
@@ -121,12 +121,22 @@ function PreviewPage() {
   };
 
   const submit = () => {
-    console.log({
-      screenName: screen.screenName,
-      screenImageUrl: screen.screenImageUrl,
-      productId: screen.productId,
-      actionItems: selectedRegions,
-    });
+    updateScreenFlow(
+      {
+        screenName: screen.screenName,
+        screenImageUrl: screen.screenImageUrl,
+        productId: screen.productId,
+        actionItems: regions,
+      },
+      screen.id
+    )
+      .then((res) => {
+        console.log(res);
+        navigate(clickPaths.USENAVIGATEFORMMASTER);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

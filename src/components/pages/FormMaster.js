@@ -25,8 +25,18 @@ import { snackBarAction } from "../../redux/actions";
 import { snackBarMessages } from "../constants/SnackBarConstants";
 import { useNavigate } from "react-router";
 import { createSearchParams } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  card: {
+    "&:hover": {
+      backgroundColor: "#00000080",
+    },
+  },
+});
 
 export const FormMaster = (props) => {
+  const classes = useStyles();
   const [products, setProducts] = React.useState([]);
   const [value, setValue] = React.useState("");
   const [files, setFiles] = React.useState([]);
@@ -34,6 +44,7 @@ export const FormMaster = (props) => {
   const [image, setImage] = React.useState({});
   const [isUploaded, setIsUploaded] = React.useState(false);
   const [screens, setScreens] = React.useState([]);
+  const [isHovered, setIsHovered] = React.useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formats = [
@@ -161,24 +172,20 @@ export const FormMaster = (props) => {
         });
   }, [value, isUploaded]);
 
-  const navigateTopreviewPage = (id) => {
+  const navigateToPage = (id, path) => {
     navigate({
-      pathname: clickPaths.USENAVIGATEPREVIEWPAGE,
+      pathname: path,
       search: `?${createSearchParams({
         editId: id,
       })}`,
     });
   };
 
-  // const handleEdit = (path) => {
-  //   path &&
-  //     navigate({
-  //       pathname: path,
-  //       search: `?${createSearchParams({
-  //         editId: rowId,
-  //       })}`,
-  //     });
-  // };
+  const navigateToCheckFlow = (id) => {
+    navigate(clickPaths.USENAVIGATECHECKPAGE, {
+      state: { id },
+    });
+  };
 
   return (
     <>
@@ -274,14 +281,15 @@ export const FormMaster = (props) => {
           </Grid>
           <Grid item xs={12}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-              {screens.map((screen) => {
+              {screens.map((screen, index) => {
                 return (
-                  <Grid
-                    item
-                    xs={4}
-                    onClick={() => navigateTopreviewPage(screen?.id)}
-                  >
-                    <Card sx={{ maxWidth: 345 }}>
+                  <Grid item xs={4}>
+                    <Card
+                      sx={{ maxWidth: 345 }}
+                      className={classes.card}
+                      onMouseOver={() => setIsHovered(index)}
+                      onMouseLeave={() => setIsHovered("")}
+                    >
                       <CardActionArea>
                         <CardMedia
                           component="img"
@@ -295,6 +303,59 @@ export const FormMaster = (props) => {
                           </Typography>
                         </CardContent>
                       </CardActionArea>
+                      <Box
+                        sx={{
+                          position: "relative",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            zIndex: 50,
+                            bottom: "90px",
+                            width: "350px",
+                            alignItems: "center",
+                            justifyContent: "space-evenly",
+                            display: isHovered === index ? "flex" : "none",
+                            // display: "flex",
+                          }}
+                        >
+                          {screen?.actionItems === null ||
+                          screen?.actionItems === [] ? (
+                            <Button
+                              variant="contained"
+                              onClick={() =>
+                                navigateToPage(
+                                  screen?.id,
+                                  clickPaths.USENAVIGATEPREVIEWPAGE
+                                )
+                              }
+                            >
+                              define flow
+                            </Button>
+                          ) : (
+                            <>
+                              <Button
+                                variant="contained"
+                                onClick={() => navigateToCheckFlow(screen.id)}
+                              >
+                                check flow
+                              </Button>
+                              <Button
+                                variant="contained"
+                                onClick={() =>
+                                  navigateToPage(
+                                    screen?.id,
+                                    clickPaths.USENAVIGATEPREVIEWPAGE
+                                  )
+                                }
+                              >
+                                edit flow
+                              </Button>
+                            </>
+                          )}
+                        </Box>
+                      </Box>
                     </Card>
                   </Grid>
                 );

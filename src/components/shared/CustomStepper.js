@@ -9,6 +9,7 @@ const StepperCont = styled(Tabs)`
   width: 15%;
   border: 1px solid #9e9e9e;
   position: fixed;
+  zindex: 1000;
 `;
 
 const CustomStepper = (props) => {
@@ -34,6 +35,7 @@ const CustomStepper = (props) => {
               key={index}
               sx={{
                 width: "75%",
+                height: "50px",
                 // marginTop: "15px",
                 // marginLeft: "10%",
                 margin: "7% 10%",
