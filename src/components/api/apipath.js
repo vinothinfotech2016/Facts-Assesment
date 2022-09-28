@@ -4,6 +4,7 @@ export const apiRoutes = {
   USER_LOGIN: "userLogin",
   GET_ROLES: "roles/list",
   GET_USER: "getCustomers",
+  CREATE_ROLE: "roles/create",
 
   //PRODUCTMASTER
   PRODUCT_CREATION: "product/create",
@@ -14,6 +15,7 @@ export const apiRoutes = {
   CREATE_MENU: "product/menu/create",
   GET_MENU_BY_USER_ID: "/product/menu/getMenusByUser",
   UPDATE_MENU: "product/menu/update",
+  GET_MENU_BY_PRODUCT_ID: "/product/menu/getMenuByProductId",
 
   // users
   USER_LISTING: "getAppUsers",

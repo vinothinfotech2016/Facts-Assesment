@@ -21,6 +21,7 @@ import PreviewPage from "../pages/PreviewPage";
 import NewRole from "../pages/NewRole";
 import CheckFlowPage from "../pages/CheckFlowPage";
 import ImageMapperPage from "../pages/ImageMapperPage";
+import DeveloperMenu from "../pages/DeveloperMenu";
 
 export const routes = [
   {
@@ -133,6 +134,11 @@ export const AppRoutes = [
   {
     path: mapPaths.HOME,
     component: Home,
+    exact: true,
+  },
+  {
+    path: mapPaths.DEV_MENU,
+    component: DeveloperMenu,
     exact: true,
   },
 ];

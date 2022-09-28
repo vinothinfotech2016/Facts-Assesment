@@ -11,7 +11,7 @@ const HeaderContainer = styled(Box)({
   display: "flex",
   alignItems: "center",
   position: "fixed",
-  top: "56px",
+  top: "58px",
   backgroundColor: "white",
   zIndex: 100,
   width: "100%",

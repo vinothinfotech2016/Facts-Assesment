@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
 import { roledata, RolesList } from "../constants/Roles";
+import { getRole } from "../api/api";
 
 export const Roles = (props) => {
+  const [roles, setRoles] = React.useState([]);
+
+  useEffect(() => {
+    getRole().then((res) => {
+      setRoles(res.data);
+    });
+  }, []);
+
   return (
     <>
       <ListContainer>
@@ -19,7 +28,7 @@ export const Roles = (props) => {
         />
         <CustomReactTable
           columnData={RolesList()}
-          rawData={roledata}
+          rawData={roles}
           disableRowSelection={true}
           disablePagination={true}
           // onChangePageSize={onChangePageSize}

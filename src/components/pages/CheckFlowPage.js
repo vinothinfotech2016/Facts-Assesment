@@ -14,6 +14,7 @@ function ImageMapperPage() {
   const [imageUrl, setimageUrl] = useState("");
   const [screen, setScreen] = useState({});
   const [areas, setAreas] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   const search = location.search;
   const searchParam = new URLSearchParams(search);
@@ -47,8 +48,6 @@ function ImageMapperPage() {
     };
   }, [location.state, editId]);
 
-  console.log(location.state, "location.state");
-
   const fetchClickedScale = (area) => {
     navigate(clickPaths.USENAVIGATECHECKPAGE, {
       state: { id: area?.data?.id },
@@ -69,7 +68,7 @@ function ImageMapperPage() {
       ...area,
     }));
     setImageMap(maps);
-  }, [areas.length, imageMap]);
+  }, [isLoaded]);
 
   return (
     <>

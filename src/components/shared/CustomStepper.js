@@ -29,7 +29,7 @@ const CustomStepper = (props) => {
           "& button:focus": { backgroundColor: "#d6d6d6", color: "black" },
         }}
       >
-        {props.stepperVal.map((item, index) => {
+        {props?.stepperVal?.map((item, index) => {
           return (
             <Tab
               key={index}
