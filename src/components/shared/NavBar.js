@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
 import { initValue } from "../constants/constant";
 import { useNavigate } from "react-router-dom";
+import { getRole } from "../api/api";
 
 const UserCont = styled(IconButton)`
   display: flex;
@@ -29,11 +30,22 @@ const UserTextCont = styled(Box)`
 export const NavBar = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+  const [roles, setRoles] = React.useState([]);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
   let userInfo = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    getRole()
+      .then((res) => {
+        setRoles(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <Box>
@@ -76,7 +88,9 @@ export const NavBar = (props) => {
                     {userInfo.data.name}
                   </Typography>
                   <Typography sx={{ color: "#9e9e9e", fontSize: "12px" }}>
-                    {userInfo.data.roleId}
+                    {roles.map((role) => {
+                      return role.id === userInfo?.data?.roleId && role.role;
+                    })}
                   </Typography>
                 </UserTextCont>
                 <Avatar src="" sx={{ marginLeft: "10px" }} />

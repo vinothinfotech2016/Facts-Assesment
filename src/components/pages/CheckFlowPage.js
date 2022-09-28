@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { getScreenById } from "../api/api";
 import { clickPaths } from "../navigation/routePaths";
@@ -19,24 +19,22 @@ function ImageMapperPage() {
   const searchParam = new URLSearchParams(search);
   const editId = searchParam?.get("editId") || location?.state?.id;
 
-  useLayoutEffect(() => {
-    console.log(location.state, "location");
-    console.log(editId, "editId");
-    getScreenById(location?.state?.id || editId).then((res) => {
-      setScreen(res.data);
-      setimageUrl(res?.data?.screenImageUrl);
-      setAreas(JSON.parse(res?.data?.actionItems));
-    });
-    const image = new Image();
-    image.src = imageUrl;
-    image.onload = () => {
-      setImageSize({ width: 1100, height: 700 });
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log(location.state, "location");
+  //   console.log(editId, "editId");
+  //   getScreenById(location?.state?.id || editId).then((res) => {
+  //     setScreen(res.data);
+  //     setimageUrl(res?.data?.screenImageUrl);
+  //     setAreas(JSON.parse(res?.data?.actionItems));
+  //   });
+  //   const image = new Image();
+  //   image.src = imageUrl;
+  //   image.onload = () => {
+  //     setImageSize({ width: 1100, height: 700 });
+  //   };
+  // }, []);
 
-  useLayoutEffect(() => {
-    console.log(location.state.id, "location");
-    console.log(editId, "editId");
+  useEffect(() => {
     getScreenById(location?.state?.id || editId).then((res) => {
       setScreen(res.data);
       setimageUrl(res?.data?.screenImageUrl);
@@ -49,8 +47,9 @@ function ImageMapperPage() {
     };
   }, [location.state, editId]);
 
+  console.log(location.state, "location.state");
+
   const fetchClickedScale = (area) => {
-    console.log(area.data.id, "data");
     navigate(clickPaths.USENAVIGATECHECKPAGE, {
       state: { id: area?.data?.id },
     });
@@ -70,7 +69,7 @@ function ImageMapperPage() {
       ...area,
     }));
     setImageMap(maps);
-  }, [areas?.length]);
+  }, [areas.length, imageMap]);
 
   return (
     <>
@@ -87,7 +86,7 @@ function ImageMapperPage() {
             }}
           >
             <div style={{ padding: "20px" }}>
-              {imageMap?.length > 0 && (
+              {imageSize.width > 0 && (
                 <ImageMapper
                   src={imageUrl}
                   onClick={fetchClickedScale}

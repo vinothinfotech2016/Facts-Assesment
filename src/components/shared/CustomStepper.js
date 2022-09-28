@@ -35,6 +35,7 @@ const CustomStepper = (props) => {
               key={index}
               sx={{
                 width: "75%",
+                height: "50px",
                 // marginTop: "15px",
                 // marginLeft: "10%",
                 margin: "7% 10%",
