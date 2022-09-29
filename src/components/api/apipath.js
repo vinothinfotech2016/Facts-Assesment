@@ -26,4 +26,7 @@ export const apiRoutes = {
   GET_SCREEN_BY_PRODUCT_ID: "screen/getScreensByProduct",
   GET_SCREEN_BY_ID: "screen/getScreen",
   UPDATE_SCREEN_FLOW: "screen/updateFlow",
+
+  //developer flow
+  GET_SCREEN_BY_MENU: "menuFlow/getScreenByMenu",
 };

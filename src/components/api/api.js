@@ -67,3 +67,7 @@ export const updateScreenFlow = (value, id) => {
 export const getMenusByProductId = (id) => {
   return appApi.get(`${apiRoutes.GET_MENU_BY_PRODUCT_ID}/${id}`);
 };
+
+export const getScreenByMenu = (id) => {
+  return appApi.get(`${apiRoutes.GET_SCREEN_BY_MENU}/${id}`);
+};

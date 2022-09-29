@@ -22,6 +22,7 @@ import NewRole from "../pages/NewRole";
 import CheckFlowPage from "../pages/CheckFlowPage";
 import ImageMapperPage from "../pages/ImageMapperPage";
 import DeveloperMenu from "../pages/DeveloperMenu";
+import DeveloperCreateFlow from "../pages/DeveloperCreateFlow";
 
 export const routes = [
   {
@@ -85,9 +86,14 @@ export const routes = [
     component: ProductMasterForm,
     exact: true,
   },
+  // {
+  //   path: mapPaths.FORMMASTER,
+  //   component: FormMaster,
+  //   exact: true,
+  // },
   {
     path: mapPaths.FORMMASTER,
-    component: FormMaster,
+    component: DeveloperCreateFlow,
     exact: true,
   },
   {

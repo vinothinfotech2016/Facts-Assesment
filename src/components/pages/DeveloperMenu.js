@@ -9,16 +9,28 @@ import {
 } from "@mui/material";
 import { NavBar } from "../shared/NavBar";
 import React, { useEffect, useState } from "react";
-import { getMenusByProductId, getProductById } from "../api/api";
-import { CustomStepper } from "../shared";
+import {
+  getMenusByProductId,
+  getProductById,
+  getScreenByMenu,
+} from "../api/api";
+import Stepper from "../shared/Stepper";
+import ImageMapper from "react-image-mapper";
+import { useLocation, useNavigate } from "react-router";
+import { clickPaths } from "../navigation/routePaths";
 
 function DeveloperMenu(props) {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [menus, setMenus] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
-
-  const data = [{ name: "some" }, { name: "thing" }];
+  const [screen, setScreen] = useState("");
+  const [imageSize, setImageSize] = useState({ width: 1100, height: 700 });
+  const [imageUrl, setimageUrl] = useState("");
+  const [areas, setAreas] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [imageMap, setImageMap] = useState([]);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -34,15 +46,54 @@ function DeveloperMenu(props) {
   }, []);
 
   useEffect(() => {
+    screen && setimageUrl(screen?.screenImageUrl);
+    // setAreas(JSON.parse(screen?.actionItems));
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      setImageSize({ width: 1100, height: 700 });
+    };
+  }, [screen]);
+
+  useEffect(() => {
     selectedProduct &&
       getMenusByProductId(selectedProduct)
         .then((res) => {
           setMenus(res.data);
+          getScreenByMenu(res?.data[0]?.id)
+            .then((res) => {
+              setScreen(res.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.log(error);
         });
   }, [selectedProduct]);
+
+  useEffect(() => {
+    const maps = areas?.map((area, index) => ({
+      _id: index,
+      shape: "rect",
+      coords: [
+        imageSize.width * (area.x / 100),
+        imageSize.height * (area.y / 100),
+        imageSize.width * ((area.x + area.width) / 100),
+        imageSize.height * ((area.y + area.height) / 100),
+      ],
+      preFillColor: "rgba(0, 0, 0, 0.5)",
+      ...area,
+    }));
+    setImageMap(maps);
+  }, []);
+
+  const fetchClickedScale = (area) => {
+    navigate(clickPaths.USENAVIGATECHECKPAGE, {
+      state: { id: area?.data?.id },
+    });
+  };
 
   return (
     <>
@@ -53,10 +104,31 @@ function DeveloperMenu(props) {
             <>
               <Grid container>
                 <Grid item xs={2}>
-                  <CustomStepper stepperVal={menus} />
+                  <Stepper stepperVal={menus} />
                 </Grid>
                 {isClicked ? (
-                  <Box>somthing</Box>
+                  <Grid item xs={10}>
+                    <Box
+                      sx={{
+                        marginTop: "60px",
+                      }}
+                    >
+                      <div style={{ padding: "20px" }}>
+                        {imageSize.width > 0 && (
+                          <ImageMapper
+                            src={imageUrl}
+                            onClick={fetchClickedScale}
+                            map={{
+                              name: "my-map",
+                              areas: imageMap,
+                            }}
+                            height={700}
+                            width={1100}
+                          />
+                        )}
+                      </div>
+                    </Box>
+                  </Grid>
                 ) : (
                   <Grid item xs={10}>
                     <Grid container>
@@ -97,6 +169,7 @@ function DeveloperMenu(props) {
                                     }}
                                     onClick={() => {
                                       setSelectedProduct(product.id);
+                                      setIsClicked(true);
                                     }}
                                   >
                                     <CardActionArea>
