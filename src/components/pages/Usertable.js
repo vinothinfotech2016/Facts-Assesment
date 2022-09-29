@@ -14,7 +14,7 @@ export const Usertable = (props) => {
       .then((res) => {
         console.log(res);
         setData(res.data);
-        console.log(res.dat);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);

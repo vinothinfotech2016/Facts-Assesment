@@ -15,16 +15,16 @@ import { FormTopbar } from "../shared/FormTopbar";
 
 const NewRole = (props) => {
   const navigate = useNavigate();
-  const [acessState, setAcessState] = useState({
+  const [accessState, setAcessState] = useState({
     productMaster: false,
     menuMaster: false,
     formMaster: false,
   });
 
-  const { productMaster, menuMaster, formMaster } = acessState;
+  const { productMaster, menuMaster, formMaster } = accessState;
 
   const handleChange = (e) => {
-    setAcessState({ ...acessState, [e.target.name]: e.target.checked });
+    setAcessState({ ...accessState, [e.target.name]: e.target.checked });
   };
 
   return (
@@ -81,7 +81,11 @@ const NewRole = (props) => {
             >
               CANCEL
             </Button>
-            <Button variant="outlined" className="btn">
+            <Button
+              variant="outlined"
+              className="btn"
+              onClick={() => console.log(accessState)}
+            >
               Save
             </Button>
           </div>
