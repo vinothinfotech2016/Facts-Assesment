@@ -62,11 +62,29 @@ function DeveloperCreateFlow() {
     getMenusByProductId(value)
       .then((res) => {
         setMenus(res.data);
+        setFinalValue(
+          res?.data?.map((menu) => {
+            return {
+              menuId: menu.id,
+            };
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
       });
   }, [value]);
+
+  useEffect(() => {
+    setFinalValue(
+      finalValue?.map((value) => {
+        return {
+          ...value,
+          screenId: screens[0]?.id,
+        };
+      })
+    );
+  }, [screens]);
 
   const changeHandler = (event) => {
     setValue(event.target.value);
@@ -200,7 +218,7 @@ function DeveloperCreateFlow() {
                             <CustomSelectField
                               inputValues={screens}
                               label={"Select Screen"}
-                              //   value={}
+                              value={finalValue[0]?.screenId}
                               //   onChange={changeHandler}
                             />
                           </Grid>
