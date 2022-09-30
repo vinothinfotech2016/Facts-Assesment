@@ -2,6 +2,7 @@ export const mapPaths = {
   LOGIN: "/",
 
   MENU: "/dashbord",
+  DEV_MENU: "/developer/menu",
 
   HOME: "/home/*",
 

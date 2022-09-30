@@ -1,7 +1,9 @@
+import { Box, Tab, Tabs } from "@mui/material";
+import { styled } from "@mui/system";
 import React from "react";
-import { styled } from "@mui/material/styles";
-import { Box, Tabs, Tab } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { getScreenById, getScreenByMenu } from "../api/api";
+import { mapPaths } from "../navigation/routePaths";
 
 const StepperCont = styled(Tabs)`
   height: 94vh;
@@ -12,13 +14,26 @@ const StepperCont = styled(Tabs)`
   zindex: 1000;
 `;
 
-const CustomStepper = (props) => {
+function Stepper(props) {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const clickHandler = (item) =>{
+                getScreenByMenu(item.id)
+                  .then((res) => {
+                     navigate(mapPaths.DEV_MENU, {
+                      state: { id: res?.data?.id },
+                        });
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+                }
+
   return (
     <Box>
       <StepperCont
@@ -29,7 +44,7 @@ const CustomStepper = (props) => {
           "& button:focus": { backgroundColor: "#d6d6d6", color: "black" },
         }}
       >
-        {props?.stepperVal?.map((item, index) => {
+        {props?.stepperVal && props?.stepperVal?.map((item, index) => {
           return (
             <Tab
               key={index}
@@ -42,9 +57,8 @@ const CustomStepper = (props) => {
                 border: "2px  solid #9e9e9e",
                 borderRadius: "5px",
               }}
-              onClick={(event) => {
-                event.preventDefault();
-                navigate(`${item.route}`);
+              onClick={() => {
+                clickHandler(item)
               }}
               label={item.name}
             />
@@ -53,6 +67,6 @@ const CustomStepper = (props) => {
       </StepperCont>
     </Box>
   );
-};
+}
 
-export { CustomStepper };
+export default Stepper;

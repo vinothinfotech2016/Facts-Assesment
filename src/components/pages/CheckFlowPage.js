@@ -47,9 +47,9 @@ function ImageMapperPage() {
     };
   }, [location.state, editId]);
 
-  console.log(location.state, "location.state");
-
   const fetchClickedScale = (area) => {
+    setimageUrl("");
+    setAreas([]);
     navigate(clickPaths.USENAVIGATECHECKPAGE, {
       state: { id: area?.data?.id },
     });
@@ -69,7 +69,7 @@ function ImageMapperPage() {
       ...area,
     }));
     setImageMap(maps);
-  }, [areas.length, imageMap]);
+  }, [areas.length,imageMap.length]);
 
   return (
     <>

@@ -20,6 +20,7 @@ const NewRole = (props) => {
     menuMaster: false,
     formMaster: false,
   });
+  const [role, setRole] = useState("");
 
   const { productMaster, menuMaster, formMaster } = accessState;
 
@@ -27,12 +28,25 @@ const NewRole = (props) => {
     setAcessState({ ...accessState, [e.target.name]: e.target.checked });
   };
 
+  const onSubmit = () => {
+    const accessMenus = Object.keys(accessState).filter((option) => {
+      return accessState[option] === true && option;
+    });
+    console.log(accessMenus);
+    console.log(role);
+  };
+
   return (
     <>
       <Box>
         <FormTopbar label="New Role" listPath={clickPaths.USENAVIGATEROLES} />
         <Box className="container">
-          <TextField label="Role Name*" style={{ marginBottom: "20px" }} />
+          <TextField
+            label="Role Name*"
+            value={role}
+            style={{ marginBottom: "20px" }}
+            onChange={(e) => setRole(e.target.value)}
+          />
           <Box>
             <FormControl>
               <FormLabel component="legend">Access</FormLabel>
@@ -84,7 +98,7 @@ const NewRole = (props) => {
             <Button
               variant="outlined"
               className="btn"
-              onClick={() => console.log(accessState)}
+              onClick={() => onSubmit()}
             >
               Save
             </Button>

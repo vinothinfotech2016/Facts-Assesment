@@ -9,14 +9,16 @@ export const initValue = {
     { name: "Parameters", route: `${mapPaths.PARAM}` },
     { name: "Logout", route: `${mapPaths.LOGIN}` },
   ],
+  devDropDown: [
+    { name: "My Profile", route: `${mapPaths.PROFILE}` },
+    { name: "Logout", route: `${mapPaths.LOGIN}` },
+  ],
   stepper: [
     { name: "PRODUCT MASTER", route: `${mapPaths.PRODUCTMASTER}` },
     { name: "FORM MASTER", route: `${mapPaths.FORMMASTER}` },
     { name: "MENU MASTER", route: `${mapPaths.MENUMASTER}` },
   ],
 };
-
-
 
 export const tableContent = {
   indiUser: {

@@ -4,6 +4,7 @@ export const apiRoutes = {
   USER_LOGIN: "userLogin",
   GET_ROLES: "roles/list",
   GET_USER: "getCustomers",
+  CREATE_ROLE: "roles/create",
 
   //PRODUCTMASTER
   PRODUCT_CREATION: "product/create",
@@ -14,6 +15,7 @@ export const apiRoutes = {
   CREATE_MENU: "product/menu/create",
   GET_MENU_BY_USER_ID: "/product/menu/getMenusByUser",
   UPDATE_MENU: "product/menu/update",
+  GET_MENU_BY_PRODUCT_ID: "/product/menu/getMenuByProductId",
 
   // users
   USER_LISTING: "getAppUsers",
@@ -24,4 +26,8 @@ export const apiRoutes = {
   GET_SCREEN_BY_PRODUCT_ID: "screen/getScreensByProduct",
   GET_SCREEN_BY_ID: "screen/getScreen",
   UPDATE_SCREEN_FLOW: "screen/updateFlow",
+
+  //developer flow
+  GET_SCREEN_BY_MENU: "menuFlow/getScreenByMenu",
+  CREATE_MENU_FLOW:"menuFlow/create"
 };

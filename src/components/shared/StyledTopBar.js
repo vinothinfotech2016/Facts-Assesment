@@ -1,8 +1,10 @@
-import { Box, Typography } from "@mui/material";
-import { styled } from "@mui/system";
-import React from "react";
+import { Typography } from '@mui/material';
+import { Box, styled } from '@mui/system';
+import React from 'react'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
+
+
+
 
 const HeaderContainer = styled(Box)({
   padding: 20,
@@ -25,14 +27,15 @@ const Title = styled(Typography)({
   fontWeight: "bold !important",
 });
 
-export function FormTopbar(props) {
-  const { label, listPath } = props;
-  const navigate = useNavigate();
+function StyledTopBar(props) {
+const {label , onClick} = props
 
   return (
-    <HeaderContainer>
+  <>
+  
+   <HeaderContainer>
       <Box
-        onClick={() => navigate(listPath ? listPath : -1)}
+        onClick={onClick}
         sx={{ display: "flex", cursor: "pointer" }}
       >
         <IconBtn />
@@ -40,5 +43,9 @@ export function FormTopbar(props) {
         <Title>{label}</Title>
       </Box>
     </HeaderContainer>
-  );
+  
+  </>
+  )
 }
+
+export default StyledTopBar

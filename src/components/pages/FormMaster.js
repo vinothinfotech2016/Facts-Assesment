@@ -33,6 +33,11 @@ const useStyles = makeStyles({
       backgroundColor: "#00000080",
     },
   },
+  CardMedia: {
+    "&:hover": {
+      backgroundColor: "#00000080",
+    },
+  },
 });
 
 export const FormMaster = (props) => {
@@ -285,7 +290,7 @@ export const FormMaster = (props) => {
                 return (
                   <Grid item xs={4}>
                     <Card
-                      sx={{ maxWidth: 345 }}
+                      sx={{ maxWidth: 345, border: "1px solid #00000050" }}
                       className={classes.card}
                       onMouseOver={() => setIsHovered(index)}
                       onMouseLeave={() => setIsHovered("")}
@@ -297,7 +302,11 @@ export const FormMaster = (props) => {
                           image={screen?.screenImageUrl}
                           alt={screen?.screenName}
                         />
-                        <CardContent>
+                        <CardContent
+                          sx={{
+                            borderTop: "1px solid #00000050",
+                          }}
+                        >
                           <Typography gutterBottom variant="h5" component="div">
                             {screen?.screenName}
                           </Typography>
@@ -313,11 +322,14 @@ export const FormMaster = (props) => {
                             position: "absolute",
                             zIndex: 50,
                             bottom: "90px",
-                            width: "350px",
+                            width: "100%",
+                            height: "100%",
                             alignItems: "center",
                             justifyContent: "space-evenly",
                             display: isHovered === index ? "flex" : "none",
-                            // display: "flex",
+                            "&:hover": {
+                              backgroundColor: "#00000090",
+                            },
                           }}
                         >
                           {screen?.actionItems === null ||

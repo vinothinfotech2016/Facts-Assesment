@@ -114,7 +114,7 @@ export const NavBar = (props) => {
                 setAnchorElUser(null);
               }}
             >
-              {initValue.userDropdown.map((item, index) => {
+              {initValue.devDropDown.map((item, index) => {
                 return (
                   <MenuItem
                     key={index}

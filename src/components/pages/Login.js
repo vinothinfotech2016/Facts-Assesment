@@ -36,7 +36,11 @@ function Login(props) {
       loginUser(data)
         .then(function (response) {
           console.log(response);
-          navigate(`${mapPaths.MENU}`);
+          if (response?.data?.role === "Developer") {
+            navigate(`${mapPaths.DEV_MENU}`);
+          } else {
+            navigate(`${mapPaths.MENU}`);
+          }
           localStorage.setItem("user", JSON.stringify(response));
         })
         .catch(function (error) {
