@@ -29,4 +29,5 @@ export const apiRoutes = {
 
   //developer flow
   GET_SCREEN_BY_MENU: "menuFlow/getScreenByMenu",
+  CREATE_MENU_FLOW:"menuFlow/create"
 };

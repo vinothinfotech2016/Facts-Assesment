@@ -5,6 +5,7 @@ import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
 import { MenuList } from "../constants/MenuList";
 import { getMenusByUserId, getProductById } from "../api/api";
+import { Grid } from "@mui/material";
 
 export const MenuMaster = (props) => {
   const [tableData, setTableData] = React.useState([]);
@@ -42,6 +43,10 @@ export const MenuMaster = (props) => {
           label={"MENU MASTER"}
           newFormPath={clickPaths.USENAVIGATEMENUMASTERFORM}
         />
+      <Grid container rowSpacing={3} columnSpacing={3} >
+        <Grid item xs={12} >
+        </Grid>
+        <Grid item xs={12} >
         <CustomReactTable
           columnData={MenuList(inputValues)}
           rawData={tableData}
@@ -66,6 +71,8 @@ export const MenuMaster = (props) => {
             },
           }}
         />
+        </Grid>
+        </Grid>
       </ListContainer>
     </>
   );

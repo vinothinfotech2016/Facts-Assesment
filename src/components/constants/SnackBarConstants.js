@@ -22,4 +22,8 @@ export const snackBarMessages = {
   //screen
   SCREEN_CREATION_SUCCESS: "Screen Created Successfully",
   SCREEN_CREATION_FAILED: "Screen Creation Failed",
+
+  //menuflow 
+  MENU_FLOW_CREATION_SUCCESS:"Menu flow Created successfully",
+  MENU_FLOW_CREATION_FAILED:"Menu flow Creation Failed"
 };

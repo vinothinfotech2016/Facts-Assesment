@@ -3,6 +3,7 @@ import { styled } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router";
 import { getScreenById, getScreenByMenu } from "../api/api";
+import { mapPaths } from "../navigation/routePaths";
 
 const StepperCont = styled(Tabs)`
   height: 94vh;
@@ -20,6 +21,19 @@ function Stepper(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const clickHandler = (item) =>{
+                getScreenByMenu(item.id)
+                  .then((res) => {
+                     navigate(mapPaths.DEV_MENU, {
+                      state: { id: res?.data?.id },
+                        });
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+                }
+
   return (
     <Box>
       <StepperCont
@@ -30,7 +44,7 @@ function Stepper(props) {
           "& button:focus": { backgroundColor: "#d6d6d6", color: "black" },
         }}
       >
-        {props?.stepperVal?.map((item, index) => {
+        {props?.stepperVal && props?.stepperVal?.map((item, index) => {
           return (
             <Tab
               key={index}
@@ -43,15 +57,8 @@ function Stepper(props) {
                 border: "2px  solid #9e9e9e",
                 borderRadius: "5px",
               }}
-              onClick={(event) => {
-                console.log(item.id);
-                getScreenByMenu(item.id)
-                  .then((res) => {
-                    console.log(res.data);
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
+              onClick={() => {
+                clickHandler(item)
               }}
               label={item.name}
             />

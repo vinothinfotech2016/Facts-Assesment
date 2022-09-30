@@ -71,3 +71,7 @@ export const getMenusByProductId = (id) => {
 export const getScreenByMenu = (id) => {
   return appApi.get(`${apiRoutes.GET_SCREEN_BY_MENU}/${id}`);
 };
+
+export const createMenuFlow = (value) =>{
+  return appApi.post(`${apiRoutes.CREATE_MENU_FLOW}`,value)
+}

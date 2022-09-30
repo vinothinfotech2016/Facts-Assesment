@@ -12,12 +12,14 @@ import React, { useEffect, useState } from "react";
 import {
   getMenusByProductId,
   getProductById,
+  getScreenById,
   getScreenByMenu,
 } from "../api/api";
 import Stepper from "../shared/Stepper";
 import ImageMapper from "react-image-mapper";
 import { useLocation, useNavigate } from "react-router";
-import { clickPaths } from "../navigation/routePaths";
+import {  mapPaths } from "../navigation/routePaths";
+import StyledTopBar from "../shared/StyledTopBar";
 
 function DeveloperMenu(props) {
   const [products, setProducts] = useState([]);
@@ -45,17 +47,7 @@ function DeveloperMenu(props) {
       });
   }, []);
 
-  useEffect(() => {
-    screen && setimageUrl(screen?.screenImageUrl);
-    // setAreas(JSON.parse(screen?.actionItems));
-    const image = new Image();
-    image.src = imageUrl;
-    image.onload = () => {
-      setImageSize({ width: 1100, height: 700 });
-    };
-  }, [screen]);
-
-  useEffect(() => {
+    useEffect(() => {
     selectedProduct &&
       getMenusByProductId(selectedProduct)
         .then((res) => {
@@ -74,6 +66,38 @@ function DeveloperMenu(props) {
   }, [selectedProduct]);
 
   useEffect(() => {
+    getScreenById(location?.state?.id).then((res) => {
+      setScreen(res.data);
+      setimageUrl(res?.data?.screenImageUrl);
+      setAreas(JSON.parse(res?.data?.actionItems));
+    });
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      setImageSize({ width: 1100, height: 700 });
+    };
+  }, [location.state]);
+
+  useEffect(() => {
+    screen && setimageUrl(screen?.screenImageUrl);
+    screen?.actionItems && setAreas(JSON.parse(screen?.actionItems));
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      setImageSize({ width: 1100, height: 700 });
+    };
+  }, [screen]);
+
+
+  const fetchClickedScale = (area) => {
+    setimageUrl("");
+    setAreas([]);
+    navigate(mapPaths.DEV_MENU, {
+      state: { id: area?.data?.id },
+    });
+  };
+
+  useEffect(() => {
     const maps = areas?.map((area, index) => ({
       _id: index,
       shape: "rect",
@@ -87,13 +111,7 @@ function DeveloperMenu(props) {
       ...area,
     }));
     setImageMap(maps);
-  }, []);
-
-  const fetchClickedScale = (area) => {
-    navigate(clickPaths.USENAVIGATECHECKPAGE, {
-      state: { id: area?.data?.id },
-    });
-  };
+  }, [areas.length,imageMap.length]);
 
   return (
     <>
@@ -104,13 +122,19 @@ function DeveloperMenu(props) {
             <>
               <Grid container>
                 <Grid item xs={2}>
-                  <Stepper stepperVal={menus} />
+                  <Stepper stepperVal={isClicked && menus} />
                 </Grid>
                 {isClicked ? (
                   <Grid item xs={10}>
+                    <StyledTopBar
+                        label="Prouducts"
+                        onClick={()=>{
+                          setIsClicked(false)
+                        }}
+                     />
                     <Box
                       sx={{
-                        marginTop: "60px",
+                        marginTop: "130px",
                       }}
                     >
                       <div style={{ padding: "20px" }}>
