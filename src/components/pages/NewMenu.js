@@ -33,12 +33,11 @@ export const NewMenu = (props) => {
   const [liveValidator, setLiveValidator] = React.useState(false);
   const [products, setProducts] = React.useState([]);
   const dispatch = useDispatch();
-  const search = useLocation().search;
-  const searchParam = new URLSearchParams(search);
-  const editId = searchParam?.get("editId");
   const LocalData = JSON.parse(localStorage.getItem("user"));
   const userId = LocalData?.data?.id;
   const [menus, setMenu] = React.useState([]);
+  const location = useLocation()
+  const editData = location?.state
 
   const handleChange = (e) => {
     setUserData({
@@ -56,30 +55,8 @@ export const NewMenu = (props) => {
       });
   }, []);
 
-  useEffect(() => {
-    getMenusByUserId(userId)
-      .then((res) => {
-        setMenu(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [editId]);
-
-  useEffect(() => {
-    menus.forEach((menu) => {
-      if (menu.id === editId) {
-        setUserData({
-          ...menu,
-          hasSubMenu: menu.hasSubMenu === 1 ? "1" : "2",
-          subMenus: JSON.parse(menu?.subMenus),
-        });
-      }
-    });
-  }, [menus]);
-
   const update = (value) => {
-    updateMenu(value, editId)
+    updateMenu(value, editData?.id)
       .then((res) => {
         console.log(res);
         navigate(clickPaths.USENAVIGATEMENUMASTER);
@@ -128,6 +105,13 @@ export const NewMenu = (props) => {
       });
   };
 
+  useEffect(()=>{
+    editData &&
+setUserData({...editData,subMenus:JSON.parse(editData?.subMenus),
+          hasSubMenu: editData.hasSubMenu === 1 ? "1" : "2",
+})
+  },[editData])
+
   return (
     <>
       <Box>
@@ -143,7 +127,7 @@ export const NewMenu = (props) => {
               name="productId"
               onChange={handleChange}
               value={userData.productId || ""}
-              disabled={Boolean(editId)}
+              disabled={Boolean(editData?.id)}
             >
               {products.map((product) => {
                 return (
@@ -158,7 +142,7 @@ export const NewMenu = (props) => {
           <h3 className="subheading">Menu Settings</h3>
           <Form
             schema={newMenuSchema}
-            uiSchema={newMenuUiSchema(editId)}
+            uiSchema={newMenuUiSchema(editData?.id)}
             widgets={widgets}
             formData={userData}
             showErrorList={false}
@@ -182,7 +166,7 @@ export const NewMenu = (props) => {
                 subMenus,
               } = props.formData;
 
-              editId
+            editData?.id
                 ? update({
                     productId,
                     orderNo,
@@ -215,7 +199,7 @@ export const NewMenu = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                {editId ? "UPDATE" : "SUBMIT"}
+                {editData ? "UPDATE" : "SUBMIT"}
               </Button>
             </div>
           </Form>

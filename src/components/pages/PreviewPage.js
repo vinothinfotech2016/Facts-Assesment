@@ -56,7 +56,7 @@ function PreviewPage() {
   const [dropDownValue, setDropDownValue] = useState(screens[0]?.id);
 
   const regionStyle = {
-    background: "rgba(0, 0, 0, 0.2)",
+    background: "rgba(0, 0, 0, 0)",
     zIndex: 99,
   };
 

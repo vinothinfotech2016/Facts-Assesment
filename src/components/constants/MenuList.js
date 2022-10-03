@@ -18,7 +18,7 @@ export const MenuList = (inputValues,Menu) => [
           }}
         >
           {inputValues?.find((item) => item.id === props.value)?.name}
-          <MenuPopover Menu={Menu} />
+          <MenuPopover Menu={Menu} index={props.row.id} />
         </div>
       );
     },

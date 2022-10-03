@@ -2,6 +2,8 @@ import { IconButton, Popover, Typography } from '@mui/material'
 import React from 'react'
 import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
 import { styled } from '@mui/system';
+import { useLocation, useNavigate } from 'react-router';
+import { clickPaths } from '../navigation/routePaths';
 
 
 const Titles = styled(Typography)({
@@ -15,7 +17,9 @@ function MenuPopover(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-  const {Menu} = props
+  const {Menu , index} = props
+  const location = useLocation()
+  const navigate = useNavigate()
 
 
 const handleClick = (event) => {
@@ -26,8 +30,13 @@ const handleClick = (event) => {
     setAnchorEl(null);
   };
 
-  const handleEdit = (Menu) =>{
-   console.log(Menu);
+  const handleEdit = (Menu,index) =>{
+  console.log(Menu[index],"data");
+    navigate(clickPaths.USENAVIGATEMENUMASTERFORM, {
+      state: Menu[index],
+    });
+  
+
   }
 
   return (
@@ -49,7 +58,7 @@ const handleClick = (event) => {
           horizontal: "left",
         }}
       >
-      <Titles onClick={() => handleEdit(Menu)}>Edit</Titles>
+      <Titles onClick={() => handleEdit(Menu,index)}>Edit</Titles>
       </Popover>
    </>
   )

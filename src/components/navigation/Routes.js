@@ -5,7 +5,7 @@ import { ChangePassword } from "../pages/ChangePassword";
 import { Roles } from "../pages/Roles";
 import { Usertable } from "../pages/Usertable";
 import { Parameters } from "../pages/Parameters";
-import { mapPaths } from "./routePaths";
+import { clickPaths, mapPaths } from "./routePaths";
 import { ProductMaster } from "../pages/ProductMaster";
 import { FormMaster } from "../pages/FormMaster";
 import { MenuMaster } from "../pages/MenuMaster";
@@ -23,6 +23,7 @@ import CheckFlowPage from "../pages/CheckFlowPage";
 import ImageMapperPage from "../pages/ImageMapperPage";
 import DeveloperMenu from "../pages/DeveloperMenu";
 import DeveloperCreateFlow from "../pages/DeveloperCreateFlow";
+
 
 export const routes = [
   {
@@ -148,3 +149,6 @@ export const AppRoutes = [
     exact: true,
   },
 ];
+
+
+
