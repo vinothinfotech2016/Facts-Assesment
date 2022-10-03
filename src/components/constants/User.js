@@ -1,7 +1,7 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const UserList = () => [
+export const UserList = (roles) => [
   {
     Header: "User Name",
     accessor: "name",
@@ -45,5 +45,8 @@ export const UserList = () => [
     accessor: "roleId",
     id: 4,
     width: 200,
+    Cell:(props =>{
+      return roles.find(item => item.id === props.value)?.role
+    })
   },
 ];

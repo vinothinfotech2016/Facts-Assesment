@@ -4,21 +4,27 @@ import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
 import { UserList } from "../constants/User";
-import { getUsers } from "../api/api";
+import { getRole, getUsers } from "../api/api";
 
 export const Usertable = (props) => {
   const [data, setData] = React.useState([]);
+  const [roles , setRoles] = React.useState([])
 
   useEffect(() => {
     getUsers()
       .then((res) => {
-        console.log(res);
         setData(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
+
+
+      getRole().then(res =>{
+        setRoles(res.data)
+      }).catch(error =>{
+        console.log(error);
+      })
   }, []);
 
   return (
@@ -33,7 +39,7 @@ export const Usertable = (props) => {
           newFormPath={clickPaths.USENAVIGATEMYUSERFORM}
         />
         <CustomReactTable
-          columnData={UserList()}
+          columnData={UserList(roles)}
           rawData={data}
           disableRowSelection={true}
           disablePagination={true}

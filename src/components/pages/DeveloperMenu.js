@@ -122,7 +122,7 @@ function DeveloperMenu(props) {
             <>
               <Grid container>
                 <Grid item xs={2}>
-                  <Stepper stepperVal={isClicked && menus} />
+               {isClicked &&   <Stepper stepperVal={isClicked && menus} />}
                 </Grid>
                 {isClicked ? (
                   <Grid item xs={10}>
@@ -154,7 +154,9 @@ function DeveloperMenu(props) {
                     </Box>
                   </Grid>
                 ) : (
-                  <Grid item xs={10}>
+                  <Grid item xs={isClicked ? 10 : 12} sx={{
+                    padding:"20px"
+                  }} >
                     <Grid container>
                       <Grid
                         item

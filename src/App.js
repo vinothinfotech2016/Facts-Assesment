@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-        {globalState.loader && <Loader />}
+        {globalState.loader && <Loader open={globalState.loader} />}
         <CustomSnackbar />
         <AppNavigation />
       </QueryClientProvider>

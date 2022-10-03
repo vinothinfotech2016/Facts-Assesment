@@ -6,7 +6,7 @@ export const initValue = {
     { name: "Customer", route: `${mapPaths.CUSTOMER}` },
     { name: "Roles & Access", route: `${mapPaths.ROLES}` },
     { name: "My User", route: `${mapPaths.MYUSER}` },
-    { name: "Parameters", route: `${mapPaths.PARAM}` },
+    // { name: "Parameters", route: `${mapPaths.PARAM}` },
     { name: "Logout", route: `${mapPaths.LOGIN}` },
   ],
   devDropDown: [
@@ -19,6 +19,10 @@ export const initValue = {
     { name: "MENU MASTER", route: `${mapPaths.MENUMASTER}` },
   ],
 };
+
+export const initValues = (role) =>{
+ return role === "Developer" ? initValue.devDropDown : initValue.userDropdown
+}
 
 export const tableContent = {
   indiUser: {

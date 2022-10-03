@@ -13,7 +13,7 @@ import { useFormik } from "formik";
 import { loginSchema } from "../validation";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { mapPaths } from "../navigation/routePaths";
+import { clickPaths, mapPaths } from "../navigation/routePaths";
 import { loginUser } from "../api/api";
 
 function Login(props) {
@@ -39,7 +39,7 @@ function Login(props) {
           if (response?.data?.role === "Developer") {
             navigate(`${mapPaths.DEV_MENU}`);
           } else {
-            navigate(`${mapPaths.MENU}`);
+            navigate(`${clickPaths.USENAVIGATEHOME}`);
           }
           localStorage.setItem("user", JSON.stringify(response));
         })

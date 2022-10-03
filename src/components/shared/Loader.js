@@ -1,8 +1,11 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-function Loader() {
+function Loader(props) {
+
+  const {open} = props
+
   return (
     <>
       <Box
@@ -16,7 +19,16 @@ function Loader() {
           justifyContent: "center",
         }}
       >
+        <Modal
+          open={open}
+          sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+          }}
+        >
         <CircularProgress />
+        </Modal>
       </Box>
     </>
   );
