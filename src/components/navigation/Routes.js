@@ -133,10 +133,10 @@ export const AppRoutes = [
     path: mapPaths.LOGIN,
     component: Login,
   },
-  {
-    path: mapPaths.MENU,
-    component: Menu,
-  },
+  // {
+  //   path: mapPaths.MENU,
+  //   component: Menu,
+  // },
   {
     path: mapPaths.HOME,
     component: Home,

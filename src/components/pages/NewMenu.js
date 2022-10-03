@@ -168,7 +168,6 @@ export const NewMenu = (props) => {
             FieldTemplate={CustomFieldTemplate}
             transformErrors={(errors) => customErrorMsg(errors, newMenuSchema)}
             onChange={(e) => {
-              console.log(e.formData);
               setUserData({
                 ...e.formData,
               });

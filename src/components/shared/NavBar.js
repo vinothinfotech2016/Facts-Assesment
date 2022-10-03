@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
-import { initValue } from "../constants/constant";
+import { initValue, initValues } from "../constants/constant";
 import { useNavigate } from "react-router-dom";
 import { getRole } from "../api/api";
 
@@ -36,6 +36,7 @@ export const NavBar = (props) => {
     setAnchorElUser(event.currentTarget);
   };
   let userInfo = JSON.parse(localStorage.getItem("user"));
+  const userRole = userInfo?.data?.role
 
   useEffect(() => {
     getRole()
@@ -114,7 +115,7 @@ export const NavBar = (props) => {
                 setAnchorElUser(null);
               }}
             >
-              {initValue.devDropDown.map((item, index) => {
+              {initValues(userRole).map((item, index) => {
                 return (
                   <MenuItem
                     key={index}

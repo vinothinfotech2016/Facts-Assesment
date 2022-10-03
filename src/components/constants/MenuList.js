@@ -1,7 +1,7 @@
-import { clickPaths } from "../navigation/routePaths";
-import { EditPopover } from "../shared/EditPopover";
+import { MenuOpen } from "@mui/icons-material";
+import MenuPopover from "../shared/MenuPopover";
 
-export const MenuList = (inputValues) => [
+export const MenuList = (inputValues,Menu) => [
   {
     Header: "Product Name",
     accessor: "productId",
@@ -18,14 +18,7 @@ export const MenuList = (inputValues) => [
           }}
         >
           {inputValues?.find((item) => item.id === props.value)?.name}
-          <EditPopover
-            values={props}
-            rowId={props.row.original.id}
-            toShow={{ edit: true, viewDetails: true }}
-            paths={{
-              edit: `${clickPaths.USENAVIGATEMENUMASTERFORM}`,
-            }}
-          />
+          <MenuPopover Menu={Menu} />
         </div>
       );
     },
@@ -54,7 +47,7 @@ export const MenuList = (inputValues) => [
     id: 5,
     width: 200,
     Cell: (props) => {
-      return JSON.parse(props?.value)?.toString();
+      return props.value ? JSON.parse(props?.value)?.toString() : "-"
     },
   },
 ];
