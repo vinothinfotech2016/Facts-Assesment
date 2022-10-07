@@ -47,7 +47,7 @@ export const NewMenu = (props) => {
     getProductById(userId)
       .then((res) => {
         setProducts(res.data);
-        setUserData({...userData,productId:res?.data[0]?.id})
+       !editData && setUserData({...userData,productId:res?.data[0]?.id})
       })
       .catch((error) => {
         console.log(error);
@@ -104,9 +104,10 @@ export const NewMenu = (props) => {
 
   useEffect(()=>{
     editData &&
-setUserData({...editData,subMenus:JSON.parse(editData?.subMenus),
+    setUserData({...editData,subMenus:JSON.parse(editData?.subMenus),
           hasSubMenu: editData.hasSubMenu === 1 ? "1" : "2",
-})
+          })
+      console.log(editData);
   },[editData])
 
   return (
