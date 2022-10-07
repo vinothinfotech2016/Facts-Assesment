@@ -15,8 +15,10 @@ export const initValue = {
   ],
   stepper: [
     { name: "PRODUCT MASTER", route: `${mapPaths.PRODUCTMASTER}` },
-    { name: "FORM MASTER", route: `${mapPaths.FORMMASTER}` },
     { name: "MENU MASTER", route: `${mapPaths.MENUMASTER}` },
+    { name: "FORM MASTER", route: `${mapPaths.FORMMASTER}` },
+     { name: "SCREEN FLOW", route: `${mapPaths.FORMMASTER}`,state:{toggleValue:"screenFlow"} }, 
+     { name: "MENU FLOW", route: `${mapPaths.FORMMASTER}`,state:{toggleValue:"menuFlow"} },
   ],
 };
 

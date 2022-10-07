@@ -18,10 +18,6 @@ export const formNewProductMasterSchema = {
       type: "string",
       label: "Product Description",
     },
-    profileName: {
-      type: "string",
-      label: "Name",
-    },
     divider1: {
       type: "string",
     },
@@ -100,7 +96,6 @@ export const formNewProductMasterUiSchema = (editId) => ({
     "ui:widget": "customDivider",
   },
   header3: { "ui:widget": "customLable" },
-  profileName: { xs: 12 },
   rightLogoUrl: {
     xs: 6.01,
     "ui:widget": "FileWidget",

@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { NavBar } from "../shared/NavBar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   getMenusByProductId,
   getProductById,
@@ -22,17 +22,17 @@ import {  mapPaths } from "../navigation/routePaths";
 import StyledTopBar from "../shared/StyledTopBar";
 
 function DeveloperMenu(props) {
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const [menus, setMenus] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
-  const [screen, setScreen] = useState("");
-  const [imageSize, setImageSize] = useState({ width: 1100, height: 700 });
-  const [imageUrl, setimageUrl] = useState("");
-  const [areas, setAreas] = useState([]);
+  const [products, setProducts] = React.useState([]);
+  const [selectedProduct, setSelectedProduct] = React.useState("");
+  const [menus, setMenus] = React.useState([]);
+  const [isClicked, setIsClicked] = React.useState(false);
+  const [screen, setScreen] = React.useState("");
+  const [imageSize, setImageSize] = React.useState({ width: 1100, height: 700 });
+  const [imageUrl, setimageUrl] = React.useState("");
+  const [areas, setAreas] = React.useState([]);
   const location = useLocation();
   const navigate = useNavigate();
-  const [imageMap, setImageMap] = useState([]);
+  const [imageMap, setImageMap] = React.useState([]);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -127,7 +127,7 @@ function DeveloperMenu(props) {
                 {isClicked ? (
                   <Grid item xs={10}>
                     <StyledTopBar
-                        label="Prouducts"
+                        label="Products"
                         onClick={()=>{
                           setIsClicked(false)
                         }}

@@ -46,7 +46,6 @@ const ProductMasterForm = (props) => {
             leftLogoUrl,
             rightLogoUrl,
             centerLogoUrl,
-            profileName,
             menuDesignUrl,
           } = product;
 
@@ -56,7 +55,6 @@ const ProductMasterForm = (props) => {
             leftLogoUrl: [leftLogoUrl],
             rightLogoUrl: [rightLogoUrl],
             centerLogoUrl: [centerLogoUrl],
-            profileName,
             menuDesignUrl: [menuDesignUrl],
           });
         }
@@ -142,7 +140,6 @@ const ProductMasterForm = (props) => {
               leftLogoUrl,
               rightLogoUrl,
               centerLogoUrl,
-              profileName,
               menuDesignUrl,
             } = values.formData;
             const formData = new FormData();
@@ -151,7 +148,6 @@ const ProductMasterForm = (props) => {
 
             formData.append("name", name);
             formData.append("description", description);
-            formData.append("profileName", profileName);
             formData.append("leftLogoUrl", leftLogoUrl[0]);
             formData.append("rightLogoUrl", rightLogoUrl[0]);
             formData.append("centerLogoUrl", centerLogoUrl[0]);

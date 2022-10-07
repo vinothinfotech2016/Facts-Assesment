@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
@@ -7,7 +7,7 @@ import { ProductList } from "../constants/ProductList";
 import { getProductById } from "../api/api";
 
 export const ProductMaster = (props) => {
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = React.useState([]);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -28,7 +28,7 @@ export const ProductMaster = (props) => {
     <>
       <ListContainer>
         <ListTopbar
-          searchField={true}
+          searchField={false}
           newForm={true}
           download={false}
           filter={false}

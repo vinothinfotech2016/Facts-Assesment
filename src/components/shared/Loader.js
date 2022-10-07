@@ -25,6 +25,7 @@ function Loader(props) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              border:"none"
           }}
         >
         <CircularProgress />

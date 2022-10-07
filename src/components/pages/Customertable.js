@@ -35,7 +35,7 @@ export const Customertable = (props) => {
     <>
       <ListContainer>
         <ListTopbar
-          searchField={true}
+          searchField={false}
           newForm={true}
           download={false}
           filter={false}

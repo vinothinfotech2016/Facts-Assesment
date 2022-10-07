@@ -286,7 +286,22 @@ export const FormMaster = (props) => {
           </Grid>
           <Grid item xs={12}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-              {screens.map((screen, index) => {
+              {screens.length === 0 ?  
+              <>
+              <Box
+              sx={{
+                width:"100%",
+                length:"100%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center"
+              }}
+              >
+                <Typography> There is no screens for this Product </Typography>
+              </Box>
+              </>
+              : 
+              screens.map((screen, index) => {
                 return (
                   <Grid item xs={4}>
                     <Card

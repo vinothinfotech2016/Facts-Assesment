@@ -5,12 +5,12 @@ import MuiAlert from "@mui/material/Alert";
 import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { formNewUserSchema, formNewUserUiSchema } from "../schema/newuser";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
-import { useNavigate } from "react-router";
-import { createUsers, getProductById, getRole } from "../api/api";
+import { useLocation, useNavigate } from "react-router";
+import { createUsers, getProductById, getRole,  updateUser } from "../api/api";
 import { useDispatch } from "react-redux";
 import { snackBarAction } from "../../redux/actions";
 import { snackBarMessages } from "../constants/SnackBarConstants";
@@ -24,9 +24,11 @@ export const UserForm = (props) => {
   const [userData, setUserData] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [role, setRole] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [role, setRole] = React.useState([]);
+  const [products, setProducts] = React.useState([]);
   const dispatch = useDispatch();
+  const location = useLocation()
+  const editData = location.state
 
   useEffect(() => {
     getRole()
@@ -40,8 +42,8 @@ export const UserForm = (props) => {
       })
       .catch((res) => console.log(responsiveFontSizes));
 
-    const userData = JSON.parse(localStorage.getItem("user"));
-    const userId = userData.data.id;
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.data.id;
 
     getProductById(userId)
       .then((res) => {
@@ -52,12 +54,109 @@ export const UserForm = (props) => {
       });
   }, []);
 
+  useEffect(()=>{
+
+    console.log(editData)
+
+    if(editData){
+    const {
+          name,
+          email,
+          mobileNumber,
+          roleId,
+          productIds
+        } = editData
+        setUserData({
+          name,
+          email,
+          mobileNumber,
+          roleId,
+          productIds:productIds && JSON.parse(productIds).map(product =>{
+            return product?.id
+          })
+        })
+      }
+  },[editData])
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
   };
+
+
+  const add = (values) =>{
+          const { name, email, mobileNumber, roleId, password, productIds } =
+                values.formData;
+              createUsers({
+                name,
+                email,
+                mobileNumber: mobileNumber.toString(),
+                roleId,
+                password,
+                productIds: productIds && JSON.parse(productIds),
+              })
+                .then((res) => {
+                  console.log(res);
+                  navigate(clickPaths.USENAVIGATEMYUSER);
+                  dispatch(
+                    snackBarAction({
+                      color: "success",
+                      open: true,
+                      message: snackBarMessages.USER_CREATION_SUCCESS,
+                    })
+                  );
+                })
+                .catch((error) => {
+                  console.log(error);
+                  dispatch(
+                    snackBarAction({
+                      color: "error",
+                      open: true,
+                      message: snackBarMessages.USER_CREATION_FAILED,
+                    })
+                  );
+                });
+  }
+
+
+  const update = (values) =>{
+       const { name, email, mobileNumber, roleId, password, productIds } =
+                values.formData;
+              updateUser(editData?.id,{
+                name,
+                email,
+                mobileNumber: mobileNumber.toString(),
+                roleId,
+                password,
+                productIds:productIds.map(product =>{
+                  return product?.id
+                }),
+              })
+                .then((res) => {
+                  console.log(res);
+                  navigate(clickPaths.USENAVIGATEMYUSER);
+                  dispatch(
+                    snackBarAction({
+                      color: "success",
+                      open: true,
+                      message: snackBarMessages.USER_CREATION_SUCCESS,
+                    })
+                  );
+                })
+                .catch((error) => {
+                  console.log(error);
+                  dispatch(
+                    snackBarAction({
+                      color: "error",
+                      open: true,
+                      message: snackBarMessages.USER_CREATION_FAILED,
+                    })
+                  );
+                });
+  }
+
 
   return (
     <>
@@ -83,41 +182,7 @@ export const UserForm = (props) => {
               });
             }}
             onSubmit={(values) => {
-              const { name, email, mobileNumber, roleId, password, userType } =
-                values.formData;
-
-              const temp = userType.map((data) => {
-                return data.id;
-              });
-              createUsers({
-                name,
-                email,
-                mobileNumber: mobileNumber.toString(),
-                roleId,
-                password,
-                productIds: temp,
-              })
-                .then((res) => {
-                  console.log(res);
-                  navigate(clickPaths.USENAVIGATEMYUSER);
-                  dispatch(
-                    snackBarAction({
-                      color: "success",
-                      open: true,
-                      message: snackBarMessages.USER_CREATION_SUCCESS,
-                    })
-                  );
-                })
-                .catch((error) => {
-                  console.log(error);
-                  dispatch(
-                    snackBarAction({
-                      color: "error",
-                      open: true,
-                      message: snackBarMessages.USER_CREATION_FAILED,
-                    })
-                  );
-                });
+            editData ? update(values): add(values)
             }}
           >
             <div className="btnContainer">
@@ -134,7 +199,7 @@ export const UserForm = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                SUBMIT
+                {editData ? "UPDATE": "ADD"}
               </Button>
               <Snackbar
                 open={open}

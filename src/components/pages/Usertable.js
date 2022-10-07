@@ -31,7 +31,7 @@ export const Usertable = (props) => {
     <>
       <ListContainer>
         <ListTopbar
-          searchField={true}
+          searchField={false}
           newForm={true}
           download={false}
           filter={false}
@@ -39,7 +39,7 @@ export const Usertable = (props) => {
           newFormPath={clickPaths.USENAVIGATEMYUSERFORM}
         />
         <CustomReactTable
-          columnData={UserList(roles)}
+          columnData={UserList(roles , data)}
           rawData={data}
           disableRowSelection={true}
           disablePagination={true}

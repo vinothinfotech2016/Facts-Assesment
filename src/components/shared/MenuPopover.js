@@ -17,8 +17,7 @@ function MenuPopover(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-  const {Menu , index} = props
-  const location = useLocation()
+  const {Menu , index , path} = props
   const navigate = useNavigate()
 
 
@@ -31,8 +30,7 @@ const handleClick = (event) => {
   };
 
   const handleEdit = (Menu,index) =>{
-  console.log(Menu[index],"data");
-    navigate(clickPaths.USENAVIGATEMENUMASTERFORM, {
+    navigate(path, {
       state: Menu[index],
     });
   

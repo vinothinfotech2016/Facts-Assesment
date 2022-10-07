@@ -14,10 +14,11 @@ import {
 import { makeStyles } from "@mui/styles";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { snackBarAction } from "../../redux/actions";
 import {
   createMenuFlow,
+  createScreen,
   getMenusByProductId,
   getProductById,
   getScreensByProductId,
@@ -41,6 +42,14 @@ const useStyles = makeStyles({
       backgroundColor: "#00000080",
     },
   },
+  errorMsgContainer:{
+        width:"100%",
+       length:"100%",
+       display:"flex",
+       alignItems:"center",
+       justifyContent:"center",
+       marginTop:"40px"
+  }
 });
 
 
@@ -59,6 +68,7 @@ function DeveloperCreateFlow() {
   const [text, setText] = React.useState("");
   const [image, setImage] = React.useState({});
   const navigate = useNavigate()
+  const location = useLocation()
   const formats = [
     "image/jpg",
     "image/jpeg",
@@ -67,6 +77,10 @@ function DeveloperCreateFlow() {
     "image/svg",
   ];
 
+useEffect(()=>{
+location?.state?.toggleValue ?
+setToggleValue(location?.state?.toggleValue): setToggleValue("uploadImage")
+},[location?.state?.toggleValue])
 
 
   useEffect(() => {
@@ -138,7 +152,6 @@ function DeveloperCreateFlow() {
     temp[index] = {
       ...finalValue[index], screenId: event.target.value
     }
-
     setFinalValue(temp)
   }
 
@@ -149,6 +162,7 @@ function DeveloperCreateFlow() {
         color: "success",
         message: snackBarMessages.MENU_FLOW_CREATION_SUCCESS
       }))
+      setIsUploaded(true)
     }).catch((error) => {
       console.log(error);
       dispatch(snackBarAction({
@@ -159,13 +173,42 @@ function DeveloperCreateFlow() {
     })
   }
 
-  const toggleChange = (event) => {
-    setToggleValue(event.target.value)
+  const submitScreenFlow = () =>{
+   
+const formData = new FormData()
+
+if(text !== ""){
+formData.append("screenImageUrl",image)
+formData.append("screenName",text)
+formData.append("productId",value)
+
+createScreen(formData).then(res =>{
+  dispatch(snackBarAction({
+    open:true,
+    message:snackBarMessages.SCREEN_CREATION_SUCCESS,
+    color:"success"
+  }))
+  imageRemover()
+}).catch(error =>{
+  dispatch(snackBarAction({
+    open:true,
+    message:snackBarMessages.SCREEN_CREATION_FAILED,
+    color:"error"
+  }))
+})
+}
   }
 
   const textChangeHandler = (event) => {
     setText(event.target.value);
   };
+
+const titleCase = (word) =>{
+const newString = word.split(' ')
+   .map(w => w[0].toUpperCase() + w.substring(1).toLowerCase())
+   .join(' ');
+   return newString
+}
 
   const storingImage = (event) => {
     if (!formats.includes(event?.target?.files[0]?.type)) {
@@ -246,31 +289,6 @@ function DeveloperCreateFlow() {
           </Grid>
           <Grid item xs={12}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-              <Grid item xs={12} >
-                <ToggleButtonGroup
-                  color="primary"
-                  value={toggleValue}
-                  exclusive
-                  onChange={(e) => toggleChange(e)}
-                  sx={{
-                    width: "100%"
-                  }}
-                >
-                  <ToggleButton value="uploadImage" sx={{
-                    width: "100%"
-                  }} >Upload Image</ToggleButton>
-                  <ToggleButton value="screenFlow" sx={{
-                    width: "100%"
-                  }}  >Screen Flow</ToggleButton>
-                  <ToggleButton value="menuFlow" sx={{
-                    width: "100%"
-                  }}  >Menu Flow</ToggleButton>
-                </ToggleButtonGroup>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container rowSpacing={3} columnSpacing={3}>
               {
                 toggleValue === "uploadImage" ? (
                   (
@@ -319,7 +337,7 @@ function DeveloperCreateFlow() {
                                       <Button
                                         color="success"
                                         variant="contained"
-                                        onClick={() => onSubmit()}
+                                        onClick={() => submitScreenFlow()}
                                       >
                                         submit
                                       </Button>
@@ -341,19 +359,26 @@ function DeveloperCreateFlow() {
                             <CustomMultipleImageUpload
                               label={"upload image"}
                               onChange={storingImage}
+                              isViewMode={products.length === 0 ? true : false}
                             />
                           </Grid>
                         )}
                       </Grid>
                       <Grid item xs={12}>
                         <Grid container rowSpacing={3} columnSpacing={3}>
-                          {screens.map((screen, index) => {
+                          {screens.length === 0 ?  
+                             <>
+                             <Box
+                             className={classes.errorMsgContainer}
+                             >
+                               <Typography variant="h4" > There is no screens for this Product </Typography>
+                             </Box>
+                             </>
+                             : 
+                          screens.map((screen) => {
+                            // console.log(screen,"screen");
                             return (
                               <Grid item xs={4}>
-
-
-
-
                                 <Card
                                   sx={{ maxWidth: 345, border: "1px solid #00000050" }}
                                 className={classes.card} 
@@ -371,7 +396,7 @@ function DeveloperCreateFlow() {
                                       }}
                                     >
                                       <Typography gutterBottom variant="h5" component="div">
-                                        {screen?.screenName}
+                                         {titleCase(screen?.screenName)}
                                       </Typography>
                                     </CardContent>
                                   </CardActionArea>
@@ -387,7 +412,16 @@ function DeveloperCreateFlow() {
                   <Grid item xs={12}>
                     { toggleValue === "screenFlow" ? ( 
                     <Grid container rowSpacing={3} columnSpacing={3}>
-              {screens.map((screen, index) => {
+              {screens.length === 0 ?  
+              <>
+              <Box
+             className={classes.errorMsgContainer}
+              >
+                <Typography variant="h4" > There is no screens for this Product </Typography>
+              </Box>
+              </>
+              : 
+              screens.map((screen, index) => {
                 return (
                   <Grid item xs={4}>
                     <Card
@@ -409,7 +443,7 @@ function DeveloperCreateFlow() {
                           }}
                         >
                           <Typography gutterBottom variant="h5" component="div">
-                            {screen?.screenName}
+                            {titleCase(screen?.screenName)}
                           </Typography>
                         </CardContent>
                       </CardActionArea>
@@ -476,7 +510,17 @@ function DeveloperCreateFlow() {
             </Grid>   
                     ) : (
  <Grid container rowSpacing={3} columnSpacing={3}>
-                  {menus.map((menu, index) => {
+                  {
+                    menus.length === 0 ?  
+              <>
+              <Box
+                className={classes.errorMsgContainer}
+              >
+                <Typography variant="h4" > There is no menus for this Product </Typography>
+              </Box>
+              </>
+              : 
+                  menus.map((menu, index) => {
                     return (
                       <>
                         <Grid
@@ -505,7 +549,7 @@ function DeveloperCreateFlow() {
                               variant="h5"
                               component="div"
                             >
-                              {menu?.name}
+                              {titleCase(menu?.name)}
                             </Typography>
                           </Box>
                         </Grid>
@@ -520,15 +564,15 @@ function DeveloperCreateFlow() {
                       </>
                     );
                   })}
-
-          <Grid item xs={12} sx={{
+            {menus.length !== 0 &&
+                 <Grid item xs={12} sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: 'flex-end',
                   margin: '20px'
                 }} >
                   <Button onClick={onSubmit} variant="contained" >submit</Button>
-                </Grid>
+                </Grid>}
                 </Grid>
                     )  }
                   </Grid>

@@ -1,7 +1,8 @@
 import { clickPaths } from "../navigation/routePaths";
-import { EditPopover } from "../shared/EditPopover";
+import MenuPopover from "../shared/MenuPopover";
 
-export const UserList = (roles) => [
+
+export const UserList = (roles,data) => [
   {
     Header: "User Name",
     accessor: "name",
@@ -17,14 +18,7 @@ export const UserList = (roles) => [
         }}
       >
         {props.value}
-        <EditPopover
-          values={props}
-          rowId={props.row.original.id}
-          toShow={{ edit: true, viewDetails: true }}
-          paths={{
-            edit: `${clickPaths.USENAVIGATEMYUSERFORM}`,
-          }}
-        />
+        <MenuPopover Menu={data} index={props.row.id} path={clickPaths.USENAVIGATEMYUSERFORM} />
       </div>
     ),
   },
