@@ -8,19 +8,19 @@ import {
   FormLabel,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 
 const NewRole = (props) => {
   const navigate = useNavigate();
-  const [accessState, setAcessState] = useState({
+  const [accessState, setAcessState] = React.useState({
     productMaster: false,
     menuMaster: false,
     formMaster: false,
   });
-  const [role, setRole] = useState("");
+  const [role, setRole] = React.useState("");
 
   const { productMaster, menuMaster, formMaster } = accessState;
 

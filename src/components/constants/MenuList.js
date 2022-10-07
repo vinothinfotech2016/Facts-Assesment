@@ -1,4 +1,4 @@
-import { MenuOpen } from "@mui/icons-material";
+import { clickPaths } from "../navigation/routePaths";
 import MenuPopover from "../shared/MenuPopover";
 
 export const MenuList = (inputValues,Menu) => [
@@ -18,7 +18,7 @@ export const MenuList = (inputValues,Menu) => [
           }}
         >
           {inputValues?.find((item) => item.id === props.value)?.name}
-          <MenuPopover Menu={Menu} index={props.row.id} />
+          <MenuPopover Menu={Menu} index={props.row.id} path={clickPaths.USENAVIGATEMENUMASTERFORM} />
         </div>
       );
     },

@@ -20,6 +20,7 @@ export const apiRoutes = {
   // users
   USER_LISTING: "getAppUsers",
   CREATE_USER: "createAppUser",
+  UPDATE_USER:"updateUser",
 
   //form master
   CREATE_SCREEN: "screen/create",

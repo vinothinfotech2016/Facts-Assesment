@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { getScreenById } from "../api/api";
 import { clickPaths } from "../navigation/routePaths";
@@ -9,11 +9,11 @@ import ImageMapper from "react-image-mapper";
 
 function ImageMapperPage() {
   const location = useLocation();
-  const [imageSize, setImageSize] = useState({ width: 1100, height: 700 });
-  const [imageMap, setImageMap] = useState([]);
-  const [imageUrl, setimageUrl] = useState("");
-  const [screen, setScreen] = useState({});
-  const [areas, setAreas] = useState([]);
+  const [imageSize, setImageSize] = React.useState({ width: 1100, height: 700 });
+  const [imageMap, setImageMap] = React.useState([]);
+  const [imageUrl, setimageUrl] = React.useState("");
+  const [screen, setScreen] = React.useState({});
+  const [areas, setAreas] = React.useState([]);
   const navigate = useNavigate();
   const search = location.search;
   const searchParam = new URLSearchParams(search);

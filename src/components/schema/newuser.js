@@ -1,4 +1,4 @@
-export const formNewUserSchema = (role, products) => ({
+export const formNewUserSchema = (role, products,editData) => ({
   type: "object",
   required: [
     // "userName",
@@ -14,7 +14,7 @@ export const formNewUserSchema = (role, products) => ({
     "roleId",
     "password",
     "confirmPassword",
-    "userType",
+    "productIds",
   ],
   properties: {
     // userName: {
@@ -41,14 +41,14 @@ export const formNewUserSchema = (role, products) => ({
     },
     password: {
       type: "string",
-      label: "Password",
+      label:editData ?"New Password" : "Password",
     },
     confirmPassword: {
       type: "string",
       label: "Confirm Password",
     },
     // selectProducts: {
-    userType: {
+    productIds: {
       type: "array",
       label: "Select Product(s)",
       items: {
@@ -68,7 +68,7 @@ export const formNewUserUiSchema = () => ({
   },
   password: { xs: 6, showEyeIcon: true, "ui:widget": "PasswordWidget" },
   confirmPassword: { xs: 6, showEyeIcon: true, "ui:widget": "PasswordWidget" },
-  userType: {
+  productIds: {
     "ui:widget": "multiSelect",
   },
 });

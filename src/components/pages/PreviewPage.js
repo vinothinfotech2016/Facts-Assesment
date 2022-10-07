@@ -1,6 +1,7 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import RegionSelect from "react-region-select";
 import { useLocation, useNavigate } from "react-router";
 import {
@@ -10,16 +11,45 @@ import {
 } from "../api/api";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
+import DeleteIcon from '@mui/icons-material/Delete';
+
+const useStyles = makeStyles({
+  dropDown:{
+    width:"100px",
+    height:"30px",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    border:"1px solid #00000050",
+    borderRadius:"4px"
+  },
+  deleteBtn:{
+    backgroundColor:"#e85454",
+    height:"30px",
+    borderRadius:"4px",
+    color:"#000",
+    "&:hover":{
+  backgroundColor:"#e85454"
+    }
+  },
+  container:{
+    position: "absolute", 
+    right: 0, 
+    bottom: "-35px",
+    display:"flex"
+  }
+})
 
 function PreviewPage() {
+  const classes = useStyles()
   const navigate = useNavigate();
   const search = useLocation().search;
   const searchParam = new URLSearchParams(search);
   const editId = searchParam?.get("editId");
-  const [screen, setScreen] = useState("");
+  const [screen, setScreen] = React.useState("");
   const areas = [];
-  const [screens, setScreens] = useState([]);
-  const [regions, setRegions] = useState(
+  const [screens, setScreens] = React.useState([]);
+  const [regions, setRegions] = React.useState(
     areas?.map((area, index) => ({
       ...area,
       data: {
@@ -53,7 +83,7 @@ function PreviewPage() {
         });
   }, [screen]);
 
-  const [dropDownValue, setDropDownValue] = useState(screens[0]?.id);
+  const [dropDownValue, setDropDownValue] = React.useState(screens[0]?.id);
 
   const regionStyle = {
     background: "rgba(0, 0, 0, 0)",
@@ -94,17 +124,21 @@ function PreviewPage() {
     if (!regionProps.isChanging) {
       return (
         <div>
-          <div style={{ position: "absolute", right: 0, top: "-25px" }}>
-            <button onClick={() => actionDeleteRegion(regionProps.data.index)}>
-              Cancel
-            </button>
-          </div>
-          <div style={{ position: "absolute", right: 0, bottom: "-30px" }}>
+          {/* <div style={{ position: "absolute", right: 0, top: "-40px" }}>
+            {/* <IconButton className={classes.deleteBtn} onClick={() => actionDeleteRegion(regionProps.data.index)} >
+            <DeleteIcon />
+            </IconButton> */}
+          {/* </div> */} 
+          <div className={classes.container} >
+            <IconButton className={classes.deleteBtn} onClick={() => actionDeleteRegion(regionProps.data.index)} >
+            <DeleteIcon />
+            </IconButton>
             <select
               onChange={(e) => {
                 markImageRegion(regionProps.data.index, e.target.value);
               }}
               value={dropDownValue}
+              className={classes.dropDown}
             >
               {screens.map((data, index) => {
                 return (
@@ -194,7 +228,7 @@ function PreviewPage() {
                 marginBottom: "40px",
               }}
             >
-              <Button variant="contained" color="error">
+              <Button variant="contained" color="error" onClick={()=>navigate(clickPaths.USENAVIGATEFORMMASTER)} >
                 Cancel
               </Button>
               <Button

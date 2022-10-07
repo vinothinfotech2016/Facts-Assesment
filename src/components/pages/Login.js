@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Grid,
   TextField,
@@ -17,9 +17,9 @@ import { clickPaths, mapPaths } from "../navigation/routePaths";
 import { loginUser } from "../api/api";
 
 function Login(props) {
-  const [visible, setVisible] = useState(false);
-  const [isTypedEmail, setIsTypedEmail] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [visible, setVisible] = React.useState(false);
+  const [isTypedEmail, setIsTypedEmail] = React.useState(true);
+  const [errorMsg, setErrorMsg] = React.useState("");
 
   const navigate = useNavigate();
   const formik = useFormik({

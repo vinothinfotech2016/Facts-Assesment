@@ -75,3 +75,7 @@ export const getScreenByMenu = (id) => {
 export const createMenuFlow = (value) =>{
   return appApi.post(`${apiRoutes.CREATE_MENU_FLOW}`,value)
 }
+
+export const updateUser = (id,value) =>{
+  return appApi.put(`${apiRoutes.UPDATE_USER}/${id}`,value)
+}

@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, } from "react";
 import { useLocation } from "react-router";
 import { getScreenById } from "../api/api";
 import { clickPaths } from "../navigation/routePaths";
@@ -10,12 +10,12 @@ import RegionSelect from "react-region-select";
 
 function ImageMapperPage() {
   const location = useLocation();
-  const [isMapper, setIsMapper] = useState(false);
-  const [imageSize, setImageSize] = useState({ width: 1100, height: 700 });
-  const [imageMap, setImageMap] = useState([]);
-  const [imageUrl, setimageUrl] = useState("");
-  const [screen, setScreen] = useState({});
-  const [areas, setAreas] = useState([]);
+  const [isMapper, setIsMapper] = React.cloneElementuseState(false);
+  const [imageSize, setImageSize] = React.cloneElementuseState({ width: 1100, height: 700 });
+  const [imageMap, setImageMap] = React.cloneElementuseState([]);
+  const [imageUrl, setimageUrl] = React.cloneElementuseState("");
+  const [screen, setScreen] = React.cloneElementuseState({});
+  const [areas, setAreas] = React.cloneElementuseState([]);
 
   useLayoutEffect(() => {
     getScreenById(location.state).then((res) => {
@@ -30,9 +30,6 @@ function ImageMapperPage() {
     };
   }, []);
 
-  //   useEffect(() => {
-  //     console.log(location.state.screen.targetImageUrl);
-  //   }, []);
   useEffect(() => {
     setTimeout(() => setIsMapper(true), 1000);
   }, []);

@@ -44,7 +44,12 @@ const CustomStepper = (props) => {
               }}
               onClick={(event) => {
                 event.preventDefault();
-                navigate(`${item.route}`);
+               item?.state ?  
+               navigate(`${item.route}`, {
+                      state: { toggleValue: item?.state?.toggleValue },
+                      })
+               : 
+               navigate(`${item.route}`) 
               }}
               label={item.name}
             />

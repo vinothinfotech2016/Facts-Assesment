@@ -19,7 +19,6 @@ import { DividerLine } from "../shared";
 import { useLocation, useNavigate } from "react-router";
 import {
   createMenu,
-  getMenusByUserId,
   getProductById,
   updateMenu,
 } from "../api/api";
@@ -35,7 +34,6 @@ export const NewMenu = (props) => {
   const dispatch = useDispatch();
   const LocalData = JSON.parse(localStorage.getItem("user"));
   const userId = LocalData?.data?.id;
-  const [menus, setMenu] = React.useState([]);
   const location = useLocation()
   const editData = location?.state
 
@@ -49,6 +47,7 @@ export const NewMenu = (props) => {
     getProductById(userId)
       .then((res) => {
         setProducts(res.data);
+        setUserData({...userData,productId:res?.data[0]?.id})
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +57,6 @@ export const NewMenu = (props) => {
   const update = (value) => {
     updateMenu(value, editData?.id)
       .then((res) => {
-        console.log(res);
         navigate(clickPaths.USENAVIGATEMENUMASTER);
         dispatch(
           snackBarAction({
@@ -83,7 +81,6 @@ export const NewMenu = (props) => {
   const add = (value) => {
     createMenu(value)
       .then((res) => {
-        console.log(res);
         navigate(clickPaths.USENAVIGATEMENUMASTER);
         dispatch(
           snackBarAction({
@@ -127,7 +124,7 @@ setUserData({...editData,subMenus:JSON.parse(editData?.subMenus),
               name="productId"
               onChange={handleChange}
               value={userData.productId || ""}
-              disabled={Boolean(editData?.id)}
+              disabled={Boolean(editData?.id) ||Boolean(!products?.length) }
             >
               {products.map((product) => {
                 return (

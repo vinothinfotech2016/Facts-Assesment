@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -22,9 +22,9 @@ import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
 // import { Routes, Route } from "react-router-dom";
 
 export const Parameters = (props) => {
-  const [parameter, setParameter] = useState({});
+  const [parameter, setParameter] = React.useState({});
   const [liveValidator, setLiveValidator] = React.useState(false);
-  const [formType, setFormtype] = useState([]);
+  const [formType, setFormtype] = React.useState([]);
 
   return (
     <>

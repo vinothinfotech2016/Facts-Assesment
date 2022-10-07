@@ -1,5 +1,5 @@
 import { Box, Button, Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import { CustomUploadImage } from "../shared/CustomUploadImage";
@@ -18,26 +18,11 @@ export const NewFormMaster = (props) => {
     setSource("");
   };
 
-  const areas = [
-    // {
-    //   data: { link: "https://www.youtube.com/" },
-    //   x: 10,
-    //   y: 10,
-    //   width: 10,
-    //   height: 10,
-    // },
-    // {
-    //   data: { link: "http://facebook.com" },
-    //   x: 20,
-    //   y: 20,
-    //   width: 10,
-    //   height: 10,
-    // },
-  ];
+  const areas = [];
 
   const imageUrl = source;
 
-  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+  const [imageSize, setImageSize] = React.useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const image = new Image();
@@ -48,7 +33,7 @@ export const NewFormMaster = (props) => {
     };
   }, []);
 
-  const [regions, setRegions] = useState(
+  const [regions, setRegions] = React.useState(
     areas.map((area, index) => ({
       ...area,
       data: { ...area.data, index },
@@ -56,7 +41,7 @@ export const NewFormMaster = (props) => {
       isChanging: false,
     }))
   );
-  const [imageMap, setImageMap] = useState([]);
+  const [imageMap, setImageMap] = React.useState([]);
 
   useEffect(() => {
     const tx = imageSize.width * (20 / 100);
@@ -151,19 +136,5 @@ export const NewFormMaster = (props) => {
     </>
   );
 
-  return (
-    <div style={{ display: "flex" }}>
-      <div style={{ flexGrow: 1, flexShrink: 1, width: "50%" }}>
-        <div className="container" style={{ position: "relative" }}>
-          {imageSize.width > 0 && (
-            <ImageMapper
-              src={imageUrl}
-              onClick={fetchClickedScale}
-              map={{ name: "my-map", areas: imageMap }}
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  
 };
