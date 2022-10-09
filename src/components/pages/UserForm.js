@@ -55,9 +55,6 @@ export const UserForm = (props) => {
   }, []);
 
   useEffect(()=>{
-
-    console.log(editData)
-
     if(editData){
     const {
           name,
@@ -69,7 +66,7 @@ export const UserForm = (props) => {
         setUserData({
           name,
           email,
-          mobileNumber,
+          mobileNumber:parseInt(mobileNumber),
           roleId,
           productIds:productIds && JSON.parse(productIds).map(product =>{
             return product?.id
