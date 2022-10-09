@@ -18,6 +18,7 @@ import { customErrorMsg } from "../../template/customErrorMsg";
 import { CustomFieldTemplate } from "../../template/fieldTemplate";
 import { objectFieldTemplate } from "../../template/objectTemplate";
 import { TableBodyCell, TableHeadingCell } from "../styled/styledProfile";
+import { ADD, CANCEL, SUBMIT } from "../constants/ButtonConstants";
 
 // import { Routes, Route } from "react-router-dom";
 
@@ -59,7 +60,7 @@ export const Parameters = (props) => {
           >
             <Box className="btnContainer ">
               <Button type="submit" variant="contained" className="btn">
-                ADD
+               {ADD}
               </Button>
             </Box>
           </Form>
@@ -100,10 +101,10 @@ export const Parameters = (props) => {
           </Box>
           <Box className="btnContainer">
             <Button variant="outlined" className="btn">
-              CANCEL
+             {CANCEL}
             </Button>
             <Button variant="outlined" className="btn">
-              SUBMIT
+              {SUBMIT}
             </Button>
           </Box>
         </Box>

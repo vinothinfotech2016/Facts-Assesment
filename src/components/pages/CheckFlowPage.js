@@ -19,20 +19,6 @@ function ImageMapperPage() {
   const searchParam = new URLSearchParams(search);
   const editId = searchParam?.get("editId") || location?.state?.id;
 
-  // useEffect(() => {
-  //   console.log(location.state, "location");
-  //   console.log(editId, "editId");
-  //   getScreenById(location?.state?.id || editId).then((res) => {
-  //     setScreen(res.data);
-  //     setimageUrl(res?.data?.screenImageUrl);
-  //     setAreas(JSON.parse(res?.data?.actionItems));
-  //   });
-  //   const image = new Image();
-  //   image.src = imageUrl;
-  //   image.onload = () => {
-  //     setImageSize({ width: 1100, height: 700 });
-  //   };
-  // }, []);
 
   useEffect(() => {
     getScreenById(location?.state?.id || editId).then((res) => {
@@ -77,7 +63,7 @@ function ImageMapperPage() {
         <Grid item xs={12}>
           <FormTopbar
             label="Check Page"
-            listPath={clickPaths.USENAVIGATEFORMMASTER}
+            listPath={clickPaths.USENAVIGATESCREENFLOWPAGE}
           />
           <Box
             sx={{

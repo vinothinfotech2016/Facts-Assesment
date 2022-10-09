@@ -25,6 +25,7 @@ import {
 import { snackBarAction } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { snackBarMessages } from "../constants/SnackBarConstants";
+import { CANCEL, SUBMIT, UPDATE } from "../constants/ButtonConstants";
 
 export const NewMenu = (props) => {
   const navigate = useNavigate();
@@ -189,7 +190,7 @@ export const NewMenu = (props) => {
                 className="btn"
                 onClick={() => navigate(clickPaths.USENAVIGATEMENUMASTER)}
               >
-                CANCEL
+               {CANCEL}
               </Button>
               <Button
                 type="submit"
@@ -197,7 +198,7 @@ export const NewMenu = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                {editData ? "UPDATE" : "SUBMIT"}
+                {editData ? UPDATE : SUBMIT}
               </Button>
             </div>
           </Form>

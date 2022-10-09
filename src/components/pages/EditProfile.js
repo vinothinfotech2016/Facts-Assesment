@@ -1,6 +1,7 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
+import { CANCEL, UPDATE } from "../constants/ButtonConstants";
 import { clickPaths } from "../navigation/routePaths";
 import { CustomUploadImage } from "../shared";
 import { FormTopbar } from "../shared/FormTopbar";
@@ -35,10 +36,10 @@ const EditProfile = (props) => {
               className="btn"
               onClick={() => navigate(clickPaths.USENAVIGATEPROFILE)}
             >
-              CANCEL
+              {CANCEL}
             </Button>
             <Button variant="outlined" className="btn">
-              UPDATE
+              {UPDATE}
             </Button>
           </Box>
         </Box>

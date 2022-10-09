@@ -2,8 +2,7 @@ import { IconButton, Popover, Typography } from '@mui/material'
 import React from 'react'
 import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
 import { styled } from '@mui/system';
-import { useLocation, useNavigate } from 'react-router';
-import { clickPaths } from '../navigation/routePaths';
+import { useNavigate } from 'react-router';
 
 
 const Titles = styled(Typography)({

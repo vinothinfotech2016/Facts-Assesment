@@ -1,13 +1,6 @@
 export const formNewUserSchema = (role, products,editData) => ({
   type: "object",
   required: [
-    // "userName",
-    // "userEmail",
-    // "userNumber",
-    // "selectRole",
-    // "password",
-    // "confirmPassword",
-    // "selectProducts",
     "name",
     "email",
     "mobileNumber",
@@ -17,23 +10,19 @@ export const formNewUserSchema = (role, products,editData) => ({
     "productIds",
   ],
   properties: {
-    // userName: {
     name: {
       type: "string",
       label: "User Name",
       name: "name",
     },
-    // userEmail: {
     email: {
       type: "string",
       label: "User Email",
     },
-    // userNumber: {
     mobileNumber: {
       type: "number",
-      label: "User Number",
+      label: "User Mobile Number",
     },
-    // selectRole: {
     roleId: {
       type: "string",
       label: "Select Role",
@@ -47,7 +36,6 @@ export const formNewUserSchema = (role, products,editData) => ({
       type: "string",
       label: "Confirm Password",
     },
-    // selectProducts: {
     productIds: {
       type: "array",
       label: "Select Product(s)",

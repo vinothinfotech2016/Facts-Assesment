@@ -14,6 +14,7 @@ import { FormTopbar } from "../shared/FormTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { createCustomer } from "../api/api";
 import { useNavigate } from "react-router";
+import { CANCEL, SUBMIT } from "../constants/ButtonConstants";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -84,7 +85,7 @@ export const CustomerForm = (props) => {
           >
             <div className="btnContainer">
               <Button variant="outlined" className="btn">
-                CANCEL
+               {CANCEL}
               </Button>
               <Button
                 type="submit"
@@ -92,7 +93,7 @@ export const CustomerForm = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                SUBMIT
+               {SUBMIT}
               </Button>
               <Snackbar
                 open={open}

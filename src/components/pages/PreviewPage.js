@@ -12,6 +12,7 @@ import {
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { CANCEL, SUBMIT } from "../constants/ButtonConstants";
 
 const useStyles = makeStyles({
   dropDown:{
@@ -229,14 +230,14 @@ function PreviewPage() {
               }}
             >
               <Button variant="contained" color="error" onClick={()=>navigate(clickPaths.USENAVIGATEFORMMASTER)} >
-                Cancel
+                {CANCEL}
               </Button>
               <Button
                 variant="contained"
                 color="success"
                 onClick={() => submit()}
               >
-                submit
+                {SUBMIT}
               </Button>
             </Grid>
           </Grid>

@@ -26,6 +26,7 @@ import { snackBarMessages } from "../constants/SnackBarConstants";
 import { useNavigate } from "react-router";
 import { createSearchParams } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import { CANCEL, CHECKFLOW, DEFINEFLOW, EDITFLOW, SUBMIT } from "../constants/ButtonConstants";
 
 const useStyles = makeStyles({
   card: {
@@ -259,14 +260,14 @@ export const FormMaster = (props) => {
                               variant="contained"
                               onClick={() => onSubmit()}
                             >
-                              submit
+                              {SUBMIT}
                             </Button>
                             <Button
                               color="error"
                               variant="contained"
                               onClick={() => imageRemover(index)}
                             >
-                              cancel
+                              {CANCEL}
                             </Button>
                           </Box>
                         </Box>
@@ -358,7 +359,7 @@ export const FormMaster = (props) => {
                                 )
                               }
                             >
-                              define flow
+                              {DEFINEFLOW}
                             </Button>
                           ) : (
                             <>
@@ -366,7 +367,7 @@ export const FormMaster = (props) => {
                                 variant="contained"
                                 onClick={() => navigateToCheckFlow(screen.id)}
                               >
-                                check flow
+                               {CHECKFLOW}
                               </Button>
                               <Button
                                 variant="contained"
@@ -377,7 +378,7 @@ export const FormMaster = (props) => {
                                   )
                                 }
                               >
-                                edit flow
+                              {EDITFLOW}
                               </Button>
                             </>
                           )}
