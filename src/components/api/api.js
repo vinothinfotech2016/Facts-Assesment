@@ -67,15 +67,17 @@ export const updateScreenFlow = (value, id) => {
 export const getMenusByProductId = (id) => {
   return appApi.get(`${apiRoutes.GET_MENU_BY_PRODUCT_ID}/${id}`);
 };
-
+export const getMenuFlowByProduct = (productId) => {
+  return appApi.get(`${apiRoutes.GET_MENUFLOW_BY_PRODUCT}/${productId}`);
+};
 export const getScreenByMenu = (id) => {
   return appApi.get(`${apiRoutes.GET_SCREEN_BY_MENU}/${id}`);
 };
 
-export const createMenuFlow = (value) =>{
-  return appApi.post(`${apiRoutes.CREATE_MENU_FLOW}`,value)
-}
+export const createMenuFlow = (value) => {
+  return appApi.post(`${apiRoutes.CREATE_MENU_FLOW}`, value);
+};
 
-export const updateUser = (id,value) =>{
-  return appApi.put(`${apiRoutes.UPDATE_USER}/${id}`,value)
-}
+export const updateUser = (id, value) => {
+  return appApi.put(`${apiRoutes.UPDATE_USER}/${id}`, value);
+};

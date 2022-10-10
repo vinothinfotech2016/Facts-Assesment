@@ -60,6 +60,7 @@ export function ListTopbar(props) {
     download,
     newForm,
     newFormPath,
+    onClickNew,
     // listPath,
     // getFilterValue,
     // filterFields,
@@ -83,8 +84,10 @@ export function ListTopbar(props) {
             </Button>
           )} */}
           {newForm && (
-            <Button onClick={() => navigate(newFormPath)}>
-              <NewButton>NEW</NewButton>
+            <Button
+              onClick={newFormPath ? () => navigate(newFormPath) : onClickNew}
+            >
+              <NewButton>{props.buttonLabel || "NEW"}</NewButton>
             </Button>
           )}
           {download && (

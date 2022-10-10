@@ -1,7 +1,7 @@
 import { clickPaths } from "../navigation/routePaths";
 import MenuPopover from "../shared/MenuPopover";
 
-export const MenuList = (inputValues,Menu) => [
+export const MenuList = (inputValues, Menu) => [
   {
     Header: "Product Name",
     accessor: "productId",
@@ -18,7 +18,11 @@ export const MenuList = (inputValues,Menu) => [
           }}
         >
           {inputValues?.find((item) => item.id === props.value)?.name}
-          <MenuPopover Menu={Menu} index={props.row.id} path={clickPaths.USENAVIGATEMENUMASTERFORM} />
+          <MenuPopover
+            Menu={Menu}
+            index={props.row.id}
+            path={clickPaths.USENAVIGATEMENUMASTERFORM}
+          />
         </div>
       );
     },
@@ -47,7 +51,45 @@ export const MenuList = (inputValues,Menu) => [
     id: 5,
     width: 200,
     Cell: (props) => {
-      return props.value ? JSON.parse(props?.value)?.toString() : "-"
+      return props.value ? JSON.parse(props?.value)?.toString() : "-";
     },
+  },
+];
+export const menuFlowLists = () => [
+  {
+    Header: "Menu",
+    accessor: "menuName",
+    sticky: "left",
+    id: 1,
+    width: 300,
+    // Cell: (props) => (
+    //   <div
+    //     style={{
+    //       display: "flex",
+    //       justifyContent: "space-between",
+    //       alignItems: "center",
+    //     }}
+    //   >
+    //     {props?.value?.length !== 0
+    //       ? props?.value?.map((value) => {
+    //           return value.name;
+    //         })
+    //       : "-"}
+    //     <EditPopover
+    //       values={props}
+    //       rowId={props.row.original.id}
+    //       toShow={{ edit: true, viewDetails: true }}
+    //       paths={{
+    //         edit: `${clickPaths.USENAVIGATECUSTOMERFORM}`,
+    //       }}
+    //     />
+    //   </div>
+    // ),
+  },
+  {
+    Header: "Screen",
+    accessor: "screenName",
+    id: 2,
+    width: 200,
   },
 ];

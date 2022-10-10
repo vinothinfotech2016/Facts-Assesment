@@ -16,11 +16,12 @@ export const apiRoutes = {
   GET_MENU_BY_USER_ID: "/product/menu/getMenusByUser",
   UPDATE_MENU: "product/menu/update",
   GET_MENU_BY_PRODUCT_ID: "/product/menu/getMenuByProductId",
+  GET_MENUFLOW_BY_PRODUCT: "/menuFlow/getMenuFlowByProduct",
 
   // users
   USER_LISTING: "getAppUsers",
   CREATE_USER: "createAppUser",
-  UPDATE_USER:"updateUser",
+  UPDATE_USER: "updateUser",
 
   //form master
   CREATE_SCREEN: "screen/create",
@@ -30,5 +31,5 @@ export const apiRoutes = {
 
   //developer flow
   GET_SCREEN_BY_MENU: "menuFlow/getScreenByMenu",
-  CREATE_MENU_FLOW:"menuFlow/create"
+  CREATE_MENU_FLOW: "menuFlow/create",
 };
