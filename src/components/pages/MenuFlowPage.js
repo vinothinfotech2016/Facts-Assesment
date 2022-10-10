@@ -246,7 +246,6 @@ function MenuFlowPage() {
                   />
                 </Grid>
               </>
-<<<<<<< HEAD
             );
           })
         )}
@@ -269,66 +268,6 @@ function MenuFlowPage() {
       </Grid>
     </>
   );
-=======
-              : 
-                  menus?.map((menu, index) => {
-                    return (
-                      <>
-                        <Grid
-                          key={index}
-                          item
-                          xs={6}
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              border: "2px solid #00000080",
-                              backgroundColor: "#00000020",
-                              borderRadius: "8px",
-                              height: "100%",
-                              width: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Typography
-                              gutterBottom
-                              variant="h5"
-                              component="div"
-                            >
-                              {titleCase(menu?.name)}
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <CustomSelectField
-                            inputValues={screens}
-                            label={"Select Screen"}
-                            value={finalValue[index]?.screenId}
-                            onChange={(e) => onChange(e, index)}
-                          />
-                        </Grid>
-                      </>
-                    );
-                  })}
-            {menus?.length !== 0 &&
-                 <Grid item xs={12} sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: 'flex-end',
-                  margin: '20px'
-                }} >
-                  <Button onClick={onSubmit} variant="contained" >{SUBMIT}</Button>
-                </Grid>}
-            </Grid> 
-   </>
-  )
->>>>>>> 1c085340de6bc1de2ef08bdb9774695302dc1f94
 }
 
 export default MenuFlowPage;
