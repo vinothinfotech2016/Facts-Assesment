@@ -72,7 +72,7 @@ export const NewMenu = (props) => {
         dispatch(
           snackBarAction({
             color: "error",
-            message: snackBarMessages.MENU_UPDATE_FAILED,
+            message: error?.response?.data?.error || snackBarMessages.MENU_UPDATE_FAILED,
             open: true,
           })
         );
@@ -96,7 +96,7 @@ export const NewMenu = (props) => {
         dispatch(
           snackBarAction({
             color: "error",
-            message: snackBarMessages.MENU_CREATION_FAILED,
+            message: error?.response?.data?.error || snackBarMessages.MENU_CREATION_FAILED,
             open: true,
           })
         );
@@ -159,7 +159,6 @@ export const NewMenu = (props) => {
               const {
                 productId,
                 orderNo,
-                displayType,
                 name,
                 hasSubMenu,
                 subMenus,
@@ -169,7 +168,7 @@ export const NewMenu = (props) => {
                 ? update({
                     productId,
                     orderNo,
-                    displayType,
+                    displayType:"Top Navigation",
                     name,
                     hasSubMenu: hasSubMenu === "1" ? true : false,
                     subMenus,
@@ -177,7 +176,7 @@ export const NewMenu = (props) => {
                 : add({
                     productId,
                     orderNo,
-                    displayType,
+                    displayType:"Top Navigation",
                     name,
                     hasSubMenu: hasSubMenu === "1" ? true : false,
                     subMenus,

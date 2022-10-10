@@ -114,7 +114,7 @@ export const UserForm = (props) => {
                     snackBarAction({
                       color: "error",
                       open: true,
-                      message: snackBarMessages.USER_CREATION_FAILED,
+                      message: error?.response?.data?.error || snackBarMessages.USER_CREATION_FAILED,
                     })
                   );
                 });
@@ -151,7 +151,7 @@ export const UserForm = (props) => {
                     snackBarAction({
                       color: "error",
                       open: true,
-                      message: snackBarMessages.USER_CREATION_FAILED,
+                      message: error?.response?.data?.error || snackBarMessages.USER_CREATION_FAILED,
                     })
                   );
                });

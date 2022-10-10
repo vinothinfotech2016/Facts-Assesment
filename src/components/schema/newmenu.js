@@ -10,16 +10,16 @@ export const newMenuSchema = {
       type: "string",
       label: "Menu Name",
     },
-    displayType: {
-      type: "string",
-      label: "Menu Display Type",
-      options: [
-        { id: "Top Navigation", name: "Top Navigation" },
-        { id: "Side Navigation", name: "Side Navigation" },
-        { id: "Profile Menu", name: "Profile Menu" },
-      ],
-      default: "Top Navigation",
-    },
+    // displayType: {
+    //   type: "string",
+    //   label: "Menu Display Type",
+    //   options: [
+    //     { id: "Top Navigation", name: "Top Navigation" },
+    //     { id: "Side Navigation", name: "Side Navigation" },
+    //     { id: "Profile Menu", name: "Profile Menu" },
+    //   ],
+    //   default: "Top Navigation",
+    // },
     hasSubMenu: {
       type: "string",
       label: "Sub-menus",
@@ -46,7 +46,6 @@ export const newMenuUiSchema = (editId) => ({
   name: {
     "ui:readonly": Boolean(editId),
   },
-
   displayType: {
     "ui:widget": "radio",
     labelStyle: { marginRight: "20px" },

@@ -1,7 +1,7 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const RolesList = () => [
+export const rolesList = () => [
   {
     Header: "Role",
     accessor: "role",

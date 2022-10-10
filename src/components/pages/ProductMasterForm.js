@@ -76,11 +76,10 @@ const ProductMasterForm = (props) => {
         );
       })
       .catch((error) => {
-        console.log(error);
         dispatch(
           snackBarAction({
             color: "error",
-            message: snackBarMessages.PRODUCT_CREATION_FAILED,
+            message: error?.response?.data?.error || snackBarMessages.PRODUCT_CREATION_FAILED,
             open: true,
           })
         );
@@ -90,7 +89,6 @@ const ProductMasterForm = (props) => {
   const update = (formData) => {
     updateProduct(formData, editId)
       .then((res) => {
-        console.log(res);
         navigate(clickPaths.USENAVIGATEHOME);
         dispatch(
           snackBarAction({
@@ -102,6 +100,7 @@ const ProductMasterForm = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        console.log("working");
         dispatch(
           snackBarAction({
             color: "error",

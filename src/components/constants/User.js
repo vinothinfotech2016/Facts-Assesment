@@ -2,7 +2,7 @@ import { clickPaths } from "../navigation/routePaths";
 import MenuPopover from "../shared/MenuPopover";
 
 
-export const UserList = (roles,data) => [
+export const userList = (roles,data) => [
   {
     Header: "User Name",
     accessor: "name",

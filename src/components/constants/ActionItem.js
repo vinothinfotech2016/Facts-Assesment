@@ -1,4 +1,4 @@
-export const ActionItem = () => [
+export const actionItem = () => [
   {
     Header: "Action Item",
     accessor: "actionItem",

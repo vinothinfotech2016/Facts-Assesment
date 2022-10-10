@@ -5,7 +5,6 @@ export const formNewProductMasterSchema = {
     "description",
     "leftLogoUrl",
     "centerLogoUrl",
-    "profileName",
     "rightLogoUrl",
     "menuDesignUrl",
   ],
