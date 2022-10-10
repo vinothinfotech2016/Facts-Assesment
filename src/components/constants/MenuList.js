@@ -1,7 +1,7 @@
 import { clickPaths } from "../navigation/routePaths";
 import MenuPopover from "../shared/MenuPopover";
 
-export const MenuList = (inputValues,Menu) => [
+export const menuList = (inputValues,Menu) => [
   {
     Header: "Product Name",
     accessor: "productId",
@@ -17,7 +17,7 @@ export const MenuList = (inputValues,Menu) => [
             alignItems: "center",
           }}
         >
-          {inputValues?.find((item) => item.id === props.value)?.name}
+          {props?.value ? inputValues?.find((item) => item.id === props.value)?.name : "-" }
           <MenuPopover Menu={Menu} index={props.row.id} path={clickPaths.USENAVIGATEMENUMASTERFORM} />
         </div>
       );

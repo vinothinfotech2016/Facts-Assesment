@@ -317,9 +317,9 @@ const newString = word.split(' ')
                              </Box>
                              </>
                              : 
-                          screens.map((screen) => {
+                          screens.map((screen,index) => {
                             return (
-                              <Grid item xs={4}>
+                              <Grid item xs={4} key={index} >
                                 <Card
                                   sx={{ maxWidth: 345, border: "1px solid #00000050" }}
                                 className={classes.card} 

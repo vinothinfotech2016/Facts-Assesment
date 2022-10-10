@@ -1,25 +1,19 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { Box,  Card, CardActionArea, CardContent,  CardMedia, Grid, IconButton, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect } from 'react'
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import { getProductById, getScreensByProductId } from '../api/api';
-import { CHECKFLOW, DEFINEFLOW, EDITFLOW } from '../constants/ButtonConstants';
 import { clickPaths } from '../navigation/routePaths';
 import { CustomSelectField } from '../shared';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from 'react-redux';
+import { snackBarAction } from '../../redux/actions';
+import { snackBarMessages } from '../constants/SnackBarConstants';
 
 
 const useStyles = makeStyles({
-  card: {
-    "&:hover": {
-      backgroundColor: "#00000080",
-    },
-  },
-  CardMedia: {
-    "&:hover": {
-      backgroundColor: "#00000080",
-    },
-  },
   errorMsgContainer:{
         width:"100%",
        length:"100%",
@@ -27,6 +21,11 @@ const useStyles = makeStyles({
        alignItems:"center",
        justifyContent:"center",
        marginTop:"40px"
+  },
+  button:{
+    borderRight:"1px solid #00000050 !important",
+    borderRadius:"0 !important",
+    padding:"10px 47px !important"
   }
 });
 
@@ -34,10 +33,10 @@ const useStyles = makeStyles({
 function ScreenFlowPage() {
 const classes = useStyles()
 const [screens , setScreens] = React.useState([])
-const [isHovered , setIsHovered] = React.useState('')
 const [products, setProducts] = React.useState([])
 const [value, setValue] = React.useState("")
 const navigate = useNavigate()
+const dispatch = useDispatch()
 
 
 useEffect(() => {
@@ -114,13 +113,48 @@ const newString = word.split(' ')
                              : 
               screens.map((screen, index) => {
                 return (
-                  <Grid item xs={4}>
+                  <Grid item xs={4} key={index} >
                     <Card
                       sx={{ maxWidth: 345, border: "1px solid #00000050" }}
-                      className={classes.card}
-                      onMouseOver={() => setIsHovered(index)}
-                      onMouseLeave={() => setIsHovered("")}
                     >
+                       <Box sx={{
+                                width:"100%",
+                              }}  >
+                              <Box
+                              sx={{
+                                width:"100%",
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"space-evenly",
+                                borderBottom:"1px solid #00000050"
+                              }}
+                              >
+                                <IconButton className={classes.button}  onClick={() =>{
+                                      if(screen?.actionItems === null){
+                                        dispatch(snackBarAction({
+                                          open:"true",
+                                          color:"error",
+                                          message:snackBarMessages.SCREENFLOW_DOES_NOT_EXIST
+                                        }))
+                                        return
+                                      }
+                                      navigateToCheckFlow(screen.id)}        
+                                }>
+                                  <VisibilityIcon/>
+                                </IconButton>
+                                 <IconButton className={classes.button}  onClick={() =>
+                                  navigateToPage(
+                                    screen?.id,
+                                    clickPaths.USENAVIGATEPREVIEWPAGE
+                                  )
+                                } >
+                                <EditIcon />
+                               </IconButton> 
+                               <IconButton className={classes.button}>
+                                  <DeleteIcon />
+                                </IconButton>
+                                </Box>
+                      </Box>
                       <CardActionArea>
                         <CardMedia
                           component="img"
@@ -141,62 +175,6 @@ const newString = word.split(' ')
                           </Typography>
                         </CardContent>
                       </CardActionArea>
-                      <Box
-                        sx={{
-                          position: "relative",
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            zIndex: 50,
-                            bottom: "90px",
-                            width: "100%",
-                            height: "100%",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                            display: isHovered === index ? "flex" : "none",
-                            "&:hover": {
-                              backgroundColor: "#00000090",
-                            },
-                          }}
-                        >
-                          {screen?.actionItems === null ||
-                          screen?.actionItems === [] ? (
-                            <Button
-                              variant="contained"
-                              onClick={() =>
-                                navigateToPage(
-                                  screen?.id,
-                                  clickPaths.USENAVIGATEPREVIEWPAGE
-                                )
-                              }
-                            >
-                              {DEFINEFLOW}
-                            </Button>
-                          ) : (
-                            <>
-                              <Button
-                                variant="contained"
-                                onClick={() => navigateToCheckFlow(screen.id)}
-                              >
-                               {CHECKFLOW}
-                              </Button>
-                              <Button
-                                variant="contained"
-                                onClick={() =>
-                                  navigateToPage(
-                                    screen?.id,
-                                    clickPaths.USENAVIGATEPREVIEWPAGE
-                                  )
-                                }
-                              >
-                                {EDITFLOW}
-                              </Button>
-                            </>
-                          )}
-                        </Box>
-                      </Box>
                     </Card>
                   </Grid>
                 );

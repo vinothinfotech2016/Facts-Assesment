@@ -104,7 +104,7 @@ const newString = word.split(' ')
       dispatch(snackBarAction({
         open: true,
         color: "error",
-        message: snackBarMessages.MENU_FLOW_CREATION_FAILED
+        message: error?.response?.data?.error || snackBarMessages.MENU_FLOW_CREATION_FAILED
       }))
     })
   }
@@ -139,6 +139,7 @@ const newString = word.split(' ')
                     return (
                       <>
                         <Grid
+                          key={index}
                           item
                           xs={6}
                           sx={{

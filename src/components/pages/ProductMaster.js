@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { ProductList } from "../constants/ProductList";
+import { productList } from "../constants/ProductList";
 import { getProductById } from "../api/api";
 
 export const ProductMaster = (props) => {
@@ -36,7 +36,7 @@ export const ProductMaster = (props) => {
           newFormPath={clickPaths.USENAVIGATEPRODUCTMASTERFORM}
         />
         <CustomReactTable
-          columnData={ProductList()}
+          columnData={productList()}
           rawData={tableData}
           disableRowSelection={true}
           disablePagination={true}

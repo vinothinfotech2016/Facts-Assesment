@@ -1,7 +1,7 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const CustomersList = (products) => [
+export const customersList = (products) => [
   {
     Header: "Product Name",
     accessor: "products",

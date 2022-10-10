@@ -125,11 +125,6 @@ function PreviewPage() {
     if (!regionProps.isChanging) {
       return (
         <div>
-          {/* <div style={{ position: "absolute", right: 0, top: "-40px" }}>
-            {/* <IconButton className={classes.deleteBtn} onClick={() => actionDeleteRegion(regionProps.data.index)} >
-            <DeleteIcon />
-            </IconButton> */}
-          {/* </div> */} 
           <div className={classes.container} >
             <IconButton className={classes.deleteBtn} onClick={() => actionDeleteRegion(regionProps.data.index)} >
             <DeleteIcon />
@@ -167,7 +162,7 @@ function PreviewPage() {
     )
       .then((res) => {
         console.log(res);
-        navigate(clickPaths.USENAVIGATEFORMMASTER);
+        navigate(clickPaths.USENAVIGATESCREENFLOWPAGE);
       })
       .catch((error) => {
         console.log(error);
@@ -180,7 +175,7 @@ function PreviewPage() {
         <Grid item xs={12}>
           <FormTopbar
             label="Preview Page"
-            listPath={clickPaths.USENAVIGATEFORMMASTER}
+            listPath={clickPaths.USENAVIGATESCREENFLOWPAGE}
           />
           <Box
             sx={{

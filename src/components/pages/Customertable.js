@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { CustomersList } from "../constants/Customers";
+import { customersList } from "../constants/Customers";
 import { getProductById, userList } from "../api/api";
 
 export const Customertable = (props) => {
@@ -43,7 +43,7 @@ export const Customertable = (props) => {
           newFormPath={clickPaths.USENAVIGATECUSTOMERFORM}
         />
         <CustomReactTable
-          columnData={CustomersList(products)}
+          columnData={customersList(products)}
           rawData={tableData}
           disableRowSelection={true}
           disablePagination={true}

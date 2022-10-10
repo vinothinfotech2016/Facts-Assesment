@@ -1,7 +1,7 @@
 import { clickPaths } from "../navigation/routePaths";
 import { EditPopover } from "../shared/EditPopover";
 
-export const FormList = () => [
+export const formList = () => [
   {
     Header: "Product Name",
     accessor: "productName",
@@ -39,23 +39,5 @@ export const FormList = () => [
     accessor: "customerUpdate",
     id: 3,
     width: 200,
-  },
-];
-
-export const formdata = [
-  {
-    productName: "Schoool ERP",
-    formName: "EMP Master Listing",
-    customerUpdate: "Approved",
-  },
-  {
-    productName: "EMS",
-    formName: "EMS Product Data",
-    customerUpdate: "Approved",
-  },
-  {
-    productName: "Design Tool",
-    formName: "Form Master",
-    customerUpdate: "Approved",
   },
 ];

@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { MenuList } from "../constants/MenuList";
+import { menuList } from "../constants/MenuList";
 import { getMenusByProductId, getProductById } from "../api/api";
 import { Grid } from "@mui/material";
 import { CustomSelectField } from "../shared";
@@ -12,7 +12,6 @@ import { CustomSelectField } from "../shared";
 export const MenuMaster = (props) => {
   const [tableData, setTableData] = React.useState([]);
   const [inputValues, setInputValues] = React.useState([]);
-  const [products , setProducts] = React.useState([])
   const [dropDownValue , setDropDownValue] = React.useState("")
 
   useEffect(() => {
@@ -22,26 +21,19 @@ export const MenuMaster = (props) => {
     getProductById(userId)
       .then((res) => {
         setInputValues(res.data);
-        setProducts(res.data)
         setDropDownValue(res.data[0]?.id)
       })
       .catch((error) => {
         console.log(error);
       });
+
+      getMenusByProductId("all").then(res =>{
+        setTableData(res.data)
+      }).catch(error =>{
+        console.log(error);
+      })
   }, []);
 
-  useEffect(()=>{
-    dropDownValue &&
-    getMenusByProductId(dropDownValue).then(res =>{
-      setTableData(res.data)
-    }).catch(error =>{
-      console.log(error);
-    })
-  },[dropDownValue])
-
-  const changeHandler =(e) =>{
-    setDropDownValue(e.target.value)
-  } 
 
   return (
     <>
@@ -56,16 +48,8 @@ export const MenuMaster = (props) => {
         />
       <Grid container rowSpacing={3} columnSpacing={3} >
         <Grid item xs={12} >
-           <CustomSelectField
-              inputValues={products}
-              label={"Select Product"}
-              value={dropDownValue}
-              onChange={changeHandler}
-            />
-        </Grid>
-        <Grid item xs={12} >
         <CustomReactTable
-          columnData={MenuList(inputValues,tableData)}
+          columnData={menuList(inputValues,tableData)}
           rawData={tableData}
           disableRowSelection={true}
           disablePagination={true}

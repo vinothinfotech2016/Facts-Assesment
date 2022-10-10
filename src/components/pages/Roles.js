@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { roledata, RolesList } from "../constants/Roles";
+import {  rolesList } from "../constants/Roles";
 import { getRole } from "../api/api";
 
 export const Roles = (props) => {
@@ -27,7 +27,7 @@ export const Roles = (props) => {
           newFormPath={clickPaths.USENAVIGATEROLESFORM}
         />
         <CustomReactTable
-          columnData={RolesList()}
+          columnData={rolesList()}
           rawData={roles}
           disableRowSelection={true}
           disablePagination={true}

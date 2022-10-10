@@ -3,7 +3,7 @@ import { ListTopbar } from "../shared/ListTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { ListContainer } from "../styled";
 import { CustomReactTable } from "../shared/CustomReactTable";
-import { UserList } from "../constants/User";
+import { userList } from "../constants/User";
 import { getRole, getUsers } from "../api/api";
 
 export const Usertable = (props) => {
@@ -39,7 +39,7 @@ export const Usertable = (props) => {
           newFormPath={clickPaths.USENAVIGATEMYUSERFORM}
         />
         <CustomReactTable
-          columnData={UserList(roles , data)}
+          columnData={userList(roles , data)}
           rawData={data}
           disableRowSelection={true}
           disablePagination={true}

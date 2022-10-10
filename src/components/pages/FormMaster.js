@@ -159,7 +159,7 @@ export const FormMaster = (props) => {
         console.log(error);
         dispatch(
           snackBarAction({
-            message: snackBarMessages.SCREEN_CREATION_FAILED,
+            message: error?.response?.data?.error || snackBarMessages.SCREEN_CREATION_FAILED,
             open: true,
             color: "error",
           })

@@ -28,5 +28,6 @@ export const snackBarMessages = {
   MENU_FLOW_CREATION_FAILED:"Menu flow Creation Failed",
 
   INVALID_EMAIL:"please enter a valid email address",
-  INVALID_MOBILE_NUMBER:"please enter a valid mobile number"
+  INVALID_MOBILE_NUMBER:"please enter a valid mobile number",
+  SCREENFLOW_DOES_NOT_EXIST:"please define the screen flow"
 };
