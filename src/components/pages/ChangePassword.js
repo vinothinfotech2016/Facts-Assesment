@@ -12,6 +12,7 @@ import {
 import { FormTopbar } from "../shared/FormTopbar";
 import { clickPaths } from "../navigation/routePaths";
 import { useNavigate } from "react-router";
+import { CANCEL, UPDATE } from "../constants/ButtonConstants";
 
 export const ChangePassword = (props) => {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export const ChangePassword = (props) => {
                 className="btn"
                 onClick={() => navigate(clickPaths.USENAVIGATEPROFILE)}
               >
-                CANCEL
+                {CANCEL}
               </Button>
               <Button
                 type="submit"
@@ -64,7 +65,7 @@ export const ChangePassword = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                UPDATE
+                {UPDATE}
               </Button>
             </div>
           </Form>

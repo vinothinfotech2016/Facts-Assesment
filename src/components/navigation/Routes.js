@@ -23,6 +23,8 @@ import CheckFlowPage from "../pages/CheckFlowPage";
 import ImageMapperPage from "../pages/ImageMapperPage";
 import DeveloperMenu from "../pages/DeveloperMenu";
 import DeveloperCreateFlow from "../pages/DeveloperCreateFlow";
+import ScreenFlowPage from "../pages/ScreenFlowPage";
+import MenuFlowPage from "../pages/MenuFlowPage";
 
 
 export const routes = [
@@ -122,11 +124,16 @@ export const routes = [
     component: CheckFlowPage,
     exact: true,
   },
-  // {
-  //   path: mapPaths.IMAGEMAPPERPAGE,
-  //   component: ImageMapperPage,
-  //   exact: true,
-  // },
+  {
+    path: mapPaths.SCREENFLOW,
+    component: ScreenFlowPage,
+    exact: true,
+  },
+  {
+    path: mapPaths.MENUFLOW,
+    component: MenuFlowPage,
+    exact: true,
+  },
 ];
 
 export const AppRoutes = [

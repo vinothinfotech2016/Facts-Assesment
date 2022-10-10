@@ -6,6 +6,7 @@ import { CustomUploadImage } from "../shared/CustomUploadImage";
 import RegionSelect from "react-region-select";
 import ImageMapper from "react-image-mapper";
 import CustomMultipleImageUpload from "../shared/CustomMultipleImageUpload";
+import { DELETE } from "../constants/ButtonConstants";
 
 export const NewFormMaster = (props) => {
   const [source, setSource] = React.useState("");
@@ -113,7 +114,7 @@ export const NewFormMaster = (props) => {
             }
           />
           <button onClick={() => actionDeleteRegion(regionProps.data.index)}>
-            Delete
+            {DELETE}
           </button>
         </div>
       );

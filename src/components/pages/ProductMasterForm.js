@@ -16,6 +16,7 @@ import { createProduct, getProductById, updateProduct } from "../api/api";
 import { useDispatch } from "react-redux";
 import { snackBarAction } from "../../redux/actions";
 import { snackBarMessages } from "../constants/SnackBarConstants";
+import { CANCEL, SUBMIT, UPDATE } from "../constants/ButtonConstants";
 
 const ProductMasterForm = (props) => {
   const navigate = useNavigate();
@@ -163,7 +164,7 @@ const ProductMasterForm = (props) => {
               className="btn"
               onClick={() => navigate(clickPaths.USENAVIGATEHOME)}
             >
-              CANCEL
+              {CANCEL}
             </Button>
             <Button
               type="submit"
@@ -171,7 +172,7 @@ const ProductMasterForm = (props) => {
               className="btn"
               onClick={() => setLiveValidator(true)}
             >
-              {editId ? "UPDATE" : "SUBMIT"}
+              {editId ? UPDATE : SUBMIT }
             </Button>
           </div>
         </Form>

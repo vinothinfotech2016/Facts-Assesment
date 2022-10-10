@@ -14,6 +14,7 @@ import { createUsers, getProductById, getRole,  updateUser } from "../api/api";
 import { useDispatch } from "react-redux";
 import { snackBarAction } from "../../redux/actions";
 import { snackBarMessages } from "../constants/SnackBarConstants";
+import { ADD, CANCEL, UPDATE } from "../constants/ButtonConstants";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -29,6 +30,8 @@ export const UserForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation()
   const editData = location.state
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+  const mobileRegex = /^[0-9]{10}$/
 
   useEffect(() => {
     getRole()
@@ -61,16 +64,14 @@ export const UserForm = (props) => {
           email,
           mobileNumber,
           roleId,
-          productIds
+          products
         } = editData
         setUserData({
           name,
           email,
           mobileNumber:parseInt(mobileNumber),
           roleId,
-          productIds:productIds && JSON.parse(productIds).map(product =>{
-            return product?.id
-          })
+          productIds:products
         })
       }
   },[editData])
@@ -92,7 +93,9 @@ export const UserForm = (props) => {
                 mobileNumber: mobileNumber.toString(),
                 roleId,
                 password,
-                productIds: productIds && JSON.parse(productIds),
+                productIds: productIds.map(product =>{
+                  return product?.id
+                }),
               })
                 .then((res) => {
                   console.log(res);
@@ -151,8 +154,8 @@ export const UserForm = (props) => {
                       message: snackBarMessages.USER_CREATION_FAILED,
                     })
                   );
-                });
-  }
+               });
+              }
 
 
   return (
@@ -161,7 +164,7 @@ export const UserForm = (props) => {
         <FormTopbar label="New User" listPath={clickPaths.USENAVIGATEMYUSER} />
         <Box className="container">
           <Form
-            schema={formNewUserSchema(role, products)}
+            schema={formNewUserSchema(role, products,editData)}
             uiSchema={formNewUserUiSchema()}
             widgets={widgets}
             formData={userData}
@@ -171,7 +174,7 @@ export const UserForm = (props) => {
             ObjectFieldTemplate={objectFieldTemplate}
             FieldTemplate={CustomFieldTemplate}
             transformErrors={(errors) =>
-              customErrorMsg(errors, formNewUserSchema)
+              customErrorMsg(errors, formNewUserSchema())
             }
             onChange={(e) => {
               setUserData({
@@ -179,6 +182,22 @@ export const UserForm = (props) => {
               });
             }}
             onSubmit={(values) => {
+              if(!values?.formData?.email.match(emailRegex)){
+                dispatch(snackBarAction({
+                  open:true,
+                  color:"error",
+                  message:snackBarMessages.INVALID_EMAIL
+                }))
+                return
+              }
+              if(!values?.formData?.mobileNumber.toString().match(mobileRegex)){
+                dispatch(snackBarAction({
+                  open:true,
+                  color:"error",
+                  message:snackBarMessages.INVALID_MOBILE_NUMBER
+                }))
+                return
+              }
             editData ? update(values): add(values)
             }}
           >
@@ -188,7 +207,7 @@ export const UserForm = (props) => {
                 className="btn"
                 onClick={() => navigate(clickPaths.USENAVIGATEMYUSER)}
               >
-                CANCEL
+             {CANCEL}
               </Button>
               <Button
                 type="submit"
@@ -196,7 +215,7 @@ export const UserForm = (props) => {
                 className="btn"
                 onClick={() => setLiveValidator(true)}
               >
-                {editData ? "UPDATE": "ADD"}
+                {editData ? UPDATE : ADD}
               </Button>
               <Snackbar
                 open={open}

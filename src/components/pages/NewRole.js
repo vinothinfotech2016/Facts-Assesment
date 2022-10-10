@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
+import { CANCEL, SAVE } from "../constants/ButtonConstants";
 import { clickPaths } from "../navigation/routePaths";
 import { FormTopbar } from "../shared/FormTopbar";
 
@@ -93,14 +94,14 @@ const NewRole = (props) => {
               className="btn"
               onClick={() => navigate(clickPaths.USENAVIGATEROLES)}
             >
-              CANCEL
+              {CANCEL}
             </Button>
             <Button
               variant="outlined"
               className="btn"
               onClick={() => onSubmit()}
             >
-              Save
+              {SAVE}
             </Button>
           </div>
         </Box>

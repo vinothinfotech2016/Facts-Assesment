@@ -17,8 +17,8 @@ export const initValue = {
     { name: "PRODUCT MASTER", route: `${mapPaths.PRODUCTMASTER}` },
     { name: "MENU MASTER", route: `${mapPaths.MENUMASTER}` },
     { name: "FORM MASTER", route: `${mapPaths.FORMMASTER}` },
-     { name: "SCREEN FLOW", route: `${mapPaths.FORMMASTER}`,state:{toggleValue:"screenFlow"} }, 
-     { name: "MENU FLOW", route: `${mapPaths.FORMMASTER}`,state:{toggleValue:"menuFlow"} },
+     { name: "SCREEN FLOW", route: `${mapPaths.SCREENFLOW}`}, 
+     { name: "MENU FLOW", route: `${mapPaths.MENUFLOW}`},
   ],
 };
 

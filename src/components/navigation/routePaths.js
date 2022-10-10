@@ -29,6 +29,8 @@ export const mapPaths = {
 
   FORMMASTER: "formMaster/list",
   FORMMASTERFORM: "formMaster/form",
+  SCREENFLOW:"formMaster/screenFlow",
+  MENUFLOW:"formMaster/menuFlow",
 
   PREVIEWPAGE: "formMaster/preview",
   CHECKPAGE: "formMaster/check",
@@ -63,4 +65,7 @@ export const clickPaths = {
   USENAVIGATEPREVIEWPAGE: "/home/formMaster/preview",
   USENAVIGATECHECKPAGE: "/home/formMaster/check",
   USENAVIGATEIMAGEMAPPERPAGE: "/home/formMaster/imageMapper",
+
+  USENAVIGATESCREENFLOWPAGE:'/home/formMaster/screenFlow',
+  USENAVIGATEMENUFLOWPAGE:'/home/formMaster/menuFlow'
 };

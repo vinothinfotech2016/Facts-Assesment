@@ -25,5 +25,8 @@ export const snackBarMessages = {
 
   //menuflow 
   MENU_FLOW_CREATION_SUCCESS:"Menu flow Created successfully",
-  MENU_FLOW_CREATION_FAILED:"Menu flow Creation Failed"
+  MENU_FLOW_CREATION_FAILED:"Menu flow Creation Failed",
+
+  INVALID_EMAIL:"please enter a valid email address",
+  INVALID_MOBILE_NUMBER:"please enter a valid mobile number"
 };

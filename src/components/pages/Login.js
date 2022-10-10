@@ -15,6 +15,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { clickPaths, mapPaths } from "../navigation/routePaths";
 import { loginUser } from "../api/api";
+import { LOGIN } from "../constants/ButtonConstants";
 
 function Login(props) {
   const [visible, setVisible] = React.useState(false);
@@ -123,7 +124,7 @@ function Login(props) {
 
             <Grid item>
               <Button variant="outlined" type="submit">
-                Login
+              {LOGIN}
               </Button>
             </Grid>
           </Grid>

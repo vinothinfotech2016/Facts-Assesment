@@ -7,22 +7,19 @@ import {
   CardMedia,
   Grid,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { snackBarAction } from "../../redux/actions";
 import {
-  createMenuFlow,
   createScreen,
   getMenusByProductId,
   getProductById,
   getScreensByProductId,
 } from "../api/api";
+import { CANCEL, SUBMIT } from "../constants/ButtonConstants";
 import { snackBarMessages } from "../constants/SnackBarConstants";
 import { clickPaths } from "../navigation/routePaths";
 import { CustomSelectField } from "../shared";
@@ -57,18 +54,13 @@ function DeveloperCreateFlow() {
   const classes = useStyles();
   const [products, setProducts] = React.useState([]);
   const [value, setValue] = React.useState("");
-  const [isHovered, setIsHovered] = React.useState("");
   const [screens, setScreens] = React.useState([]);
-  const [menus, setMenus] = React.useState([]);
   const [finalValue, setFinalValue] = React.useState([]);
   const dispatch = useDispatch()
-  const [toggleValue, setToggleValue] = React.useState("uploadImage")
   const [isUploaded, setIsUploaded] = React.useState(false);
   const [files, setFiles] = React.useState([]);
   const [text, setText] = React.useState("");
   const [image, setImage] = React.useState({});
-  const navigate = useNavigate()
-  const location = useLocation()
   const formats = [
     "image/jpg",
     "image/jpeg",
@@ -77,10 +69,6 @@ function DeveloperCreateFlow() {
     "image/svg",
   ];
 
-useEffect(()=>{
-location?.state?.toggleValue ?
-setToggleValue(location?.state?.toggleValue): setToggleValue("uploadImage")
-},[location?.state?.toggleValue])
 
 
   useEffect(() => {
@@ -117,7 +105,6 @@ setToggleValue(location?.state?.toggleValue): setToggleValue("uploadImage")
     value &&
       getMenusByProductId(value)
         .then((res) => {
-          setMenus(res.data);
           setFinalValue(
             res?.data?.map((menu) => {
               return {
@@ -145,33 +132,6 @@ setToggleValue(location?.state?.toggleValue): setToggleValue("uploadImage")
   const changeHandler = (event) => {
     setValue(event.target.value);
   };
-
-  const onChange = (event, index) => {
-
-    const temp = [...finalValue]
-    temp[index] = {
-      ...finalValue[index], screenId: event.target.value
-    }
-    setFinalValue(temp)
-  }
-
-  const onSubmit = () => {
-    createMenuFlow(finalValue).then(() => {
-      dispatch(snackBarAction({
-        open: true,
-        color: "success",
-        message: snackBarMessages.MENU_FLOW_CREATION_SUCCESS
-      }))
-      setIsUploaded(true)
-    }).catch((error) => {
-      console.log(error);
-      dispatch(snackBarAction({
-        open: true,
-        color: "error",
-        message: snackBarMessages.MENU_FLOW_CREATION_FAILED
-      }))
-    })
-  }
 
   const submitScreenFlow = () =>{
    
@@ -251,22 +211,6 @@ const newString = word.split(' ')
     setIsUploaded(false);
   };
 
-
-  const navigateToPage = (id, path) => {
-    navigate({
-      pathname: path,
-      search: `?${createSearchParams({
-        editId: id,
-      })}`,
-    });
-  };
-
-  const navigateToCheckFlow = (id) => {
-    navigate(clickPaths.USENAVIGATECHECKPAGE, {
-      state: { id },
-    });
-  };
-
   return (
     <>
       <ListContainer>
@@ -289,9 +233,7 @@ const newString = word.split(' ')
           </Grid>
           <Grid item xs={12}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-              {
-                toggleValue === "uploadImage" ? (
-                  (
+              
                     <>
                       <Grid item xs={12} >
 
@@ -339,14 +281,14 @@ const newString = word.split(' ')
                                         variant="contained"
                                         onClick={() => submitScreenFlow()}
                                       >
-                                        submit
+                                      {SUBMIT}
                                       </Button>
                                       <Button
                                         color="error"
                                         variant="contained"
                                         onClick={() => imageRemover(index)}
                                       >
-                                        cancel
+                                        {CANCEL}
                                       </Button>
                                     </Box>
                                   </Box>
@@ -376,7 +318,6 @@ const newString = word.split(' ')
                              </>
                              : 
                           screens.map((screen) => {
-                            // console.log(screen,"screen");
                             return (
                               <Grid item xs={4}>
                                 <Card
@@ -393,6 +334,9 @@ const newString = word.split(' ')
                                     <CardContent
                                       sx={{
                                         borderTop: "1px solid #00000050",
+                                        display:"flex",
+                                        alignItems:"center",
+                                        justifyContent:"center"
                                       }}
                                     >
                                       <Typography gutterBottom variant="h5" component="div">
@@ -407,177 +351,6 @@ const newString = word.split(' ')
                         </Grid>
                       </Grid>
                     </>
-                  )
-                ) : (
-                  <Grid item xs={12}>
-                    { toggleValue === "screenFlow" ? ( 
-                    <Grid container rowSpacing={3} columnSpacing={3}>
-              {screens.length === 0 ?  
-              <>
-              <Box
-             className={classes.errorMsgContainer}
-              >
-                <Typography variant="h4" > There is no screens for this Product </Typography>
-              </Box>
-              </>
-              : 
-              screens.map((screen, index) => {
-                return (
-                  <Grid item xs={4}>
-                    <Card
-                      sx={{ maxWidth: 345, border: "1px solid #00000050" }}
-                      className={classes.card}
-                      onMouseOver={() => setIsHovered(index)}
-                      onMouseLeave={() => setIsHovered("")}
-                    >
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="140"
-                          image={screen?.screenImageUrl}
-                          alt={screen?.screenName}
-                        />
-                        <CardContent
-                          sx={{
-                            borderTop: "1px solid #00000050",
-                          }}
-                        >
-                          <Typography gutterBottom variant="h5" component="div">
-                            {titleCase(screen?.screenName)}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                      <Box
-                        sx={{
-                          position: "relative",
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            zIndex: 50,
-                            bottom: "90px",
-                            width: "100%",
-                            height: "100%",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                            display: isHovered === index ? "flex" : "none",
-                            "&:hover": {
-                              backgroundColor: "#00000090",
-                            },
-                          }}
-                        >
-                          {screen?.actionItems === null ||
-                          screen?.actionItems === [] ? (
-                            <Button
-                              variant="contained"
-                              onClick={() =>
-                                navigateToPage(
-                                  screen?.id,
-                                  clickPaths.USENAVIGATEPREVIEWPAGE
-                                )
-                              }
-                            >
-                              define flow
-                            </Button>
-                          ) : (
-                            <>
-                              <Button
-                                variant="contained"
-                                onClick={() => navigateToCheckFlow(screen.id)}
-                              >
-                                check flow
-                              </Button>
-                              <Button
-                                variant="contained"
-                                onClick={() =>
-                                  navigateToPage(
-                                    screen?.id,
-                                    clickPaths.USENAVIGATEPREVIEWPAGE
-                                  )
-                                }
-                              >
-                                edit flow
-                              </Button>
-                            </>
-                          )}
-                        </Box>
-                      </Box>
-                    </Card>
-                  </Grid>
-                );
-              })}
-            </Grid>   
-                    ) : (
- <Grid container rowSpacing={3} columnSpacing={3}>
-                  {
-                    menus.length === 0 ?  
-              <>
-              <Box
-                className={classes.errorMsgContainer}
-              >
-                <Typography variant="h4" > There is no menus for this Product </Typography>
-              </Box>
-              </>
-              : 
-                  menus.map((menu, index) => {
-                    return (
-                      <>
-                        <Grid
-                          item
-                          xs={6}
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              border: "2px solid #00000080",
-                              backgroundColor: "#00000020",
-                              borderRadius: "8px",
-                              height: "100%",
-                              width: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Typography
-                              gutterBottom
-                              variant="h5"
-                              component="div"
-                            >
-                              {titleCase(menu?.name)}
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <CustomSelectField
-                            inputValues={screens}
-                            label={"Select Screen"}
-                            value={finalValue[index]?.screenId}
-                            onChange={(e) => onChange(e, index)}
-                          />
-                        </Grid>
-                      </>
-                    );
-                  })}
-            {menus.length !== 0 &&
-                 <Grid item xs={12} sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: 'flex-end',
-                  margin: '20px'
-                }} >
-                  <Button onClick={onSubmit} variant="contained" >submit</Button>
-                </Grid>}
-                </Grid>
-                    )  }
-                  </Grid>
-                )
-              }
             </Grid>
           </Grid>
         </Grid>
