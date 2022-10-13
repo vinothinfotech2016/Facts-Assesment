@@ -1,23 +1,13 @@
 import React from "react";
-import { AppNavigation } from "./components/navigation/Navigation";
-import "./App.css";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { useSelector } from "react-redux";
-import Loader from "./components/shared/Loader";
-import CustomSnackbar from "./components/shared/CustomSnackbar";
+import { Route, Routes } from "react-router";
 
-const queryClient = new QueryClient();
+import { Main } from "./Main";
+
 function App() {
-  const globalState = useSelector((state) => state);
-
   return (
-    <div className="App">
-      <QueryClientProvider client={queryClient}>
-        {globalState.loader && <Loader open={globalState.loader} />}
-        <CustomSnackbar />
-        <AppNavigation />
-      </QueryClientProvider>
-    </div>
+    <Routes>
+      <Route key={"main"} path={"/"} element={<Main />} />
+    </Routes>
   );
 }
 
