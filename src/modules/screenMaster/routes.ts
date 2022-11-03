@@ -12,5 +12,4 @@ export default function (app: Express) {
   app.post("/screen/commentsReply", handle(controller.postComments));
   app.get("/screen/getCommentsByUser/:userId", handle(controller.getComments));
   app.get("/screen/getScreenComments/:screenId", handle(controller.getScreenComments));
-
 }

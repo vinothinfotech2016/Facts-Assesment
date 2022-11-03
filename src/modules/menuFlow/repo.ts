@@ -39,18 +39,18 @@ export default class Repo {
       throw error;
     }
   };
-  static updateMenuFlow = async (flowId:any,data:any)=>{
-    try{
-      const updatedFlow: any = await MenuFlow.query().update(data).where("id",flowId);
-      if(updatedFlow) return {message:"Flow updated sucessfully"}
-      else{
+  static updateMenuFlow = async (flowId: any, data: any) => {
+    try {
+      const updatedFlow: any = await MenuFlow.query().update(data).where("id", flowId);
+      if (updatedFlow) return {message: "Flow updated sucessfully"};
+      else {
         return{
-          error:true,
-          errorText:"Flow not updated"
-        }
+          error: true,
+          errorText: "Flow not updated"
+        };
       }
 
-    }catch(err){
+    } catch (err) {
       throw err;
     }
   }
@@ -115,16 +115,16 @@ export default class Repo {
           return targetScreen;
         } else {
           return {
-            error:true,
+            error: true,
             errorText : "Menus does not exist"
           };
         }
       }
-      if(!menuFlow.length) {
+      if (!menuFlow.length) {
         return {
-          error:true,
-          errorText:"Menu does not exist"
-        }
+          error: true,
+          errorText: "Menu does not exist"
+        };
       }
     } catch (error) {
       throw error;

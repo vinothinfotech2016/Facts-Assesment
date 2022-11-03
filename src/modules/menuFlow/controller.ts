@@ -68,7 +68,7 @@ export const updateMenuFlow = async (handler: RequestHandler) => {
   try {
     const flowId = await handler.getRequestParameterAsString("flowId");
     const data = await handler.getBody();
-    const res: any = await Service.updateMenuFlow(flowId,data);
+    const res: any = await Service.updateMenuFlow(flowId, data);
     return handler.handleCreatedResponse(res);
   } catch (err) {
     return handler.sendServerError(err);

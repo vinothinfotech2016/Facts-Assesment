@@ -7,9 +7,9 @@ export default class Service {
     data = await parseFormJsonObjects(data);
     return await Repo.createMenuFlow(data);
   };
-  static updateMenuFlow = async (flowId:any,data: any) => {
+  static updateMenuFlow = async (flowId: any, data: any) => {
     data = await parseFormJsonObjects(data);
-    return await Repo.updateMenuFlow(flowId,data);
+    return await Repo.updateMenuFlow(flowId, data);
   };
 
   static getScreenByMenu = async (menuId: any) => await Repo.getScreenByMenu(menuId);

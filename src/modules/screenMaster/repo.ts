@@ -183,14 +183,14 @@ static getScreenComments = async (screenId: any) => {
   static getScreen = async (screenId: any) => {
     try {
       const screen: any = await ScreenMaster.query().findById(screenId);
-      if (screen){
+      if (screen) {
         screen.screenImageUrl = FileService.S3FileRead(screen.screenImageUrl);
         return screen;
-      }else{
+      } else {
         return{
-          error:true,
-          errorText:"screen not found"
-        }
+          error: true,
+          errorText: "screen not found"
+        };
       }
 
       // if (screen.actionItems)
