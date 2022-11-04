@@ -1,12 +1,12 @@
 import Knex from "knex";
 
 const {
-  DB_CONNECTION_URL = "",
-  DB_HOST = "",
-  DB_PORT = "",
-  DB_NAME = "",
-  DB_USER = "",
-  DB_PASS = "",
+  DB_CONNECTION_URL = "mysql://vhimysql:mysql_01@school-erp.cifnqjduqpnx.ap-south-1.rds.amazonaws.com:3306/design_tool",
+  DB_HOST = "school-erp.cifnqjduqpnx.ap-south-1.rds.amazonaws.com",
+  DB_PORT = "3306",
+  DB_NAME = "design_tool",
+  DB_USER = "vhimysql",
+  DB_PASS = "mysql_01",
   DB_POOL_MIN = "2",
   DB_POOL_MAX = "100",
 } = process.env;
